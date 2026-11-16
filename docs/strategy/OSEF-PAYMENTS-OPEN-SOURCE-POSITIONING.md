@@ -2,6 +2,8 @@
 
 **Proposition de stratégie — 16 novembre 2026.** Document prospectif : aucune traction commerciale, homologation réglementaire ou partenariat n'est présumé.
 
+**Feuille de route détaillée :** [Vision et plan 2027–2029](OSEF-PAYMENT-ENGINEERING-ROADMAP-2027-2029.md).
+
 ## Positionnement recommandé
 **OSEF = fabrique communautaire et partenaire d'ingénierie Open Source pour les systèmes bancaires, monétiques et de paiement.** OSEF aide des prestataires de services financiers, ESN et équipes techniques à étudier, intégrer, tester, fiabiliser et maintenir des composants ouverts, sans se présenter comme opérateur de paiement ou établissement agréé.
 
