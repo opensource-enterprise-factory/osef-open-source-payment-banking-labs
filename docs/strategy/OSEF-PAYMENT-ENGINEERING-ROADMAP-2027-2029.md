@@ -8,6 +8,8 @@
 
 > Faire émerger en Afrique francophone une capacité collective d'ingénierie Open Source bancaire et de paiement, reconnue pour ses contributions internationales, ses réalisations techniques reproductibles et la qualité des services apportés aux entreprises financières africaines.
 
+**Catalogue détaillé des offres :** [6 produits et 6 services OSEF Payment Engineering](OSEF-PAYMENT-ENGINEERING-PRODUCTS-SERVICES.md).
+
 ## Positionnement
 
 OSEF ne cherche pas à devenir une banque, un établissement de paiement ou un opérateur de switch interbancaire. Son positionnement **proposé** est celui d'une fabrique de compétences, de biens communs techniques et de prestations d'ingénierie Open Source dans la banque, la monétique et les paiements.
