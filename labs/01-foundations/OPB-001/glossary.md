@@ -13,5 +13,9 @@
 | Réconciliation / rapprochement | Comparaison de sources d'informations pour détecter des concordances et des écarts. |
 | Contribution upstream | Modification, documentation ou participation proposée au projet Open Source d'origine. |
 
+## Définition transversale OSEF
+
+Voir [Définition de l'Open Source bancaire et des paiements](open-source-banking-payments-definition.md), incluant les six domaines proposés, les distinctions entre logiciels et standards ouverts, et les sources primaires.
+
 ## Sources à compléter
 Ajouter les définitions et liens applicables au contexte étudié avant validation finale.
