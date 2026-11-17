@@ -18,6 +18,8 @@ Ce catalogue décompose les **10 architectures cibles** en **4 visuels Mermaid i
 | **[ARC-09 — Payment Observability & Resilience](ARC-09.md)** | [B](ARC-09-B.md) | [D](ARC-09-D.md) | [A](ARC-09-A.md) | [T](ARC-09-T.md) | [BDAT](ARC-09-BDAT.md) |
 | **[ARC-10 — Payment Integration & Testing Factory](ARC-10.md)** | [B](ARC-10-B.md) | [D](ARC-10-D.md) | [A](ARC-10-A.md) | [T](ARC-10-T.md) | [BDAT](ARC-10-BDAT.md) |
 
+**Utilisation dans OSEF Academy :** [matrice des 21 modules, compétences, vues BDAT et preuves](../../academy/MATRICE-COMPETENCES-BDAT-LABS.md).
+
 ## Comment étudier une architecture ?
 
 1. **B — Business (bleu) :** acteurs et processus, objectifs métiers, événements, exceptions et responsabilités.
