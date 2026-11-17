@@ -17,6 +17,10 @@
 **Pour commencer sans monter d'infrastructure :** [OPB-001 — cartographie](01-foundations/OPB-001/README.md).  
 **Pour pratiquer la monétique :** [OPB-D03-001 — ISO 8583](03-card-payments/OPB-D03-001/README.md) et son [guide de démarrage](03-card-payments/OPB-D03-001/START-HERE.md) ; **prototype non validé**.
 
+## Mini-labs du tronc commun OSEF Academy
+
+[TC-01 à TC-07 — sept exercices Python exécutables hors ligne](common-core/README.md). Ils s'ajoutent aux vingt sujets OPB initiaux et au prototype spécialisé OPB-D03-001 ; **aucun succès CI n'est déclaré sans vérification**.
+
 ## Catalogue des 20 premiers labs
 
 Les **difficultés sont des estimations pédagogiques proposées** et ne représentent pas des niveaux officiellement validés. Les intitulés et IDs sont ceux du catalogue initial.
