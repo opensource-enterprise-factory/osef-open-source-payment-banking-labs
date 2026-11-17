@@ -14,6 +14,8 @@ Ces parcours sont proposés et non certifiants. Les travaux pratiques doivent ê
 
 **Nouveauté :** [Sept mini-labs du tronc commun — Python standard library](labs/common-core/README.md) (tests automatisés fournis, exécution CI à confirmer).
 
+**Contribuer :** [🧪 Labs et 🎤 Meetups — filtres GitHub, templates et règles](docs/community/ISSUES-LABS-MEETUPS.md). Les catégories sont identifiées par `type:lab` et `type:meetup` ; les événements proposés ne sont pas des événements confirmés.
+
 ## Objectif
 Apprendre par la pratique les systèmes bancaires, les paiements interopérables, les API, la sécurité, les données et la résilience, puis préparer des contributions aux projets Open Source amont.
 
