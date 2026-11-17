@@ -6,6 +6,8 @@
 > **Aucune intégration bout en bout, conformité bancaire, certification PCI DSS ou compatibilité avec PI-SPI n'est démontrée à ce stade.** Tous les composants ci-dessous sont **candidats** ; le choix définitif doit être validé par les labs et des revues de sécurité/licences.
 
 
+
+**Atlas détaillé :** [40 vues BDAT distinctes, quatre par architecture](blueprints/BDAT-4-VUES-README.md) ; prérequis, exigences et critères de revue dans chaque fiche.
 ## Catalogue des architectures par cas d'usage
 
 Le [catalogue des dix blueprints](blueprints/README.md) permet de choisir une architecture en fonction du besoin métier, plutôt que de déployer toutes les briques simultanément. Chaque blueprint propose composants, interfaces, scénarios de test, risques, labs associés et critères de validation. Voir le [modèle commun](blueprints/BLUEPRINT-TEMPLATE.md).
