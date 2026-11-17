@@ -40,6 +40,52 @@ La preuve doit préciser : auteur/pseudo GitHub, date, version de l'environnemen
 
 Les sources sont des **points de départ à consulter** : leur présence ne démontre ni version compatible, ni conformité de l'implémentation OSEF.
 
+## Séquence de cours détaillée — proposition pédagogique v0.2
+
+**Périmètre :** approfondissement théorique et travaux dirigés sur messages et hôtes de **laboratoire fictifs**. Les supports de cours magistraux, les heures et les résultats des tests ne sont pas présumés validés.
+
+### Objectifs d'apprentissage évaluables
+1. Représenter émetteur et acquéreur sans les confondre.
+2. Expliquer trois réponses métier.
+3. Identifier ce que le laboratoire n'exécute pas.
+
+### Chapitres à enseigner
+1. **Chapitre 1 — Acteurs carte fictifs.** Expliquer le principe, analyser un exemple de lab et expliciter les limites techniques.
+2. **Chapitre 2 — Demande et réponse conceptuelles.** Expliquer le principe, analyser un exemple de lab et expliciter les limites techniques.
+3. **Chapitre 3 — Autorisation versus règlement.** Expliquer le principe, analyser un exemple de lab et expliciter les limites techniques.
+4. **Chapitre 4 — Refus et état indéterminé.** Expliquer le principe, analyser un exemple de lab et expliciter les limites techniques.
+
+### Séance-type proposée
+1. Mise en situation métier à partir de **ARC-02-B**.
+2. Analyse des messages et données via **ARC-02-D**.
+3. Étude des responsabilités logicielles **ARC-02-A** et des contraintes **ARC-02-T**.
+4. Travail dirigé documenté ci-dessous.
+5. Correction collective : expliquer une anomalie, documenter l'attendu et le réellement observé.
+
+### TP guidé
+1. Dessiner un parcours porteur fictif–acquéreur–hôte fictif.
+2. Étiqueter demande, acceptation, refus, timeout.
+3. Annoter le diagramme Business ARC-02.
+
+**Point de départ :** [OPB-D03-001](../../../labs/03-card-payments/OPB-D03-001/README.md). Le code de référence **n'a pas de résultat de compilation et de tests confirmé** : le formateur doit commencer par le vérifier et ne pas attribuer une réussite a priori.
+
+### Évaluation proposée
+- **Questions de compréhension :** expliquer au moins un acteur, un champ/protocole ou un scénario d'échec pertinent.
+- **Étude d'architecture :** relier une exigence de la vue B, D, A ou T à la fonctionnalité étudiée.
+- **Épreuve pratique :** soumettre un jeu de données inventé, un scénario nominal et un scénario négatif, ou signaler exactement ce qui n'a pas été exécuté.
+- **Preuve :** code/diagramme, environnement, versions, commandes commentées, sorties expurgées et éventuelle revue.
+
+**Critères ciblés :**
+- [ ] Acteurs cohérents.
+- [ ] Absence de connexion réelle.
+- [ ] Timeout non assimilé au refus.
+- [ ] Les supports originaux OSEF restent séparés de toute documentation OPPL confidentielle.
+- [ ] La validation est réservée à une revue fondée sur les preuves.
+
+[Correspondance compétence ↔ cours](../CORRESPONDANCE-COMPETENCES-COURS.md) · [Atlas des 40 vues BDAT](../../architecture/blueprints/BDAT-4-VUES-README.md) · [Modèle de preuve](../MODELE-PREUVE-COMPETENCE.md)
+
+---
+
 ## Pour l'évaluateur
 Utiliser la [grille d'évaluation commune](EVALUATION.md) : attribuer les points uniquement pour des preuves consultables et reproductibles. Si un contrôle n'a pas été exécuté, noter **non vérifié**, pas **réussi**.
 
