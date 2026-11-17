@@ -24,6 +24,8 @@ L'ordre est **recommandé**, mais pas une dépendance technique absolue. Les dur
 
 **Traçabilité des acquis :** [matrice Compétences × BDAT × Labs](../MATRICE-COMPETENCES-BDAT-LABS.md), [modèle de preuve](../MODELE-PREUVE-COMPETENCE.md). Les correspondances sont proposées ; aucune validation de cohorte n'est déclarée.
 
+**Correspondance compétence → cours :** [voir les sept cours TC, leurs notions et leurs évaluations](../CORRESPONDANCE-COMPETENCES-COURS.md#tronc-commun).
+
 ## Modules et réalisations
 
 | Code | Module | Livrable de sortie | Labs / architectures associés |
