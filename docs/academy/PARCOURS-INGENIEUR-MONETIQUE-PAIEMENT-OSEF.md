@@ -12,6 +12,10 @@ Permettre à un contributeur de **lire un flux de paiement, construire des compo
 
 Ce parcours n'est **ni un titre professionnel enregistré, ni une certification d'un scheme, ni une formation agréée**. Les durées, modalités d'évaluation et niveaux ci-dessous sont des **propositions OSEF** à piloter sur une cohorte expérimentale.
 
+## Correspondance des compétences et des cours
+
+Le [tableau **Compétence → Cours → Notions à enseigner → Lab → Évaluation**](CORRESPONDANCE-COMPETENCES-COURS.md) donne, pour les 21 unités du cursus, l'intitulé du cours principal, le syllabus proposé, les travaux pratiques correspondants et les preuves attendues. **Le syllabus est un plan pédagogique à compléter, non une déclaration que toutes les leçons sont déjà rédigées ou dispensées.**
+
 ## Référentiel de traçabilité des compétences
 
 La [matrice pédagogique de 21 unités](MATRICE-COMPETENCES-BDAT-LABS.md) relie chaque module aux vues B/D/A/T, labs et preuves attendues. Le [modèle d'évaluation](MODELE-PREUVE-COMPETENCE.md) distingue objectif, réalisation, résultat réellement observé et revue. Cette traçabilité n'est pas une certification.
