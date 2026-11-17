@@ -3,6 +3,13 @@
 > **Statut : architecture conceptuelle proposée, version 1.0 — 16 novembre 2026.**  
 > **Aucune intégration bout en bout, conformité bancaire, certification PCI DSS ou compatibilité avec PI-SPI n'est démontrée à ce stade.** Tous les composants ci-dessous sont **candidats** ; le choix définitif doit être validé par les labs et des revues de sécurité/licences.
 
+
+## Catalogue des architectures par cas d'usage
+
+Le [catalogue des dix blueprints](blueprints/README.md) permet de choisir une architecture en fonction du besoin métier, plutôt que de déployer toutes les briques simultanément. Chaque blueprint propose composants, interfaces, scénarios de test, risques, labs associés et critères de validation. Voir le [modèle commun](blueprints/BLUEPRINT-TEMPLATE.md).
+
+**Priorité proposée :** ARC-10 (Testing Factory), ARC-02 (ISO 8583), ARC-09 (Observabilité), ARC-01 (Core Banking), ARC-03 (Interopérabilité). Toutes les architectures sont au stade **proposé** : ni intégration prouvée ni homologation de production.
+
 ## 1. Objectif et périmètre
 
 Fournir une vision partagée des briques techniques et des interfaces à étudier pour former des ingénieurs, développer des simulateurs réutilisables et réaliser des **démonstrations isolées**, uniquement à l'aide de données fictives.
