@@ -4,6 +4,8 @@
 
 > **Statut : proposées.** Aucune intégration, performance, conformité ou habilitation d'exploitation de systèmes financiers réels ne découle de ces diagrammes.
 
+
+**Décomposition en quatre visuels :** [Atlas des 40 vues Business, Data, Application et Technology](BDAT-4-VUES-README.md). Les présentes fiches restent des vues de synthèse.
 ## Galerie des diagrammes
 
 | ID | Cas d'usage | Diagramme BDAT | Blueprint métier détaillé |
