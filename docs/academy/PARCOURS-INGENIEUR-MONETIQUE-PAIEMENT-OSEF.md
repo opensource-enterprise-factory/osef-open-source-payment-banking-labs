@@ -12,6 +12,10 @@ Permettre à un contributeur de **lire un flux de paiement, construire des compo
 
 Ce parcours n'est **ni un titre professionnel enregistré, ni une certification d'un scheme, ni une formation agréée**. Les durées, modalités d'évaluation et niveaux ci-dessous sont des **propositions OSEF** à piloter sur une cohorte expérimentale.
 
+## Tronc commun détaillé — obligatoire dans le parcours pédagogique proposé
+
+[Sept fiches de tronc commun et grille d'évaluation](tronc-commun/README.md) : systèmes et Git, réseaux/API, acteurs et cycles, données/ledger, sécurité, tests/résilience, architecture/OSS. Ce socle est **une proposition non certifiante**, non encore évaluée par une cohorte.
+
 ## 2. Deux itinéraires et un tronc partagé
 
 ```mermaid
