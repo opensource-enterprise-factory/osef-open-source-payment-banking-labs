@@ -12,6 +12,10 @@ Permettre à un contributeur de **lire un flux de paiement, construire des compo
 
 Ce parcours n'est **ni un titre professionnel enregistré, ni une certification d'un scheme, ni une formation agréée**. Les durées, modalités d'évaluation et niveaux ci-dessous sont des **propositions OSEF** à piloter sur une cohorte expérimentale.
 
+## Référentiel de traçabilité des compétences
+
+La [matrice pédagogique de 21 unités](MATRICE-COMPETENCES-BDAT-LABS.md) relie chaque module aux vues B/D/A/T, labs et preuves attendues. Le [modèle d'évaluation](MODELE-PREUVE-COMPETENCE.md) distingue objectif, réalisation, résultat réellement observé et revue. Cette traçabilité n'est pas une certification.
+
 ## Tronc commun détaillé — obligatoire dans le parcours pédagogique proposé
 
 [Sept fiches de tronc commun et grille d'évaluation](tronc-commun/README.md) : systèmes et Git, réseaux/API, acteurs et cycles, données/ledger, sécurité, tests/résilience, architecture/OSS. Ce socle est **une proposition non certifiante**, non encore évaluée par une cohorte.
