@@ -6,6 +6,8 @@
 
 **Prérequis commun recommandé :** [Tronc commun OSEF — 7 fiches](../tronc-commun/README.md). Les acquis doivent être démontrés ; aucun diplôme n'est présumé.
 
+**Évaluation liée aux architectures :** [matrice commune des compétences, vues BDAT, labs et preuves](../MATRICE-COMPETENCES-BDAT-LABS.md), et [modèle de preuve](../MODELE-PREUVE-COMPETENCE.md).
+
 ## Parcours de progression
 
 ```mermaid
