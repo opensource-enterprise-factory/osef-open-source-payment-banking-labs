@@ -7,6 +7,8 @@ Ce programme communautaire vise à **apprendre, expérimenter, documenter et con
 
 > **Participation ouverte, sur la base des contributions.** Il n'est pas nécessaire d'être employé d'une banque, de détenir une certification ou de maîtriser parfaitement l'anglais. La participation à ce dépôt ne constitue ni un contrat de travail, ni une promesse de mission, de rémunération, de mentorat individualisé ou d'accès à des systèmes financiers.
 
+**Nouveau :** [Parcours communautaire Ingénieur monétique & paiements — compétences et labs OSEF](docs/academy/PARCOURS-INGENIEUR-MONETIQUE-PAIEMENT-OSEF.md). Ce parcours est proposé, non diplômant et distinct des programmes confidentiels OPPL.
+
 **Accès rapide :** [Trouver un lab](labs/README.md) · [Issues ouvertes](https://github.com/opensource-enterprise-factory/osef-open-source-payment-banking-labs/issues) · [Comment contribuer](CONTRIBUTING.md) · [Code de conduite](CODE_OF_CONDUCT.md) · [Sécurité](SECURITY.md) · [Atlas BDAT](docs/architecture/blueprints/BDAT-README.md)
 
 ---
