@@ -104,6 +104,8 @@ OPB-009 (API) → OPB-010 (IAM) → OPB-013 (événements) → OPB-016 (traces)
 ```
 **Attention :** ce chemin est une proposition ; les labs peuvent nécessiter des prérequis et composants qui ne sont pas encore fournis dans le dépôt. Aucune intégration n'est présumée fonctionnelle.
 
+**Parcours complémentaire :** [Ingénierie des paiements numériques et de l'interopérabilité — huit fiches](../docs/academy/paiements-numeriques-interoperabilite/README.md). Les projets pratiques proposés ne signifient pas que les labs sont réalisés.
+
 ## Critères de validation d'un lab
 
 Un lab ne passe à « **Validé en laboratoire** » que lorsque les critères établis pour **ce lab précis** ont été vérifiés et la revue documentée.
