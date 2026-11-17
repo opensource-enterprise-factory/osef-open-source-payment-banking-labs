@@ -4,6 +4,8 @@
 
 **Périmètre :** six fiches pédagogiques **originales OSEF** construites à partir des blueprints et des labs publics du dépôt. Ce parcours n'est pas une publication du curriculum, des méthodes, du matériel ou des supports OPPL marqués confidentiels. Aucun résultat de lab n'est réputé réussi sans preuve.
 
+**Prérequis commun recommandé :** [Tronc commun OSEF — 7 fiches](../tronc-commun/README.md). Les acquis doivent être démontrés ; aucun diplôme n'est présumé.
+
 ## Parcours de progression
 
 ```mermaid
