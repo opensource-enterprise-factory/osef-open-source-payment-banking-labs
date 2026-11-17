@@ -1,0 +1,38 @@
+name: Common Core Labs — Offline Python Tests
+
+on:
+  push:
+    paths:
+      - 'labs/common-core/**'
+      - '.github/workflows/common-core-tests.yml'
+  pull_request:
+    paths:
+      - 'labs/common-core/**'
+      - '.github/workflows/common-core-tests.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  common-core:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout training repo
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile the local code
+        run: python -m py_compile labs/common-core/runner.py labs/common-core/test_runner.py
+      - name: Run offline standard-library unit tests
+        run: python -m unittest discover -s labs/common-core -p 'test_*.py' -v
+      - name: Demonstrate all seven offline labs
+        run: |
+          for id in TC-01 TC-02 TC-03 TC-04 TC-05 TC-06 TC-07; do
+            python labs/common-core/runner.py "$id"
+          done
+# CI configuration is not evidence of successful execution.
+# For production supply-chain hardening, pin third-party actions to reviewed full SHAs.
