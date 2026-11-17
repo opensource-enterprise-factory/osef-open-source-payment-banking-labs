@@ -8,6 +8,8 @@
 
 **Évaluation liée aux architectures :** [matrice commune des compétences, vues BDAT, labs et preuves](../MATRICE-COMPETENCES-BDAT-LABS.md), et [modèle de preuve](../MODELE-PREUVE-COMPETENCE.md).
 
+**Correspondance compétence → cours :** [voir les six cours monétiques, leurs notions et leurs évaluations](../CORRESPONDANCE-COMPETENCES-COURS.md#spécialité-a--monétique).
+
 ## Parcours de progression
 
 ```mermaid
