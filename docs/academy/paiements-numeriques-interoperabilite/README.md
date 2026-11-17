@@ -10,6 +10,8 @@ Concevoir, implémenter, tester et faire exploiter **en laboratoire** les compos
 
 **Ce que nous n'affirmons pas :** aucune connexion au système PI-SPI, aucune accréditation BCEAO ou conformité PCI DSS, aucun service financier, aucun paiement réel, aucune homologation ni certification professionnelle.
 
+**Évaluation liée aux architectures :** [matrice commune des compétences, vues BDAT, labs et preuves](../MATRICE-COMPETENCES-BDAT-LABS.md), et [modèle de preuve](../MODELE-PREUVE-COMPETENCE.md).
+
 ## Séquence proposée
 
 ```mermaid
