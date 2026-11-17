@@ -4,6 +4,14 @@
 
 [Catalogue des 20 premiers labs](labs/README.md) · [Rejoindre](JOIN-US.md) · [Contribuer](CONTRIBUTING.md) · [Code de conduite](CODE_OF_CONDUCT.md) · [Sécurité](SECURITY.md) · [Parcours Ingénieur paiement](docs/academy/PARCOURS-INGENIEUR-MONETIQUE-PAIEMENT-OSEF.md)
 
+## OSEF Academy — Tronc commun et deux spécialisations
+
+- [Tronc commun — 7 modules](docs/academy/tronc-commun/README.md)
+- [Spécialité monétique & ISO 8583](docs/academy/monetique-iso8583/README.md)
+- [Spécialité paiements numériques & interopérabilité](docs/academy/paiements-numeriques-interoperabilite/README.md)
+
+Ces parcours sont proposés et non certifiants. Les travaux pratiques doivent être testés et revus avant toute validation.
+
 ## Objectif
 Apprendre par la pratique les systèmes bancaires, les paiements interopérables, les API, la sécurité, les données et la résilience, puis préparer des contributions aux projets Open Source amont.
 
