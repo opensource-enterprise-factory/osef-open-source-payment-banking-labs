@@ -12,6 +12,10 @@ Permettre à un contributeur de **lire un flux de paiement, construire des compo
 
 Ce parcours n'est **ni un titre professionnel enregistré, ni une certification d'un scheme, ni une formation agréée**. Les durées, modalités d'évaluation et niveaux ci-dessous sont des **propositions OSEF** à piloter sur une cohorte expérimentale.
 
+## Catalogue des cours approfondis
+
+Les [21 fiches de cours détaillées](CATALOGUE-COURS-DETAILLES.md) disposent maintenant d'objectifs pédagogiques, chapitres à enseigner, déroulement proposé, travaux pratiques guidés et épreuves d'évaluation. **Le contenu est documenté mais les cours ne sont pas présumés dispensés, les supports complets et les tests des labs ne sont pas tous validés.**
+
 ## Correspondance des compétences et des cours
 
 Le [tableau **Compétence → Cours → Notions à enseigner → Lab → Évaluation**](CORRESPONDANCE-COMPETENCES-COURS.md) donne, pour les 21 unités du cursus, l'intitulé du cours principal, le syllabus proposé, les travaux pratiques correspondants et les preuves attendues. **Le syllabus est un plan pédagogique à compléter, non une déclaration que toutes les leçons sont déjà rédigées ou dispensées.**
