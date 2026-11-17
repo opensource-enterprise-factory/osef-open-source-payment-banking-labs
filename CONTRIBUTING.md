@@ -11,7 +11,7 @@ Notre objectif : apprendre collectivement, produire des expérimentations **repr
 
 ## 1 — Démarrer en 5 étapes
 
-1. **Lire les règles** : [README](README.md), [Sécurité](SECURITY.md) et [JOIN-US](JOIN-US.md).
+1. **Lire les règles** : [README](README.md), [Sécurité](SECURITY.md) [JOIN-US](JOIN-US.md) et [Code de conduite](CODE_OF_CONDUCT.md).
 2. **Choisir un sujet** : [catalogue des 20 premiers labs](labs/README.md), [issues ouvertes](https://github.com/opensource-enterprise-factory/osef-open-source-payment-banking-labs/issues), ou [architectures BDAT](docs/architecture/blueprints/BDAT-README.md).
 3. **Signaler son intention** : commenter l'issue : `Je souhaite contribuer à OPB-XXX — domaine : … — contribution envisagée : …`. N'annoncer de disponibilité ou de responsabilité que si elle est confirmée.
 4. **Proposer une modification** dans une branche personnelle ou un fork, sans pousser directement sur `main` pour les contributions ordinaires.
@@ -169,7 +169,7 @@ OSEF **n'est pas** Apache Fineract, Mojaloop, Moov, jPOS, Mifos ou FINOS et ne p
 ## 8 — Communication, respect et gouvernance
 
 - Bienvenue aux contributions en **français et en anglais**. Pour les guides essentiels, privilégier un résumé bilingue; les échanges techniques avec un projet upstream suivent la langue et les règles de celui-ci.
-- Être précis, respectueux et constructif : critiquer le code et les idées, pas les personnes. Respecter les règles de conduite de la communauté : échanges courtois, absence de harcèlement, discrimination et attaques personnelles. Un code de conduite autonome reste à formaliser; signaler les problèmes de gouvernance sans divulguer de données privées.
+- Être précis, respectueux et constructif : critiquer le code et les idées, pas les personnes. Respecter le [Code de conduite OSEF](CODE_OF_CONDUCT.md) : échanges courtois, absence de harcèlement, discrimination, attaques personnelles et représailles. Les incidents de conduite doivent être signalés avec discrétion selon sa procédure ; ne pas publier de données privées.
 - Les issues et PR du dépôt public sont visibles mondialement. Ne publiez ni numéros de téléphone, ni coordonnées personnelles, ni documents de clients, ni informations sur vos employeurs sans permission.
 - Les labels, rôles, dates et responsabilités doivent être **confirmés**. Ne pas s'auto-attribuer des privilèges de mainteneur, une affiliation institutionnelle ou une certification.
 - Les prestations commerciales éventuelles d'OSEF sont distinctes des contributions bénévoles : voir [catalogue produits/services](docs/strategy/OSEF-PAYMENT-ENGINEERING-PRODUCTS-SERVICES.md). Les droits, la rémunération et la confidentialité sur une mission client doivent être contractualisés séparément.
@@ -181,6 +181,7 @@ OSEF **n'est pas** Apache Fineract, Mojaloop, Moov, jPOS, Mifos ou FINOS et ne p
 - [Catalogue des labs](labs/README.md)
 - [Atlas BDAT](docs/architecture/blueprints/BDAT-README.md)
 - [Politique de sécurité](SECURITY.md)
+- [Code de conduite](CODE_OF_CONDUCT.md)
 - [Guide de participation](JOIN-US.md)
 
 ---
@@ -190,7 +191,7 @@ OSEF **n'est pas** Apache Fineract, Mojaloop, Moov, jPOS, Mifos ou FINOS et ne p
 **OSEF Payment & Banking Labs** welcomes developers, financial engineers, DevOps, SRE, security specialists, researchers, documentation writers and translators.
 
 ### Quick start
-1. Read [README](README.md), [SECURITY.md](SECURITY.md) and [JOIN-US](JOIN-US.md).
+1. Read [README](README.md), [SECURITY.md](SECURITY.md), [JOIN-US](JOIN-US.md) and the [Code of Conduct](CODE_OF_CONDUCT.md).
 2. Pick a [lab](labs/README.md) or [open issue](https://github.com/opensource-enterprise-factory/osef-open-source-payment-banking-labs/issues); comment to express interest.
 3. Fork or create a feature branch (if you have write access), then make a focused change.
 4. Run and document the actual tests, sanitize evidence, and submit a pull request linked to an issue.
