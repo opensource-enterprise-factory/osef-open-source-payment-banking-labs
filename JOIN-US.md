@@ -9,6 +9,8 @@ Ce programme communautaire vise à **apprendre, expérimenter, documenter et con
 
 **Nouveau :** [Parcours communautaire Ingénieur monétique & paiements — compétences et labs OSEF](docs/academy/PARCOURS-INGENIEUR-MONETIQUE-PAIEMENT-OSEF.md). Ce parcours est proposé, non diplômant et distinct des programmes confidentiels OPPL.
 
+**Deuxième spécialisation :** [Ingénierie des paiements numériques et de l'interopérabilité](docs/academy/paiements-numeriques-interoperabilite/README.md) (huit fiches pédagogiques proposées, non certifiantes).
+
 **Accès rapide :** [Trouver un lab](labs/README.md) · [Issues ouvertes](https://github.com/opensource-enterprise-factory/osef-open-source-payment-banking-labs/issues) · [Comment contribuer](CONTRIBUTING.md) · [Code de conduite](CODE_OF_CONDUCT.md) · [Sécurité](SECURITY.md) · [Atlas BDAT](docs/architecture/blueprints/BDAT-README.md)
 
 ---
