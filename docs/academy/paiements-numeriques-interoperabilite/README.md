@@ -2,6 +2,8 @@
 
 **Parcours public proposé v0.1 — 17 novembre 2026.** **Non diplômant, non certifiant, non déployé en cohorte à ce jour.** Ce cursus est une création pédagogique OSEF fondée sur les labs et blueprints **publics** du dépôt. Il ne reproduit pas les kits, méthodes ou supports des documents OPPL confidentiels.
 
+**Prérequis commun recommandé :** [Tronc commun OSEF — 7 fiches](../tronc-commun/README.md). Les acquis doivent être démontrés ; aucun diplôme n'est présumé.
+
 ## Mission de l'ingénieur de paiement numérique
 
 Concevoir, implémenter, tester et faire exploiter **en laboratoire** les composants qui permettent à plusieurs systèmes hétérogènes d'échanger des instructions et états de paiement : API, adaptateurs, wallets fictifs, événements, mécanismes de cohérence, sécurité et observabilité.
