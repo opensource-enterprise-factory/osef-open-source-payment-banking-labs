@@ -23,7 +23,8 @@ def tc02_api(method: str, path: str, data: dict, token: str) -> tuple[int, dict]
         return 401, {"error": "unauthorized"}
     if method != "POST" or path != "/fake-payments":
         return 404, {"error": "not_found"}
-    if not isinstance(data, dict) or data.get("amount_minor") not in range(1, 1000001):
+    if (not isinstance(data, dict) or type(data.get("amount_minor")) is not int
+            or not 1 <= data["amount_minor"] <= 1000000):
         return 422, {"error": "invalid_amount"}
     if not isinstance(data.get("reference"), str) or not data["reference"].startswith("FAKE-"):
         return 422, {"error": "invalid_reference"}
