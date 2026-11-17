@@ -1,5 +1,7 @@
 # Catalogue — 10 architectures cibles OSEF Payment & Banking
 
+> **Visuels BDAT disponibles :** [Atlas des dix architectures Business / Data / Application / Technology](BDAT-README.md). Les schémas Mermaid sont éditables et documentent le statut proposé de chaque architecture.
+
 > **Version 1.0 — 17 novembre 2026.** Toutes les architectures ci-dessous sont **proposées** et non validées en laboratoire. Aucun accès aux systèmes bancaires ou réseaux de paiement réels.
 
 **Principe :** partir du cas d'usage, non d'une architecture monolithique qui forcerait tous les composants (Fineract, Mojaloop, jPOS, Kafka...) à coexister.
