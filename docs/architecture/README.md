@@ -1,5 +1,7 @@
 # OSEF Open Source Payment & Banking Labs — Architecture de référence
 
+> **Visuels BDAT disponibles :** [Atlas des dix architectures Business / Data / Application / Technology](blueprints/BDAT-README.md). Les schémas Mermaid sont éditables et documentent le statut proposé de chaque architecture.
+
 > **Statut : architecture conceptuelle proposée, version 1.0 — 16 novembre 2026.**  
 > **Aucune intégration bout en bout, conformité bancaire, certification PCI DSS ou compatibilité avec PI-SPI n'est démontrée à ce stade.** Tous les composants ci-dessous sont **candidats** ; le choix définitif doit être validé par les labs et des revues de sécurité/licences.
 
