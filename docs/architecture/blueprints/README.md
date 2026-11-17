@@ -19,6 +19,8 @@
 | [ARC-09](ARC-09.md) | Payment Observability & Resilience | Mesurer délais, erreurs, taux de succès et comportements sous panne | DSI, équipes SRE/production, intégrateurs | Proposée |
 | [ARC-10](ARC-10.md) | Payment Integration & Testing Factory | Industrialiser des tests API et ISO 8583 avec preuves reproductibles | ESN, QA, banques, équipes de certification technique | Proposée |
 
+
+> **Nouveau :** [40 vues BDAT distinctes B / D / A / T](BDAT-4-VUES-README.md), avec diagrammes, prérequis et exigences détaillées. Les [10 synthèses BDAT](BDAT-README.md) sont conservées.
 ## Quelle architecture pour quel acteur ?
 
 | Acteur | Sélection initiale | Usage |
