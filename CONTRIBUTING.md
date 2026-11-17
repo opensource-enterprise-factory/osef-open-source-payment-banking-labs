@@ -169,7 +169,7 @@ OSEF **n'est pas** Apache Fineract, Mojaloop, Moov, jPOS, Mifos ou FINOS et ne p
 ## 8 — Communication, respect et gouvernance
 
 - Bienvenue aux contributions en **français et en anglais**. Pour les guides essentiels, privilégier un résumé bilingue; les échanges techniques avec un projet upstream suivent la langue et les règles de celui-ci.
-- Être précis, respectueux et constructif : critiquer le code et les idées, pas les personnes. Respecter le [Code de conduite](CODE_OF_CONDUCT.md) si disponible; signaler tout problème de gouvernance sans divulguer de données privées.
+- Être précis, respectueux et constructif : critiquer le code et les idées, pas les personnes. Respecter les règles de conduite de la communauté : échanges courtois, absence de harcèlement, discrimination et attaques personnelles. Un code de conduite autonome reste à formaliser; signaler les problèmes de gouvernance sans divulguer de données privées.
 - Les issues et PR du dépôt public sont visibles mondialement. Ne publiez ni numéros de téléphone, ni coordonnées personnelles, ni documents de clients, ni informations sur vos employeurs sans permission.
 - Les labels, rôles, dates et responsabilités doivent être **confirmés**. Ne pas s'auto-attribuer des privilèges de mainteneur, une affiliation institutionnelle ou une certification.
 - Les prestations commerciales éventuelles d'OSEF sont distinctes des contributions bénévoles : voir [catalogue produits/services](docs/strategy/OSEF-PAYMENT-ENGINEERING-PRODUCTS-SERVICES.md). Les droits, la rémunération et la confidentialité sur une mission client doivent être contractualisés séparément.
