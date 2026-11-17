@@ -2,7 +2,7 @@
 
 **Laboratoires communautaires Open Source pour les ingénieurs d’Afrique francophone.**
 
-[Catalogue des 20 premiers labs](labs/README.md) · [Rejoindre](JOIN-US.md) · [Contribuer](CONTRIBUTING.md) · [Code de conduite](CODE_OF_CONDUCT.md) · [Sécurité](SECURITY.md)
+[Catalogue des 20 premiers labs](labs/README.md) · [Rejoindre](JOIN-US.md) · [Contribuer](CONTRIBUTING.md) · [Code de conduite](CODE_OF_CONDUCT.md) · [Sécurité](SECURITY.md) · [Parcours Ingénieur paiement](docs/academy/PARCOURS-INGENIEUR-MONETIQUE-PAIEMENT-OSEF.md)
 
 ## Objectif
 Apprendre par la pratique les systèmes bancaires, les paiements interopérables, les API, la sécurité, les données et la résilience, puis préparer des contributions aux projets Open Source amont.
