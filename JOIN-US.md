@@ -1,4 +1,6 @@
 # Rejoindre OSEF Payment & Banking Labs
+
+**Distinguer les activités :** [Labs (expérimentations)](https://github.com/opensource-enterprise-factory/osef-open-source-payment-banking-labs/issues?q=is%3Aissue+label%3A%22type%3Alab%22) · [Meetups (partages)](https://github.com/opensource-enterprise-factory/osef-open-source-payment-banking-labs/issues?q=is%3Aissue+label%3A%22type%3Ameetup%22) · [Guide des types d'issues](docs/community/ISSUES-LABS-MEETUPS.md).
 ## JOIN US — Contribuer depuis l'Afrique francophone et au-delà
 
 **Bienvenue dans Open Source Enterprise Factory (OSEF) — Payment & Banking Labs.**
