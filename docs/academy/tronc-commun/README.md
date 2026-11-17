@@ -22,6 +22,8 @@ L'ordre est **recommandé**, mais pas une dépendance technique absolue. Les dur
 
 **Mise en pratique :** [Sept mini-labs exécutables en Python, tests et modèle de preuves](../../../labs/common-core/README.md). Le code est committé ; les résultats CI et la revue indépendante restent à confirmer.
 
+**Traçabilité des acquis :** [matrice Compétences × BDAT × Labs](../MATRICE-COMPETENCES-BDAT-LABS.md), [modèle de preuve](../MODELE-PREUVE-COMPETENCE.md). Les correspondances sont proposées ; aucune validation de cohorte n'est déclarée.
+
 ## Modules et réalisations
 
 | Code | Module | Livrable de sortie | Labs / architectures associés |
