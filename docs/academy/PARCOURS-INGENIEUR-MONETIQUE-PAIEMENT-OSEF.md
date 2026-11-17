@@ -65,6 +65,10 @@ La spécialisation est choisie **selon les preuves produites**, pas selon un int
 
 Ce premier parcours pratique couvre : acteurs et flux, MTI/bitmap/champs, Pack/Unpack Go, erreurs et états incertains, sécurité/observabilité et revue d'intégration. **Fiches documentées, exercices et tests non présumés réalisés.**
 
+## Parcours détaillé — Paiements numériques et interopérabilité
+
+[Accéder aux huit fiches pédagogiques, aux projets pratiques et à la grille d'évaluation](paiements-numeriques-interoperabilite/README.md). Les fiches sont publiées comme propositions ; aucun lab supplémentaire n'est déclaré testé.
+
 ## 5. Projets de validation par spécialité
 
 ### Projet A — ISO 8583 Test Bench (100 % fictif)
