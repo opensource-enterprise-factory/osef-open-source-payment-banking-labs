@@ -58,6 +58,13 @@ La spécialisation est choisie **selon les preuves produites**, pas selon un int
 
 **Note :** ces liens constituent des **correspondances pédagogiques proposées**. Une issue existante ou un blueprint BDAT ne prouve pas un lab terminé ni l'acquisition de la compétence.
 
+
+## Parcours détaillé disponible — Ingénieur monétique et ISO 8583
+
+[Accéder aux six fiches pédagogiques, exercices et grille d'évaluation](monetique-iso8583/README.md).
+
+Ce premier parcours pratique couvre : acteurs et flux, MTI/bitmap/champs, Pack/Unpack Go, erreurs et états incertains, sécurité/observabilité et revue d'intégration. **Fiches documentées, exercices et tests non présumés réalisés.**
+
 ## 5. Projets de validation par spécialité
 
 ### Projet A — ISO 8583 Test Bench (100 % fictif)
