@@ -327,3 +327,48 @@ watch -n 1 docker compose ps -a
 ```
 
 Pendant T09, le relais s’arrête brièvement. Le script affiche le HTTP 503 attendu, puis un HTTP 200 avec le même jeton après redémarrage. La suite réussit si elle se termine par `OK : scénarios T01 à T10 terminés.` Pour une démo, projeter le log à côté des interfaces web.
+
+## Démarrage automatique après reboot de la VM VirtualBox
+
+**Politique OSEF : les changements de configuration sont préparés dans une branche et intégrés via Pull Request GitHub. Ne pas créer ou modifier directement les fichiers de configuration dans la VM.**
+
+Le `compose.yaml` versionné active `restart: unless-stopped` pour `relay`, `psp-a` et `psp-b`. Docker relancera les conteneurs **existants** au redémarrage du démon, sauf s'ils ont été arrêtés volontairement. Cette politique n'exécute **pas** `docker compose up` à chaque démarrage : une initialisation `up -d` est requise après avoir récupéré et intégré la PR. Une fois les ports Host-only créés, Docker conserve leurs publications au redémarrage.
+
+### Après fusion de la PR (une seule fois sur Ubuntu)
+
+```bash
+cd /home/lionel/osef-open-source-payment-banking-labs
+git status -sb                      # vérifier l'absence de changements locaux à préserver
+git checkout main
+git pull --ff-only origin main
+
+cd labs/FRAUD-001
+# Les fichiers sont versionnés ; aucune édition locale.
+# La variable IP n'est utilisée que par Compose au moment de créer/recréer les conteneurs.
+FRAUD_HOST_ONLY_IP=192.168.255.10 \
+  docker compose -f compose.yaml -f compose.host-only.yaml up -d
+
+# Vérifier les politiques et ports effectifs.
+docker inspect --format '{{.Name}} {{.HostConfig.RestartPolicy.Name}}' \
+  $(FRAUD_HOST_ONLY_IP=192.168.255.10 docker compose -f compose.yaml -f compose.host-only.yaml ps -q)
+
+FRAUD_HOST_ONLY_IP=192.168.255.10 \
+  docker compose -f compose.yaml -f compose.host-only.yaml ps
+```
+
+### Conditions requises et vérification
+
+- `sudo systemctl enable --now docker` assure le démarrage du démon Docker avec Ubuntu.
+- L'interface VirtualBox Host-only `enp0s8` doit conserver `192.168.255.10/24` via Netplan et être opérationnelle. Si Docker redémarre avant l'interface ou si l'adresse n'est plus présente, les ports explicitement liés à `192.168.255.10` peuvent ne pas être publiés correctement. Vérifier `ip -br addr show enp0s8` et `docker compose ps` après le test de reboot.
+- Depuis Windows, vérifier `Test-NetConnection 192.168.255.10 -Port 8090`, `8091` et `8092`, puis ouvrir les pages HTTP dans un navigateur.
+- Si `docker compose down` a **supprimé** les conteneurs, ou après un arrêt volontaire avec `docker stop`, le redémarrage automatique ne suffit plus. Relancer explicitement la commande `up -d` ci-dessus.
+- Ne jamais utiliser `down --volumes` pour FRAUD-001 ; le volume SQLite contient les signaux fictifs et l'audit.
+- **Important :** T09 dans `test-lab.sh --extended` arrête le relais de manière intentionnelle et le redémarre lui-même. Le test doit être surveillé et rejoué après la fusion afin de vérifier qu'il fonctionne avec la politique `unless-stopped`.
+
+### Règle de gestion de configuration
+
+1. Modifier les fichiers exclusivement **dans une branche GitHub dédiée**.
+2. Ouvrir une Pull Request, faire vérifier les changements et les risques, puis fusionner.
+3. Sur la VM, **synchroniser la branche approuvée avec Git**, sans créer de fichier de configuration ni exécuter d'édition manuelle sur place.
+4. Appliquer la configuration versionnée avec `docker compose` et documenter les preuves d'exécution dans GitHub.
+
