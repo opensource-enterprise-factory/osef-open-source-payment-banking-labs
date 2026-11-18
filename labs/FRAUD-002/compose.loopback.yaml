@@ -18,9 +18,11 @@ services:
       - "127.0.0.1:14222:4222"
       - "127.0.0.1:16222:6222"
       - "127.0.0.1:18222:8222"
+  # Interface de démonstration accessible uniquement depuis le réseau privé VirtualBox.
+  # Ne pas publier sur 0.0.0.0 ; adresse confirmée de osef-fraud-01.
   tazama-demo:
     ports: !override
-      - "127.0.0.1:3011:3011"
+      - "192.168.255.10:3011:3011"
   tms-service:
     ports: !override
       - "127.0.0.1:5000:3000"
