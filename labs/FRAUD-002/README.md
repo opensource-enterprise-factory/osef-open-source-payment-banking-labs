@@ -64,6 +64,8 @@ Les flèches pointillées sont **des interfaces projetées et non implémentées
 
 La stack Tazama actuelle présente aussi les **extensions** (configuration studios, case management) et **BIAR** (analytics/reporting), mais **elles ne sont pas nécessaires pour le premier objectif de FRAUD-002**. Vérifier licences et conditions d'accès aux différents composants et images avant installation. Certains processeurs de règles peuvent avoir un accès conditionné ; ne pas les qualifier de libres d'accès sans vérification.
 
+> **Décision du 18 novembre 2026 : Option B retenue — une seule VM `osef-fraud-01` redimensionnée pour FRAUD-001 + FRAUD-002.** [Procédure opérationnelle détaillée : sauvegarde, VirtualBox, agrandissement disque, contrôle Ubuntu et tests de non-régression](OPTION-B-REDIMENSIONNEMENT-VM.md). La taille cible de départ (4 vCPU / 12 Gio / 80 Go) dépend de la capacité du laptop Windows ; **aucune modification de la VM n'est encore confirmée**.
+
 ## Deux architectures VirtualBox possibles
 
 Le lab peut être déployé selon **deux options documentées** :
