@@ -296,3 +296,45 @@ Le script inspecte le profil **Public (DockerHub) sans addons facultatifs** et i
 
 **Règle OSEF confirmée : toutes les modifications de configuration passent par une PR GitHub ; aucun changement manuel de fichiers sur la VM.** Les commandes de la VM servent à synchroniser et appliquer uniquement le contenu révisé.
 
+
+## Lancement sécurisé du profil Public (DockerHub) sur une VM unique
+
+**Rapport d'audit exécuté sur `osef-fraud-01` :** 13 services, aucune collision 8090–8092, mais **9 publications sur l'interface hôte par défaut** (admin, batch, PostgreSQL, trois ports NATS, démonstration web, TMS, Valkey) et aucune limite mémoire explicite. Les résultats proviennent de `python3 labs/FRAUD-002/scripts/check-tazama-compose.py`, fournis par l'ingénieur.
+
+**Remédiation OSEF versionnée dans GitHub :**
+- [`compose.loopback.yaml`](compose.loopback.yaml) : restreint les **9** publications à `127.0.0.1`, avec `ports: !override` (sans laisser subsister les entrées `0.0.0.0` du fichier officiel).
+- [`scripts/tazama-safe.py`](scripts/tazama-safe.py) : compose les **cinq fichiers officiels du commit inspecté** et l'overlay OSEF ; refuse un lancement si une IP autre que localhost est publiée, si un port 8090–8092 est utilisé, ou si la composition n'a pas exactement 13 services et 9 publications attendues.
+
+**Règle de déploiement :** jamais de modification de fichier directement sur la VM. Revue puis fusion de la PR GitHub, suivies d'une synchronisation `git pull --ff-only` sur `main`. Ne pas utiliser directement le lanceur officiel `tazama-core.sh` pour ce profil : il **n'inclut pas l'overlay OSEF** et certaines options déclenchent `down --volumes`.
+
+### Après fusion et synchronisation Git sur Ubuntu
+
+```bash
+cd /home/lionel/osef-open-source-payment-banking-labs
+git status -sb
+git checkout main
+git pull --ff-only origin main
+
+# Vérifier la capacité réellement utilisable ; ne poursuivre que si l'extension du système de fichiers est faite.
+free -h
+df -h /
+nproc
+
+# Contrôle sans démarrage : Compose valide, 13 services et 9 ports locaux.
+python3 labs/FRAUD-002/scripts/tazama-safe.py check
+
+# UNIQUEMENT après validation des ressources et du retour OK :
+# python3 labs/FRAUD-002/scripts/tazama-safe.py up
+
+# Inspection de l'état après lancement, puis diagnostic :
+# python3 labs/FRAUD-002/scripts/tazama-safe.py ps
+# python3 labs/FRAUD-002/scripts/tazama-safe.py logs
+```
+
+**Notes d'exploitation :**
+- Les **9 ports ne seront pas accessibles depuis Windows** à `192.168.255.10` par conception. Pour consulter la démonstration, utiliser un tunnel SSH explicitement autorisé (ex. `ssh -L 3011:127.0.0.1:3011 lionel@192.168.255.10` depuis Windows), sous réserve des fonctions réellement exposées par le profil choisi.
+- `tazama-safe.py` n'efface aucun volume ni fichier ; `up` peut créer les conteneurs, réseaux et volumes du projet `tazama-core`. Il ne démarre jamais FRAUD-001.
+- Les images, règles et données du profile upstream restent à tester. Un healthcheck TMS ou des scénarios officiels réussis ne sont **pas encore confirmés**.
+- **Ne pas lancer les 13 services avec seulement 25 Go utilisables** : vérifier `df -h /` après redimensionnement avant installation, et surveiller mémoire/stockage.
+- Les limites de RAM n'étant pas définies par ces fichiers Compose, procéder à des tests progressifs, surveiller `docker stats --no-stream`, et s'arrêter en cas de pression mémoire.
+
