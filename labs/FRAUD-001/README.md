@@ -267,3 +267,20 @@ done
 Ouvre le [relais](http://192.168.255.10:8090/), le [PSP A](http://192.168.255.10:8091/) et le [PSP B](http://192.168.255.10:8092/) sur Windows. L’adresse doit déjà être attribuée à la VM. Cette option publie les trois ports sur l’interface privée et conserve les ports locaux utilisés par les scripts. Pour recréer les services en conservant l’accès privé, réutilise les deux fichiers Compose et la variable. Pour revenir à l’accès local seul, exécute `docker compose up -d`.
 
 Le réseau privé doit être réservé aux machines de démonstration autorisées. Utilise uniquement des données et des clés de lab.
+
+
+### Parcours web validé le 18 novembre 2026
+
+Lionel Sakiti a exécuté ce parcours depuis le navigateur Windows sur le réseau privé VirtualBox de la VM `osef-fraud-01`, avec un signal fictif.
+
+1. **T01 — Envoyer depuis le PSP A (8091).** Saisir la clé de démonstration, puis cliquer sur **Envoyer**. HTTP **201** et `accepted` confirment l’enregistrement du signal. Copier le jeton du formulaire.
+
+   ![T01 — Signal accepté par le PSP A, HTTP 201](evidence/t01-psp-a-emission.png)
+
+2. **T04 — Retrouver le signal dans le PSP B (8092).** Saisir la même clé de démonstration et coller le jeton, puis cliquer sur **Lire les signaux**. HTTP **200** et le même jeton dans la réponse confirment l’échange. La réponse identifie `psp-a` comme émetteur et `psp-b` comme destinataire.
+
+   ![T04 — Même signal retrouvé par le PSP B, HTTP 200](evidence/t04-psp-b-reception.png)
+
+3. **T07 — Consulter le journal sur le relais (8090).** Saisir la clé d’audit et cliquer sur **Voir l’audit**. HTTP **200** et les entrées `psp-a / create / accepted` et `psp-b / read / authorized` montrent que le relais journalise les opérations.
+
+   ![T07 — Création et lecture visibles dans le journal du relais, HTTP 200](evidence/t07-relais-audit.png)
