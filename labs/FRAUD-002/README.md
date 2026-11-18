@@ -383,3 +383,35 @@ python3 labs/FRAUD-002/scripts/tazama-safe.py ps
 ```
 
 **Note :** `up` peut recréer le conteneur Batch PPA, provoquant une interruption courte ; ne pas ajouter `down --volumes`. Ne pas exposer l'API Batch PPA sur le réseau Host-only.
+
+
+## Premier scénario métier de bout en bout — collection officielle Newman 2.1
+
+**Source upstream vérifiée :** [Tazama Postman, `Newman/Newman - 2.1. (NO-AUTH) Public DockerHub End-to-End Test.postman_collection.json`](https://github.com/tazama-lf/postman/blob/main/Newman/Newman%20-%202.1.%20(NO-AUTH)%20Public%20DockerHub%20End-to-End%20Test.postman_collection.json) et son [environnement officiel](https://github.com/tazama-lf/postman/blob/main/environments/Tazama-Docker-Compose.postman_environment.json). La collection contient quatre requêtes, organisées en deux groupes : création des messages synthétiques, émission `pacs.008` et `pacs.002` au TMS, puis consultation du rapport via Admin Service.
+
+Cette suite écrit **des transactions de démonstration** dans la pile Tazama et lit le résultat. Elle ne doit pas être exécutée sur un environnement avec des transactions réelles.
+
+Le script versionné [`scripts/test-tazama-e2e.sh`](scripts/test-tazama-e2e.sh) effectue d'abord un précontrôle du profil réseau OSEF et des API sur localhost, puis lance la **collection officielle sans la modifier** via l'image Docker officielle `postman/newman:alpine` en mode `--network host` (Linux). Aucun port TMS ou Admin n'est exposé à Windows ou à Internet.
+
+### Procédure (après revue et fusion de la PR)
+
+```bash
+cd /home/lionel/osef-open-source-payment-banking-labs
+git status -sb
+git checkout main
+git pull --ff-only origin main
+
+# Synchroniser la collection du projet officiel par Git, sans édition manuelle de fichiers.
+# N'exécuter le clone que si le dossier n'existe pas déjà.
+test -d /home/lionel/tazama-postman/.git || \
+  git clone https://github.com/tazama-lf/postman.git /home/lionel/tazama-postman
+
+# Contrôler les API et lancer les tests officiels via un conteneur Newman éphémère.
+bash labs/FRAUD-002/scripts/test-tazama-e2e.sh
+```
+
+**Critères d'acceptation** : le runner se termine avec le code 0, les requêtes TMS et Admin réussissent, les assertions métier de la collection sont satisfaites et les trois conteneurs FRAUD-001 restent actifs. Les résultats ne sont **pas encore obtenus**. Si échec, conserver la sortie **expurgée** des identifiants et données sensibles ; diagnostiquer la requête, son URL, sa réponse et la configuration des règles avant d'ouvrir une issue upstream.
+
+**Attention :** la collection officielle et les images `:rc` peuvent évoluer indépendamment ; documenter les révisions exactes utilisées. Ce script prend les collections `main` de Tazama Postman au moment du clone. Les résultats sont à interpréter selon la version du profil installé. L'exécution Newman peut émettre des données synthétiques persistantes, sans supprimer de volumes.
+
+**Opportunités de contribution :** si une assertion échoue systématiquement avec la pile documentée, reproduire et vérifier les issues Tazama existantes ; proposer une amélioration de tests ou de compatibilité dans le dépôt upstream concerné. Les échanges upstream doivent être en anglais.
