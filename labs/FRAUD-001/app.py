@@ -9,10 +9,12 @@ import sqlite3
 import uuid
 from contextlib import contextmanager
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 from typing import Literal
 
 import httpx
 from fastapi import FastAPI, Header, HTTPException
+from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
 
 ROLE = os.environ.get("ROLE", "")
@@ -188,3 +190,11 @@ async def inbox(x_lab_key: str | None = Header(default=None)):
     except httpx.HTTPError:
         raise HTTPException(status_code=503, detail="Lab relay unavailable")
     return response.json()
+
+
+@app.get("/", response_class=HTMLResponse, include_in_schema=False)
+def demo():
+    if ROLE not in ("relay", "psp-a", "psp-b"):
+        raise HTTPException(status_code=404)
+    page = Path(__file__).with_name("demo.html").read_text(encoding="utf-8")
+    return HTMLResponse(page.replace("__FRAUD_ROLE__", ROLE), headers={"Cache-Control": "no-store"})
