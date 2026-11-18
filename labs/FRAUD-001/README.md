@@ -233,3 +233,21 @@ TLS/mTLS entre services, authentification OAuth2/OIDC avec Keycloak, secrets Vau
 - Docker Compose : https://docs.docker.com/compose/
 - Pydantic : https://docs.pydantic.dev/
 - OWASP API Security Top 10 : https://owasp.org/API-Security/
+
+
+## Démonstration dans le navigateur
+
+Reconstruire les images depuis le dossier du lab avec `docker compose up --build -d`. Dans le navigateur de la VM, ouvrir le [relais](http://localhost:8090/), le [PSP A](http://localhost:8091/) et le [PSP B](http://localhost:8092/).
+
+Pour ouvrir ces pages sur Windows lorsque Docker tourne dans VirtualBox, ouvrir un tunnel depuis PowerShell et laisser la session ouverte. Adapter l’adresse de la VM si nécessaire.
+
+```powershell
+ssh -N -o ExitOnForwardFailure=yes -L 127.0.0.1:8090:127.0.0.1:8090 -L 127.0.0.1:8091:127.0.0.1:8091 -L 127.0.0.1:8092:127.0.0.1:8092 lionel@192.168.255.10
+```
+
+1. Dans le PSP A, saisir `LAB_USER_KEY` du fichier `.env`, envoyer un signal (T01), puis rejouer le même jeton (T02). Les boutons T03 et T05 couvrent la clé invalide et le format invalide.
+2. Dans le PSP B, saisir `LAB_USER_KEY` et copier le jeton du PSP A pour le retrouver (T04). Garder le même onglet pour T08. Après expiration réelle ou expiration forcée de ce même signal fictif dans SQLite depuis la VM, exécuter T08. Le test observe le retrait de la boîte de réception.
+3. Dans le relais, tester la lecture sans clé (T06), consulter l’audit avec `ADMIN_KEY` (T07), puis tester l’interdiction de lire avec `PSP_A_KEY` (T10).
+4. Pour T09, garder le PSP B ouvert, exécuter `docker compose stop relay` dans la VM, puis cliquer sur **Lire pendant l’arrêt**. Redémarrer avec `docker compose start relay`, attendre que le relais soit `healthy` et relancer la lecture.
+
+Les champs de clés sont masqués. Les clés sont envoyées uniquement dans les en-têtes des requêtes au service affiché et ne sont pas enregistrées par l’interface. Chaque onglet affiche les statuts HTTP, le contenu JSON et l’historique local des actions.
