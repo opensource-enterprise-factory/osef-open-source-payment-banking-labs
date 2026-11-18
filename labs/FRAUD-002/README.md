@@ -274,3 +274,25 @@ Même ingénieur possible sur plusieurs rôles selon la disponibilité ; aucun r
 - [Tazama — documentation](https://github.com/tazama-lf/docs)
 
 **Critère de clôture :** démonstration réelle avec preuves des scénarios, documentation et revue. Une fiche de conception n'est pas une livraison fonctionnelle.
+
+## Pré-déploiement sur VM unique — contrôle des ports
+
+Avant de démarrer les 13 services Tazama sur `osef-fraud-01`, exécuter le **contrôle non destructif versionné**. Le commit de référence Tazama déjà cloné est `83e4b12c16986aedfff843ed84b7045ac912ec0a`.
+
+```bash
+# Après revue et fusion de la PR GitHub correspondante :
+cd /home/lionel/osef-open-source-payment-banking-labs
+git status -sb   # ne rien écraser sur la VM
+git checkout main
+git pull --ff-only origin main
+
+# Vérification uniquement : n'exécute ni docker compose up ni down.
+python3 labs/FRAUD-002/scripts/check-tazama-compose.py
+```
+
+Le script inspecte le profil **Public (DockerHub) sans addons facultatifs** et indique : liste des 13 services, ports hôte publiés, restrictions d'écoute, collisions avec les ports FRAUD-001 (8090–8092), limites mémoire déclarées. Il **n'affiche pas les valeurs des variables d'environnement** et ne crée/modifie aucun fichier, volume ou conteneur. **Un code de sortie 1 signale une exposition réseau ou un conflit nécessitant une revue, pas forcément un échec Docker.**
+
+**Constat initial à partir des fichiers upstream inspectés :** PostgreSQL, NATS, Valkey et certaines APIs sont publiés par des mappings sans IP de liaison explicite ; selon la configuration Docker, ces publications peuvent être accessibles depuis les interfaces de la VM, au-delà de localhost. **Ne pas lancer Tazama avant revue d'une restriction à 127.0.0.1 ou à un réseau d'administration autorisé.** La seule absence de collision avec FRAUD-001 ne prouve pas que la configuration est sécurisée.
+
+**Règle OSEF confirmée : toutes les modifications de configuration passent par une PR GitHub ; aucun changement manuel de fichiers sur la VM.** Les commandes de la VM servent à synchroniser et appliquer uniquement le contenu révisé.
+
