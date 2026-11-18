@@ -233,3 +233,54 @@ TLS/mTLS entre services, authentification OAuth2/OIDC avec Keycloak, secrets Vau
 - Docker Compose : https://docs.docker.com/compose/
 - Pydantic : https://docs.pydantic.dev/
 - OWASP API Security Top 10 : https://owasp.org/API-Security/
+
+
+## Démonstration dans le navigateur
+
+Reconstruire les images depuis le dossier du lab avec `docker compose up --build -d`. Dans le navigateur de la VM, ouvrir le [relais](http://localhost:8090/), le [PSP A](http://localhost:8091/) et le [PSP B](http://localhost:8092/).
+
+Pour ouvrir ces pages sur Windows lorsque Docker tourne dans VirtualBox, ouvrir un tunnel depuis PowerShell et laisser la session ouverte. Adapter l’adresse de la VM si nécessaire.
+
+```powershell
+ssh -N -o ExitOnForwardFailure=yes -L 127.0.0.1:8090:127.0.0.1:8090 -L 127.0.0.1:8091:127.0.0.1:8091 -L 127.0.0.1:8092:127.0.0.1:8092 lionel@192.168.255.10
+```
+
+1. Dans le PSP A, saisir `LAB_USER_KEY` du fichier `.env`, envoyer un signal (T01), puis rejouer le même jeton (T02). Les boutons T03 et T05 couvrent la clé invalide et le format invalide.
+2. Dans le PSP B, saisir `LAB_USER_KEY` et copier le jeton du PSP A pour le retrouver (T04). Garder le même onglet pour T08. Après expiration réelle ou expiration forcée de ce même signal fictif dans SQLite depuis la VM, exécuter T08. Le test observe le retrait de la boîte de réception.
+3. Dans le relais, tester la lecture sans clé (T06), consulter l’audit avec `ADMIN_KEY` (T07), puis tester l’interdiction de lire avec `PSP_A_KEY` (T10).
+4. Pour T09, garder le PSP B ouvert, exécuter `docker compose stop relay` dans la VM, puis cliquer sur **Lire pendant l’arrêt**. Redémarrer avec `docker compose start relay`, attendre que le relais soit `healthy` et relancer la lecture.
+
+Les champs de clés sont masqués. Les clés sont envoyées uniquement dans les en-têtes des requêtes au service affiché et ne sont pas enregistrées par l’interface. Chaque onglet affiche les statuts HTTP, le contenu JSON et l’historique local des actions.
+
+
+### Accéder directement aux trois services depuis Windows
+
+Depuis Ubuntu, dans le dossier du lab, indique l’IPv4 privée de la VM sur l’adaptateur Host-only VirtualBox. Pour `osef-fraud-01` :
+
+```bash
+FRAUD_HOST_ONLY_IP=192.168.255.10 docker compose -f compose.yaml -f compose.host-only.yaml up --build -d
+for port in 8090 8091 8092; do
+  curl -fsS "http://192.168.255.10:$port/health" && echo
+done
+```
+
+Ouvre le [relais](http://192.168.255.10:8090/), le [PSP A](http://192.168.255.10:8091/) et le [PSP B](http://192.168.255.10:8092/) sur Windows. L’adresse doit déjà être attribuée à la VM. Cette option publie les trois ports sur l’interface privée et conserve les ports locaux utilisés par les scripts. Pour recréer les services en conservant l’accès privé, réutilise les deux fichiers Compose et la variable. Pour revenir à l’accès local seul, exécute `docker compose up -d`.
+
+Le réseau privé doit être réservé aux machines de démonstration autorisées. Utilise uniquement des données et des clés de lab.
+
+
+### Parcours web validé le 18 novembre 2026
+
+Lionel Sakiti a exécuté ce parcours depuis le navigateur Windows sur le réseau privé VirtualBox de la VM `osef-fraud-01`, avec un signal fictif.
+
+1. **T01 — Envoyer depuis le PSP A (8091).** Saisir la clé de démonstration, puis cliquer sur **Envoyer**. HTTP **201** et `accepted` confirment l’enregistrement du signal. Copier le jeton du formulaire.
+
+   ![T01 — Signal accepté par le PSP A, HTTP 201](evidence/t01-psp-a-emission.png)
+
+2. **T04 — Retrouver le signal dans le PSP B (8092).** Saisir la même clé de démonstration et coller le jeton, puis cliquer sur **Lire les signaux**. HTTP **200** et le même jeton dans la réponse confirment l’échange. La réponse identifie `psp-a` comme émetteur et `psp-b` comme destinataire.
+
+   ![T04 — Même signal retrouvé par le PSP B, HTTP 200](evidence/t04-psp-b-reception.png)
+
+3. **T07 — Consulter le journal sur le relais (8090).** Saisir la clé d’audit et cliquer sur **Voir l’audit**. HTTP **200** et les entrées `psp-a / create / accepted` et `psp-b / read / authorized` montrent que le relais journalise les opérations.
+
+   ![T07 — Création et lecture visibles dans le journal du relais, HTTP 200](evidence/t07-relais-audit.png)

@@ -1,0 +1,11 @@
+# Optional lab access from the VirtualBox host. The base loopback port is kept.
+services:
+  relay:
+    ports:
+      - "${FRAUD_HOST_ONLY_IP:?Set FRAUD_HOST_ONLY_IP to the VM host-only IPv4}:8090:8000"
+  psp-a:
+    ports:
+      - "${FRAUD_HOST_ONLY_IP:?Set FRAUD_HOST_ONLY_IP to the VM host-only IPv4}:8091:8000"
+  psp-b:
+    ports:
+      - "${FRAUD_HOST_ONLY_IP:?Set FRAUD_HOST_ONLY_IP to the VM host-only IPv4}:8092:8000"
