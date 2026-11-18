@@ -1,6 +1,8 @@
 # Bind host ports to loopback: LAB ONLY, never expose to the internet.
 services:
   relay:
+    # Restart after Docker/VM reboot unless deliberately stopped.
+    restart: unless-stopped
     build: .
     environment:
       ROLE: relay
@@ -18,6 +20,7 @@ services:
       timeout: 3s
       retries: 12
   psp-a:
+    restart: unless-stopped
     build: .
     environment:
       ROLE: psp-a
@@ -30,6 +33,7 @@ services:
       relay:
         condition: service_healthy
   psp-b:
+    restart: unless-stopped
     build: .
     environment:
       ROLE: psp-b
