@@ -20,6 +20,7 @@ FILES = [
     "docker-compose.hub.core.yaml",
     "docker-compose.hub.rules.yaml",
 ]
+DEMO_HOST_IP = "192.168.255.10"  # Réseau privé VirtualBox, pas une adresse publique.
 EXPECTED = {
     ("admin-service", 5100), ("batch-ppa", 4100), ("core-postgres", 15432),
     ("nats", 14222), ("nats", 16222), ("nats", 18222),
@@ -56,8 +57,9 @@ def main():
             for port in service.get("ports", []):
                 host = port.get("host_ip")
                 number = int(port["published"])
-                if host != "127.0.0.1":
-                    raise ValueError(f"{name} publie {number} sur {host!r} au lieu de localhost")
+                expected_ip = DEMO_HOST_IP if (name, number) == ("tazama-demo", 3011) else "127.0.0.1"
+                if host != expected_ip:
+                    raise ValueError(f"{name} publie {number} sur {host!r}, attendu {expected_ip!r}")
                 if number in (8090, 8091, 8092):
                     raise ValueError(f"{name} utilise le port FRAUD-001 {number}")
                 published.add((name, number))
@@ -69,7 +71,7 @@ def main():
         print(f"[BLOCK] Déploiement interdit : {e}", file=sys.stderr)
         return 1
 
-    print("[OK] 13 services, 9 ports uniquement sur 127.0.0.1 ; aucune collision 8090–8092.")
+    print("[OK] 13 services, 8 ports localhost et Tazama Demo sur 192.168.255.10:3011 ; aucune collision 8090–8092.")
     print("[INFO] Aucune limite mémoire déclarée ; ne lancer 'up' qu'après validation des ressources et du disque.")
     if action == "check":
         print("[INFO] Contrôle en lecture seule, aucun conteneur démarré.")
