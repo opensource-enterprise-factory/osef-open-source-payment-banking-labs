@@ -64,6 +64,17 @@ Les flèches pointillées sont **des interfaces projetées et non implémentées
 
 La stack Tazama actuelle présente aussi les **extensions** (configuration studios, case management) et **BIAR** (analytics/reporting), mais **elles ne sont pas nécessaires pour le premier objectif de FRAUD-002**. Vérifier licences et conditions d'accès aux différents composants et images avant installation. Certains processeurs de règles peuvent avoir un accès conditionné ; ne pas les qualifier de libres d'accès sans vérification.
 
+## Deux architectures VirtualBox possibles
+
+Le lab peut être déployé selon **deux options documentées** :
+
+1. **Deux VM séparées (recommandée si le PC hôte le permet)** : conserver `osef-fraud-01` (FRAUD-001, 2 vCPU / 4 Gio / 25 Go) ; créer `osef-fraud-02` pour Tazama Core (point de départ OSEF : **4 vCPU / 12 Gio / 80 Go**).
+2. **Une seule VM redimensionnée** : conserver `osef-fraud-01` mais passer, selon la capacité du PC, à **4–6 vCPU / 12–16 Gio / 80–100 Go** avec sauvegarde, arrêt, extension du VDI, extension contrôlée de la partition et revérification T01–T10.
+
+Ces chiffres sont des **estimations de laboratoire non garanties par Tazama**. Le PC physique et les consommations réelles restent à mesurer. La version Core inspectée est `83e4b12c16986aedfff843ed84b7045ac912ec0a`, avec 13 services prévus dans le profil Public (DockerHub).
+
+➡️ **[Guide complet : dimensionnement, choix, procédures VirtualBox/Ubuntu, réseau, sauvegardes et critères de validation](DIMENSIONNEMENT-VIRTUALBOX.md)**.
+
 ## 4. Matériel et environnement
 
 ### Séparer les phases
