@@ -97,55 +97,74 @@ sudo docker compose down
 
 **Gate A :** conserver preuves T01–T07 ; ne pas poursuivre si l'authentification ou la séparation des rôles ne fonctionne pas.
 
-## 6. Procédure détaillée — Phase B : installer Tazama Core
+## 6. Procédure détaillée — Phase B : déployer Tazama Core
 
-**Source officielle actuelle :**
-- [tazama-lf/tazama-stack](https://github.com/tazama-lf/tazama-stack)
-- [README Core](https://github.com/tazama-lf/tazama-stack/blob/main/core/README.md)
+**Documentation officielle à suivre :**
+- [Tazama Stack](https://github.com/tazama-lf/tazama-stack)
+- [README Core officiel](https://github.com/tazama-lf/tazama-stack/blob/main/core/README.md)
 
-La stack officielle est destinée à la **démonstration, exploration et test**, et non à la production.
+**Correction importante :** le lanceur Linux documenté par Tazama est **`./tazama.sh` à la racine** de `tazama-stack`, et non `core/tazama-core.sh`. La stack officielle sert à la **démonstration et aux tests**, pas à la production. Ne pas supposer que les 4 Gio de RAM de FRAUD-001 suffiront.
+
+### B1. Pré-contrôle non destructif de la VM
+
+Depuis le dossier OSEF `labs/FRAUD-002` :
 
 ```bash
-# Sur la VM dédiée au lab Tazama : vérifier les ressources réellement disponibles.
-free -h
-df -h /
-sudo docker version
-sudo docker compose version
+# Affiche l'OS, les vCPU, la RAM, le disque, les ports et les versions Docker/Compose.
+# Ne lance pas Tazama, n'altère pas la configuration de la machine.
+bash scripts/preflight.sh
+```
 
-# Cloner la branche principale officielle de la stack.
+Le script signale les dépendances absentes mais **ne garantit pas la capacité de la VM à faire tourner Tazama**. Conserver sa sortie sans informations sensibles dans le compte rendu du lab.
+
+### B2. Cloner la pile et inspecter ses options
+
+```bash
+# Télécharger uniquement les sources officielles.
 git clone --branch main https://github.com/tazama-lf/tazama-stack.git
 cd tazama-stack
 
-# Enregistrer le commit exact pour garantir une reproduction ultérieure.
+# Capturer le commit pour reproductibilité.
 git rev-parse HEAD
 
-# Consulter la documentation Core correspondant à ce commit.
+# Lire les prérequis et la procédure correspondant au commit obtenu.
 less core/README.md
 
-# Vérifier le script de lancement Linux avant exécution.
-ls -l core/tazama-core.sh
+# Vérifier le lanceur documenté par l'upstream.
+ls -l ./tazama.sh
 ```
 
-**Important :** lire les options du script `core/tazama-core.sh` et la documentation associée **avant** de lancer le déploiement, car les options et prérequis peuvent évoluer. Dans les sources actuelles, l'option de déploiement public basée sur les images DockerHub est présentée comme un démarrage rapide ; vérifier la disponibilité des images sélectionnées et les éventuelles exigences d'authentification. Le fichier officiel peut nécessiter des clés ou variables d'environnement particulières.
+Le menu officiel présente notamment **Public (GitHub)**, **Public (DockerHub)**, **Full-service (DockerHub)** et **Multi-Tenant Public (DockerHub)**. Pour un premier essai limité, privilégier **Public (DockerHub)** après lecture du menu, car l'upstream précise que cette option déploie les services de base et un processeur de règle d'exemple. **Ne pas sélectionner une configuration multi-tenant ou full-service par défaut.**
+
+### B3. Prendre connaissance des secrets et de l'exposition réseau
+
+La procédure upstream peut exiger un **jeton GitHub `read:packages`** pour récupérer des images hébergées dans GHCR ; cela dépend de l'option de déploiement choisie. Si ce cas se présente, suivre la documentation Tazama et utiliser `docker login ... --password-stdin` **sans écrire le jeton dans le dépôt ni le fichier .env**.
+
+**Attention :** vérifier les ports publiés par chaque fichier Compose Tazama avant de l'exécuter. L'environnement initial n'a pas la garantie de se limiter à `127.0.0.1`. Pour ce lab, employer une VM isolée, sans redirection de ports depuis la box/routeur vers Internet.
+
+### B4. Lancer le menu officiel sur Linux
 
 ```bash
-# Seulement après lecture du script et du README officiel :
-cd core
-bash ./tazama-core.sh
-
-# Contrôle de santé prévu par la documentation upstream lorsque la pile est démarrée :
-curl --fail-with-body http://127.0.0.1:5000/
+# À la racine du clone tazama-stack, et seulement après revue du README :
+chmod +x ./tazama.sh
+./tazama.sh
 ```
 
-**Attendu selon upstream :** réponse JSON indiquant un service disponible (exemple officiel `{"status":"UP"}`). **Le succès et les ports effectifs sont à vérifier avec la version sélectionnée**.
+Sélectionner l'option documentée, noter le choix et les addons. Les composants tels que Keycloak, relay services, pgAdmin et Hasura varient selon le mode choisi. Les tests officiels peuvent dépendre de services relais NATS : suivre les recommandations associées à la collection Postman choisie.
 
-Documenter :
-- Version/commit Tazama, Docker/Compose, VM, RAM libre, stockage.
-- Choix exact du menu et des images, état des conteneurs, ports exposés.
-- Détails expurgés des secrets.
-- Capture du contrôle de santé et logs sans identifiant sensible.
+### B5. Vérifier le déploiement avec la procédure upstream
 
-**Gate B :** Tazama Core sain et test officiel réussi. Ne pas poursuivre l'intégration si le déploiement de base échoue.
+Consulter la section « Testing the end-to-end deployment » du README officiel et utiliser **les URL, ports, identifiants fictifs et jeux de tests indiqués pour le commit déployé**. Ne pas supposer qu'un endpoint `/health` ou un port fixe sera identique à travers toutes les options de déploiement.
+
+**Preuves à consigner :**
+- commit Git de `tazama-stack`, mode du menu choisi et version des images ;
+- `docker compose ps` ou commande prescrite par le script, avec statut des services ;
+- mémoire et espace disque avant/après ;
+- réponse des points de contrôle documentés ;
+- un jeu de tests officiel exécuté et résultats expurgés ;
+- incidents et correctifs, **sans aucun secret**.
+
+**Gate B :** la stack est démarrée et une vérification de bout en bout de l'upstream a effectivement réussi, avec preuves. Si cette étape échoue, ne pas développer l'adaptateur sur des hypothèses.
 
 ## 7. Phase C : comprendre le format transactionnel de Tazama
 
