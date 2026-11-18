@@ -1,0 +1,45 @@
+# Bind host ports to loopback: LAB ONLY, never expose to the internet.
+services:
+  relay:
+    build: .
+    environment:
+      ROLE: relay
+      PSP_A_KEY: ${PSP_A_KEY:?Run bash scripts/init-env.sh}
+      PSP_B_KEY: ${PSP_B_KEY:?Run bash scripts/init-env.sh}
+      ADMIN_KEY: ${ADMIN_KEY:?Run bash scripts/init-env.sh}
+      DATABASE_PATH: /data/relay.db
+    ports:
+      - "127.0.0.1:8090:8000"
+    volumes:
+      - relay-data:/data
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=2)"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+  psp-a:
+    build: .
+    environment:
+      ROLE: psp-a
+      RELAY_URL: http://relay:8000
+      LAB_USER_KEY: ${LAB_USER_KEY:?Run bash scripts/init-env.sh}
+      PSP_A_KEY: ${PSP_A_KEY:?Run bash scripts/init-env.sh}
+    ports:
+      - "127.0.0.1:8091:8000"
+    depends_on:
+      relay:
+        condition: service_healthy
+  psp-b:
+    build: .
+    environment:
+      ROLE: psp-b
+      RELAY_URL: http://relay:8000
+      LAB_USER_KEY: ${LAB_USER_KEY:?Run bash scripts/init-env.sh}
+      PSP_B_KEY: ${PSP_B_KEY:?Run bash scripts/init-env.sh}
+    ports:
+      - "127.0.0.1:8092:8000"
+    depends_on:
+      relay:
+        condition: service_healthy
+volumes:
+  relay-data:
