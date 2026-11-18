@@ -1,5 +1,10 @@
 # FRAUD-002 — Détection transactionnelle avec Tazama et interopérabilité avec FRAUD-001
 
+## Guide des 13 services Tazama
+
+Avant les tests métier, lire le [guide détaillé des 13 services Tazama Core](docs/ARCHITECTURE-13-SERVICES-TAZAMA.md) : responsabilités, dépendances, ports, santé, diagnostics et opportunités de contribution upstream. Il reprend les sources officielles du commit Tazama utilisé sur `osef-fraud-01` et distingue les contrôles déjà observés des validations encore nécessaires.
+
+
 > **Statut : lab proposé / conception documentée ; déploiement et intégration NON testés.**
 > **Usage : laboratoire isolé uniquement.** Données entièrement synthétiques, sans PSP bancaire réel.
 > **Attention :** ce lab ne constitue pas une implémentation officielle de l'OFTA, ni une preuve de conformité aux réglementations sectorielles.
