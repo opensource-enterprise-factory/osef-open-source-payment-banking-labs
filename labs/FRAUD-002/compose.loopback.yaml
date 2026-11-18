@@ -1,0 +1,29 @@
+# OSEF FRAUD-002 — overlay sécurisé du profil Tazama Public (DockerHub).
+# Revu sur tazama-stack commit 83e4b12c16986aedfff843ed84b7045ac912ec0a.
+# Docker Compose >= 2.24.4 : !override REMPLACE entièrement ports, évitant
+# de conserver simultanément les publications originales sur 0.0.0.0.
+# L'overlay est versionné dans OSEF, SANS modifier les fichiers upstream Tazama.
+services:
+  admin-service:
+    ports: !override
+      - "127.0.0.1:5100:3100"
+  batch-ppa:
+    ports: !override
+      - "127.0.0.1:4100:4100"
+  core-postgres:
+    ports: !override
+      - "127.0.0.1:15432:5432"
+  nats:
+    ports: !override
+      - "127.0.0.1:14222:4222"
+      - "127.0.0.1:16222:6222"
+      - "127.0.0.1:18222:8222"
+  tazama-demo:
+    ports: !override
+      - "127.0.0.1:3011:3011"
+  tms-service:
+    ports: !override
+      - "127.0.0.1:5000:3000"
+  valkey:
+    ports: !override
+      - "127.0.0.1:16379:6379"
