@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="fr">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FRAUD-001 · Démonstration</title>
+<style>
+:root{color-scheme:dark;font:16px system-ui,sans-serif;background:#101827;color:#edf4ff}
+body{max-width:940px;margin:0 auto;padding:32px 20px} a{color:#91e8cf}
+header,section{background:#192438;border:1px solid #34445e;border-radius:16px;padding:24px;margin:16px 0}
+nav,.actions{display:flex;gap:12px;flex-wrap:wrap} h1{font-size:clamp(2rem,6vw,3.5rem);margin:10px 0}
+label{display:block;margin:12px 0 5px} input,select,button{font:inherit;padding:9px 12px;border-radius:8px;border:1px solid #61738d;background:#101827;color:inherit}
+input{width:min(100%,450px);box-sizing:border-box} button{background:#91e8cf;color:#101827;font-weight:650;cursor:pointer} button:disabled{opacity:.55;cursor:wait}
+small,p{line-height:1.5;color:#bdcbe0} pre{white-space:pre-wrap;overflow-wrap:anywhere;margin:0;color:#d7e4fa}
+li{padding:8px 0} .pass{color:#91e8cf}.fail{color:#ffaba6} [hidden]{display:none!important}
+</style>
+<body>
+<nav aria-label="Services">
+<a href="http://localhost:8090/">Relais · 8090</a>
+<a href="http://localhost:8091/">PSP A · 8091</a>
+<a href="http://localhost:8092/">PSP B · 8092</a>
+</nav>
+<header>
+<small>OSEF / FRAUD-001</small>
+<h1 id="title"></h1>
+<p id="intro"></p>
+<button id="health" type="button">Vérifier le service</button>
+</header>
+<section data-role="psp-a">
+<h2>Soumettre un signal fictif</h2>
+<label for="key-a">Clé de démonstration (LAB_USER_KEY)</label>
+<input id="key-a" type="password" autocomplete="off" spellcheck="false">
+<label for="token">Jeton de transaction</label>
+<input id="token" autocomplete="off" pattern="demo-[A-Za-z0-9-]{8,64}" required>
+<label for="category">Catégorie</label>
+<select id="category"><option>suspicious-transfer</option><option>account-takeover</option><option>social-engineering</option></select>
+<label for="severity">Gravité</label>
+<select id="severity"><option>high</option><option>medium</option><option>low</option></select>
+<p>Expiration après une heure. Conserve le jeton pour rejouer le doublon et le retrouver chez le PSP B.</p>
+<div class="actions">
+<button type="button" id="new-token">Nouveau jeton</button>
+<button type="button" data-send="201">T01 · Envoyer</button>
+<button type="button" data-send="409">T02 · Rejouer</button>
+<button type="button" data-send="401">T03 · Clé invalide</button>
+<button type="button" data-send="422">T05 · Schéma invalide</button>
+</div>
+</section>
+<section data-role="psp-b">
+<h2>Consulter la boîte de réception</h2>
+<label for="key-b">Clé de démonstration (LAB_USER_KEY)</label>
+<input id="key-b" type="password" autocomplete="off" spellcheck="false">
+<label for="lookup">Jeton à retrouver (facultatif)</label>
+<input id="lookup" autocomplete="off" placeholder="demo-…">
+<p>Pour observer T09, arrête le relais dans le terminal de la VM, puis relance-le après le test.</p>
+<div class="actions">
+<button type="button" id="inbox">T04 · Lire les signaux</button>
+<button type="button" id="expired">T08 · Vérifier le retrait</button>
+<button type="button" id="outage">T09 · Lire pendant l’arrêt</button>
+</div>
+</section>
+<section data-role="relay">
+<h2>Contrôler les accès et l’audit</h2>
+<label for="admin">Clé d’audit (ADMIN_KEY)</label>
+<input id="admin" type="password" autocomplete="off" spellcheck="false">
+<label for="key-role">Clé du PSP A (PSP_A_KEY)</label>
+<input id="key-role" type="password" autocomplete="off" spellcheck="false">
+<p>T10 attend un refus de lecture avec la clé du PSP A. Vérifie sa valeur dans le fichier .env avant la démo.</p>
+<div class="actions">
+<button type="button" id="anonymous">T06 · Lire sans clé</button>
+<button type="button" id="audit">T07 · Voir l’audit</button>
+<button type="button" id="denied">T10 · Lire comme PSP A</button>
+</div>
+</section>
+<section>
+<h2>Dernière réponse</h2>
+<p id="status" role="status">En attente d’une action.</p>
+<pre id="result"></pre>
+</section>
+<section>
+<h2>Historique de cet onglet</h2>
+<ol id="history"></ol>
+</section>
+<script>
+const role = "__FRAUD_ROLE__";
+const title = {"psp-a":"PSP A · Émission","psp-b":"PSP B · Réception",relay:"Relais · Contrôles et audit"};
+const intro = {"psp-a":"Crée un signal et observe le contrôle des doublons, des clés et du format.",
+               "psp-b":"Retrouve le signal émis par le PSP A dans la boîte du prestataire destinataire.",
+               relay:"Vérifie les règles de lecture et consulte les événements consignés."};
+const observedTokens = new Set();
+const get = id => document.getElementById(id);
+get("title").textContent = title[role];
+get("intro").textContent = intro[role];
+document.querySelectorAll("[data-role]").forEach(section => { section.hidden = section.dataset.role !== role; });
+
+function key(id) {
+  const input = get(id);
+  if (!input.value.trim()) {
+    input.focus();
+    throw new Error("Renseigne la clé de démonstration pour continuer.");
+  }
+  return input.value.trim();
+}
+
+function newToken() {
+  get("token").value = "demo-" + crypto.randomUUID();
+}
+
+function report(message, ok, body = "") {
+  get("status").textContent = message;
+  get("status").className = ok ? "pass" : "fail";
+  get("result").textContent = body;
+  const row = document.createElement("li");
+  row.textContent = new Date().toLocaleTimeString("fr-FR") + " · " + message;
+  row.className = ok ? "pass" : "fail";
+  get("history").prepend(row);
+}
+
+async function run(label, path, expected, options = {}, verify = () => true) {
+  const buttons = document.querySelectorAll("button");
+  buttons.forEach(button => { button.disabled = true; });
+  try {
+    const response = await fetch(path, {...options, cache:"no-store", signal:AbortSignal.timeout(12000)});
+    const body = await response.json();
+    const ok = response.status === expected && verify(body);
+    report(label + " · HTTP " + response.status + " · " + (ok ? "réussi" : "écart détecté"), ok,
+           JSON.stringify(body, null, 2));
+  } catch (error) {
+    report(label + " · " + error.message, false);
+  } finally {
+    buttons.forEach(button => { button.disabled = false; });
+  }
+}
+
+function on(id, action) {
+  get(id).addEventListener("click", () => {
+    try { action(); } catch (error) { report(error.message, false); }
+  });
+}
+
+get("health").onclick = () => run("État du service", "/health", 200, {}, body => body.status === "ok");
+if (role === "psp-a") {
+  newToken();
+  on("new-token", newToken);
+  const tests = {"201":"T01","409":"T02","401":"T03","422":"T05"};
+  document.querySelectorAll("[data-send]").forEach(button => {
+    button.onclick = () => {
+      try {
+        if (!get("token").reportValidity()) return;
+        const expected = Number(button.dataset.send);
+        const payload = {
+          transaction_token:get("token").value,
+          category:expected === 422 ? "invalid-category" : get("category").value,
+          severity:get("severity").value,
+          recipient:"psp-b",
+          expires_in_hours:1
+        };
+        run(tests[expected], "/submit", expected, {
+          method:"POST",
+          headers:{"Content-Type":"application/json","X-Lab-Key":expected === 401 ? "invalid" : key("key-a")},
+          body:JSON.stringify(payload)
+        });
+      } catch (error) { report(error.message, false); }
+    };
+  });
+}
+if (role === "psp-b") {
+  on("inbox", () => {
+    const token = get("lookup").value.trim();
+    run(token ? "T04 · Jeton recherché" : "Lecture de la boîte", "/inbox", 200,
+        {headers:{"X-Lab-Key":key("key-b")}}, body => {
+          if (!Array.isArray(body.signals)) return false;
+          if (!token) return true;
+          const found = body.signals.some(item => item.transaction_token === token);
+          if (found) observedTokens.add(token);
+          return found;
+        });
+  });
+  on("expired", () => {
+    const token = get("lookup").value.trim();
+    if (!observedTokens.has(token)) throw new Error("Retrouve d’abord ce jeton avec T04 dans cet onglet.");
+    run("T08 · Retrait après expiration", "/inbox", 200, {headers:{"X-Lab-Key":key("key-b")}},
+        body => Array.isArray(body.signals) && !body.signals.some(item => item.transaction_token === token));
+  });
+  on("outage", () => run("T09", "/inbox", 503, {headers:{"X-Lab-Key":key("key-b")}},
+                        body => body.detail === "Lab relay unavailable"));
+}
+if (role === "relay") {
+  on("anonymous", () => run("T06", "/signals", 401));
+  on("audit", () => run("T07", "/audit", 200, {headers:{"X-API-Key":key("admin")}},
+                       body => Array.isArray(body.events) && body.events.length > 0));
+  on("denied", () => run("T10", "/signals", 401, {headers:{"X-API-Key":key("key-role")}}));
+}
+</script>
+</body>
+</html>
