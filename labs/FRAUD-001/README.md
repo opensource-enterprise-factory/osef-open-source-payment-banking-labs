@@ -284,3 +284,42 @@ Lionel Sakiti a exécuté ce parcours depuis le navigateur Windows sur le résea
 3. **T07 — Consulter le journal sur le relais (8090).** Saisir la clé d’audit et cliquer sur **Voir l’audit**. HTTP **200** et les entrées `psp-a / create / accepted` et `psp-b / read / authorized` montrent que le relais journalise les opérations.
 
    ![T07 — Création et lecture visibles dans le journal du relais, HTTP 200](evidence/t07-relais-audit.png)
+
+
+## Tests étendus T08 à T10
+
+Dans le dossier du lab, avec les trois services déjà démarrés, exécuter :
+
+```bash
+bash scripts/test-lab.sh --extended
+```
+
+Le script exécute d’abord T01 à T07. Ensuite, T10 vérifie le refus de lecture pour le PSP A. T09 arrête brièvement le relais, vérifie le HTTP 503 du PSP B, redémarre le relais et exige un HTTP 200 contenant le même jeton. T08 force l’expiration de ce seul signal fictif dans SQLite et vérifie qu’il disparaît de la boîte de réception. Prévoir cette interruption pendant une fenêtre de test du lab. Le mode sans argument exécute T01 à T07.
+
+
+### Suivre les tests automatisés en direct
+
+Avec les trois services actifs, ouvrir deux terminaux sur la VM. Dans le premier, depuis `labs/FRAUD-001`, lancer la suite, afficher sa sortie et conserver un log :
+
+```bash
+(
+  set -o pipefail
+  bash scripts/test-lab.sh --extended 2>&1 | tee /tmp/fraud-001-tests.log
+)
+```
+
+Dans le second terminal, suivre le fichier depuis le début :
+
+```bash
+tail -n +1 -F /tmp/fraud-001-tests.log
+```
+
+`Ctrl+C` dans le deuxième terminal arrête l’affichage. Le fichier est remplacé lors de la prochaine exécution et peut être relu avec `less /tmp/fraud-001-tests.log`.
+
+Pour suivre l’état des conteneurs à la place, lancer depuis `labs/FRAUD-001` :
+
+```bash
+watch -n 1 docker compose ps -a
+```
+
+Pendant T09, le relais s’arrête brièvement. Le script affiche le HTTP 503 attendu, puis un HTTP 200 avec le même jeton après redémarrage. La suite réussit si elle se termine par `OK : scénarios T01 à T10 terminés.` Pour une démo, projeter le log à côté des interfaces web.
