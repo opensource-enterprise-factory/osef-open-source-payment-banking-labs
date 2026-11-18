@@ -103,7 +103,7 @@ sudo docker compose down
 - [Tazama Stack](https://github.com/tazama-lf/tazama-stack)
 - [README Core officiel](https://github.com/tazama-lf/tazama-stack/blob/main/core/README.md)
 
-**Correction importante :** le lanceur Linux documenté par Tazama est **`./tazama.sh` à la racine** de `tazama-stack`, et non `core/tazama-core.sh`. La stack officielle sert à la **démonstration et aux tests**, pas à la production. Ne pas supposer que les 4 Gio de RAM de FRAUD-001 suffiront.
+**Attention à l'incohérence du dépôt upstream :** le README `core/README.md` cite `./tazama.sh`, mais l'arborescence actuelle de la branche `main` contient **`core/tazama-core.sh`**, sans `tazama.sh` à la racine. **Vérifier le fichier réellement présent dans le clone avant de le lancer** ; utiliser `bash ./tazama-core.sh` depuis le répertoire `core` si le clone correspond à l'arborescence inspectée. La stack officielle sert à la démonstration et aux tests, pas à la production. Ne pas supposer que les 4 Gio de RAM de FRAUD-001 suffiront.
 
 ### B1. Pré-contrôle non destructif de la VM
 
@@ -130,8 +130,10 @@ git rev-parse HEAD
 # Lire les prérequis et la procédure correspondant au commit obtenu.
 less core/README.md
 
-# Vérifier le lanceur documenté par l'upstream.
-ls -l ./tazama.sh
+# Vérifier les lanceurs réellement disponibles dans ce commit.
+ls -l ./tazama.sh ./core/tazama-core.sh 2>/dev/null || true
+# Inspecter le script réellement présent avant de l'exécuter.
+less core/tazama-core.sh
 ```
 
 Le menu officiel présente notamment **Public (GitHub)**, **Public (DockerHub)**, **Full-service (DockerHub)** et **Multi-Tenant Public (DockerHub)**. Pour un premier essai limité, privilégier **Public (DockerHub)** après lecture du menu, car l'upstream précise que cette option déploie les services de base et un processeur de règle d'exemple. **Ne pas sélectionner une configuration multi-tenant ou full-service par défaut.**
@@ -146,8 +148,9 @@ La procédure upstream peut exiger un **jeton GitHub `read:packages`** pour réc
 
 ```bash
 # À la racine du clone tazama-stack, et seulement après revue du README :
-chmod +x ./tazama.sh
-./tazama.sh
+# Pour l'arborescence actuellement observée sur GitHub :
+cd core
+bash ./tazama-core.sh
 ```
 
 Sélectionner l'option documentée, noter le choix et les addons. Les composants tels que Keycloak, relay services, pgAdmin et Hasura varient selon le mode choisi. Les tests officiels peuvent dépendre de services relais NATS : suivre les recommandations associées à la collection Postman choisie.
