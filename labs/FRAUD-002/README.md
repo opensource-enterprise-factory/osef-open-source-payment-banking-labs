@@ -299,11 +299,13 @@ Le script inspecte le profil **Public (DockerHub) sans addons facultatifs** et i
 
 ## Lancement sécurisé du profil Public (DockerHub) sur une VM unique
 
+**Évolution demandée pour la démonstration sur Windows :** publication sélective de `tazama-demo` sur `192.168.255.10:3011`. Il ne s’agit pas d’un déploiement Internet. Éviter toute donnée réelle ou clé sensible dans le lab.
+
 **Rapport d'audit exécuté sur `osef-fraud-01` :** 13 services, aucune collision 8090–8092, mais **9 publications sur l'interface hôte par défaut** (admin, batch, PostgreSQL, trois ports NATS, démonstration web, TMS, Valkey) et aucune limite mémoire explicite. Les résultats proviennent de `python3 labs/FRAUD-002/scripts/check-tazama-compose.py`, fournis par l'ingénieur.
 
 **Remédiation OSEF versionnée dans GitHub :**
-- [`compose.loopback.yaml`](compose.loopback.yaml) : restreint les **9** publications à `127.0.0.1`, avec `ports: !override` (sans laisser subsister les entrées `0.0.0.0` du fichier officiel).
-- [`scripts/tazama-safe.py`](scripts/tazama-safe.py) : compose les **cinq fichiers officiels du commit inspecté** et l'overlay OSEF ; refuse un lancement si une IP autre que localhost est publiée, si un port 8090–8092 est utilisé, ou si la composition n'a pas exactement 13 services et 9 publications attendues.
+- [`compose.loopback.yaml`](compose.loopback.yaml) : restreint **8** publications à `127.0.0.1` et la seule interface `tazama-demo` à `192.168.255.10:3011`, avec `ports: !override` (sans laisser subsister les entrées `0.0.0.0` du fichier officiel).
+- [`scripts/tazama-safe.py`](scripts/tazama-safe.py) : compose les **cinq fichiers officiels du commit inspecté** et l'overlay OSEF ; refuse un lancement si une IP autre que localhost est publiée, à l’exception contrôlée de `tazama-demo` sur `192.168.255.10:3011`, si un port 8090–8092 est utilisé, ou si la composition n'a pas exactement 13 services et 9 publications attendues.
 
 **Règle de déploiement :** jamais de modification de fichier directement sur la VM. Revue puis fusion de la PR GitHub, suivies d'une synchronisation `git pull --ff-only` sur `main`. Ne pas utiliser directement le lanceur officiel `tazama-core.sh` pour ce profil : il **n'inclut pas l'overlay OSEF** et certaines options déclenchent `down --volumes`.
 
@@ -320,7 +322,7 @@ free -h
 df -h /
 nproc
 
-# Contrôle sans démarrage : Compose valide, 13 services et 9 ports locaux.
+# Contrôle sans démarrage : Compose valide, 13 services ; 8 ports locaux et la démo sur Host-only.
 python3 labs/FRAUD-002/scripts/tazama-safe.py check
 
 # UNIQUEMENT après validation des ressources et du retour OK :
@@ -332,7 +334,7 @@ python3 labs/FRAUD-002/scripts/tazama-safe.py check
 ```
 
 **Notes d'exploitation :**
-- Les **9 ports ne seront pas accessibles depuis Windows** à `192.168.255.10` par conception. Pour consulter la démonstration, utiliser un tunnel SSH explicitement autorisé (ex. `ssh -L 3011:127.0.0.1:3011 lionel@192.168.255.10` depuis Windows), sous réserve des fonctions réellement exposées par le profil choisi.
+- **Seule l’interface Tazama Demo sera accessible depuis Windows** à `http://192.168.255.10:3011/` sur le réseau privé Host-only VirtualBox. Les 8 autres ports restent sur `127.0.0.1` dans la VM. Vérifier que la VM possède toujours l’adresse `192.168.255.10/24` sur `enp0s8` avant `up`, et que le réseau Host-only est réservé à des machines autorisées. Depuis Windows : `Test-NetConnection 192.168.255.10 -Port 3011` puis navigateur `http://192.168.255.10:3011/`. L’accès réel ne sera confirmé qu’après le démarrage et les vérifications.
 - `tazama-safe.py` n'efface aucun volume ni fichier ; `up` peut créer les conteneurs, réseaux et volumes du projet `tazama-core`. Il ne démarre jamais FRAUD-001.
 - Les images, règles et données du profile upstream restent à tester. Un healthcheck TMS ou des scénarios officiels réussis ne sont **pas encore confirmés**.
 - **Ne pas lancer les 13 services avec seulement 25 Go utilisables** : vérifier `df -h /` après redimensionnement avant installation, et surveiller mémoire/stockage.
