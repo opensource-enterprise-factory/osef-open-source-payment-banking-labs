@@ -6,6 +6,11 @@
 - [Fiche de veille OFTA](../../docs/veille/2026-11-18/OFTA-FRAUD-INTEROPERABILITY.md)
 - [Meetup associé #46](https://github.com/opensource-enterprise-factory/osef-open-source-payment-banking-labs/issues/46)
 
+
+## Exécution sur laptop Windows avec VirtualBox
+
+Pour une VM Ubuntu Server 24.04 LTS unique avec les trois conteneurs Docker, voir le [guide VirtualBox + Ubuntu détaillé](VIRTUALBOX-UBUNTU.md). Il couvre la configuration de la VM, l'installation officielle de Docker, les commandes, les tests, la sécurité réseau et le dépannage. **Ce parcours n'est pas encore validé par un test matériel confirmé.**
+
 ## 1. Objectif et limites
 
 Simuler le partage **d'un signal de risque non nominatif** d'un PSP A vers un PSP B à travers un service relais commun. Prouver par des tests qu'un échange autorisé fonctionne, qu'un doublon est refusé, qu'un acteur non autorisé ne peut pas lire le relais et qu'un audit minimal existe.
