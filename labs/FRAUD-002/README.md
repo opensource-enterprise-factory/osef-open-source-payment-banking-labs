@@ -345,3 +345,41 @@ python3 labs/FRAUD-002/scripts/tazama-safe.py check
 - **Ne pas lancer les 13 services avec seulement 25 Go utilisables** : vérifier `df -h /` après redimensionnement avant installation, et surveiller mémoire/stockage.
 - Les limites de RAM n'étant pas définies par ces fichiers Compose, procéder à des tests progressifs, surveiller `docker stats --no-stream`, et s'arrêter en cas de pression mémoire.
 
+
+
+## Batch PPA : santé Docker sur image sans shell (diagnostic du 18/11/2026)
+
+**Preuves depuis la VM Ubuntu** :
+- `docker inspect batch-ppa --format '{{json .Config.Healthcheck.Test}}'` renvoie `["CMD-SHELL","[ -e /tmp/.lock ] || exit 1"]`.
+- `docker inspect ...State.Health` renvoie `unhealthy` avec `exec: "/bin/sh": stat /bin/sh: no such file or directory` ; ce diagnostic prouve une défaillance de la commande de sonde.
+- `curl -i http://127.0.0.1:4100/` et `curl -i http://127.0.0.1:4100/health` renvoient **HTTP 200** et `{"status":"UP"}`.
+- Processus `running` ; `Restarts=0` ; logs de démarrage : dépendances déclarées `Ok` et Fastify listening sur port 4100.
+
+**Remédiation limitée à OSEF :** dans `compose.loopback.yaml`, remplacer le check fourni par l'image par une commande `CMD` exécutant `/nodejs/bin/node` pour interroger `http://127.0.0.1:4100/health`. Le test est une **sonde HTTP de liveness**, pas un contrôle profond de la DB et des traitements. L'existence du chemin Node dans l'image est cohérente avec l'entrypoint observé, mais la correction **reste à valider en exécution**.
+
+**Issue upstream existante :** [tazama-lf/tazama-stack#230](https://github.com/tazama-lf/tazama-stack/issues/230), sur les healthchecks compatibles distroless. Ne pas déposer d'issue concurrente. Proposer les preuves et une PR adaptée aux conventions des mainteneurs après validation du correctif.
+
+### Tester après fusion de la PR GitHub (aucune édition de fichiers dans la VM)
+
+```bash
+cd /home/lionel/osef-open-source-payment-banking-labs
+git status -sb
+git checkout main
+git pull --ff-only origin main
+
+# Vérifier le profil et la commande healthcheck effective
+python3 labs/FRAUD-002/scripts/tazama-safe.py check
+
+# Appliquer le nouveau healthcheck uniquement si le check réussit
+python3 labs/FRAUD-002/scripts/tazama-safe.py up
+
+# Laisser quelques cycles de healthcheck, puis inspecter
+docker inspect batch-ppa --format '{{json .Config.Healthcheck.Test}}'
+docker inspect batch-ppa --format '{{json .State.Health}}' | python3 -m json.tool
+
+# Vérifier l'API depuis l'hôte et la non-régression des autres services
+curl -fsS http://127.0.0.1:4100/health
+python3 labs/FRAUD-002/scripts/tazama-safe.py ps
+```
+
+**Note :** `up` peut recréer le conteneur Batch PPA, provoquant une interruption courte ; ne pas ajouter `down --volumes`. Ne pas exposer l'API Batch PPA sur le réseau Host-only.
