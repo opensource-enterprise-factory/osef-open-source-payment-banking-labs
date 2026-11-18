@@ -251,3 +251,17 @@ ssh -N -o ExitOnForwardFailure=yes -L 127.0.0.1:8090:127.0.0.1:8090 -L 127.0.0.1
 4. Pour T09, garder le PSP B ouvert, exécuter `docker compose stop relay` dans la VM, puis cliquer sur **Lire pendant l’arrêt**. Redémarrer avec `docker compose start relay`, attendre que le relais soit `healthy` et relancer la lecture.
 
 Les champs de clés sont masqués. Les clés sont envoyées uniquement dans les en-têtes des requêtes au service affiché et ne sont pas enregistrées par l’interface. Chaque onglet affiche les statuts HTTP, le contenu JSON et l’historique local des actions.
+
+
+### Accéder directement au relais depuis Windows
+
+Depuis Ubuntu, dans le dossier du lab, indique l’IPv4 privée de la VM sur l’adaptateur Host-only VirtualBox. Pour `osef-fraud-01` :
+
+```bash
+FRAUD_HOST_ONLY_IP=192.168.255.10 docker compose -f compose.yaml -f compose.host-only.yaml up --build -d relay
+curl -fsS http://192.168.255.10:8090/health
+```
+
+Ouvre [le relais](http://192.168.255.10:8090/) sur Windows. L’adresse doit déjà être attribuée à la VM. Cette option ajoute une publication du port 8090 sur l’interface privée en plus de la publication locale. Les pages PSP A et PSP B restent sur la boucle locale. Pour recréer le relais avec l’accès privé, réutilise les deux fichiers Compose et la variable. Pour revenir à l’accès local seul, exécute `docker compose up -d relay`.
+
+Le réseau privé doit être réservé aux machines de démonstration autorisées. Utilise uniquement des données et des clés de lab.
