@@ -80,6 +80,13 @@ li{padding:8px 0} .pass{color:#91e8cf}.fail{color:#ffaba6} [hidden]{display:none
 <ol id="history"></ol>
 </section>
 <script>
+for (const link of document.querySelectorAll("nav a")) {
+  const url = new URL(link.href);
+  url.hostname = window.location.hostname;
+  url.protocol = window.location.protocol;
+  link.href = url.href;
+}
+
 const role = "__FRAUD_ROLE__";
 const title = {"psp-a":"PSP A · Émission","psp-b":"PSP B · Réception",relay:"Relais · Contrôles et audit"};
 const intro = {"psp-a":"Crée un signal et observe le contrôle des doublons, des clés et du format.",
@@ -101,7 +108,10 @@ function key(id) {
 }
 
 function newToken() {
-  get("token").value = "demo-" + crypto.randomUUID();
+  // getRandomValues is available over HTTP on the private lab address.
+  const bytes = crypto.getRandomValues(new Uint8Array(16));
+  const suffix = Array.from(bytes, byte => byte.toString(16).padStart(2, "0")).join("");
+  get("token").value = "demo-" + suffix;
 }
 
 function report(message, ok, body = "") {
