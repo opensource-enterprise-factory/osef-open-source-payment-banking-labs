@@ -186,11 +186,11 @@ docker compose down --volumes
 | T05 | Catégorie inconnue | HTTP 422 |
 | T06 | Requête sans clé sur le relais | HTTP 401 |
 | T07 | Consultation du journal par admin | HTTP 200 |
-| T08 | Signal expiré à la lecture | N'apparaît plus dans l'inbox (test manuel/automatisation à réaliser) |
-| T09 | Indisponibilité du relais | Réponse contrôlée HTTP 503 (test manuel/automatisation à réaliser) |
-| T10 | Clé PSP A utilisée pour lire /signals | HTTP 401 (test manuel à réaliser) |
+| T08 | Signal expiré à la lecture | N'apparaît plus dans l'inbox (automatisé avec `--extended`, à valider en VM) |
+| T09 | Indisponibilité du relais | HTTP 503 et reprise contrôlée (automatisé avec `--extended`, à valider en VM) |
+| T10 | Clé PSP A utilisée pour lire /signals | HTTP 401 (automatisé avec `--extended`, à valider en VM) |
 
-**Limitation :** T08–T10 ne sont pas encore inclus dans le script `test-lab.sh`. Un ingénieur doit les implémenter et publier leurs preuves avant de cocher la couverture complète.
+**Évolution vérifiée dans le code :** T08–T10 figurent maintenant dans le script `test-lab.sh --extended`. Cela ne prouve pas leur réussite sur une VM donnée : l'ingénieur doit exécuter le script et joindre ses preuves avant de cocher la couverture complète.
 
 ## 7. Critères de validation et livrables de contribution
 
@@ -222,7 +222,7 @@ TLS/mTLS entre services, authentification OAuth2/OIDC avec Keycloak, secrets Vau
 ## 9. Statut de vérification
 
 - **Conçu / déposé :** architecture, scripts et API publiés dans le dépôt.
-- **Non confirmé :** construction Docker, bon fonctionnement sur WSL2/Ubuntu, succès de bout en bout, tests T08–T10.
+- **Non confirmé pour la VM de chaque contributeur :** bon fonctionnement de l'ensemble des scénarios T01–T10. Des preuves partielles pour les échanges via navigateur figurent plus bas ; elles ne suffisent pas à valider tous les tests étendus.
 - **Responsable :** à désigner.
 - **Contexte réglementaire :** chaque organisation doit faire sa propre analyse juridique avant tout échange réel. Le lab ne démontre aucune conformité sectorielle.
 
@@ -296,6 +296,10 @@ bash scripts/test-lab.sh --extended
 
 Le script exécute d’abord T01 à T07. Ensuite, T10 vérifie le refus de lecture pour le PSP A. T09 arrête brièvement le relais, vérifie le HTTP 503 du PSP B, redémarre le relais et exige un HTTP 200 contenant le même jeton. T08 force l’expiration de ce seul signal fictif dans SQLite et vérifie qu’il disparaît de la boîte de réception. Prévoir cette interruption pendant une fenêtre de test du lab. Le mode sans argument exécute T01 à T07.
 
+
+### Remarque pour Ubuntu VirtualBox et les droits Docker
+
+Le script `test-lab.sh --extended` appelle `docker compose` pour arrêter et redémarrer le relais et modifier l'expiration du signal synthétique. Si `docker info` échoue sans droits d'administrateur, **ne pas ouvrir les permissions du socket Docker** : utiliser `sudo -v` puis lancer `sudo bash scripts/test-lab.sh --extended` dans le premier terminal. Le `.env` reste local et les tests n'utilisent que des données fictives. Pour le second terminal, `tail -n +1 -F /tmp/fraud-001-tests.log` permet de suivre le log du premier terminal si celui-ci est lancé avec `tee`.
 
 ### Suivre les tests automatisés en direct
 
