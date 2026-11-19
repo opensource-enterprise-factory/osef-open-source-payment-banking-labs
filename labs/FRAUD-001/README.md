@@ -372,3 +372,20 @@ FRAUD_HOST_ONLY_IP=192.168.255.10 \
 3. Sur la VM, **synchroniser la branche approuvée avec Git**, sans créer de fichier de configuration ni exécuter d'édition manuelle sur place.
 4. Appliquer la configuration versionnée avec `docker compose` et documenter les preuves d'exécution dans GitHub.
 
+
+
+### T11 — Purger les signaux fictifs expirés
+
+Depuis le dossier du lab, avec le relais démarré, compter les signaux fictifs expirés en lecture seule :
+
+```bash
+docker compose exec -T relay python - < scripts/purge-expired.py
+```
+
+Sur la base du lab uniquement, après vérification du périmètre, ajouter `--apply` pour supprimer définitivement les lignes éligibles :
+
+```bash
+docker compose exec -T relay python - --apply < scripts/purge-expired.py
+```
+
+Pour préparer T11, la suite étendue crée un signal fictif et force son expiration en T08. Créer également un signal frais côté PSP A et vérifier que B le retrouve. Après la purge, répéter la simulation et vérifier qu’elle renvoie zéro, que B retrouve le signal frais et que le journal d’audit reste consultable. Le nombre de lignes purgées peut comprendre des signaux de runs antérieurs. La commande agit sur les lignes SQLite de la table des signaux. Elle ne modifie pas le journal d’audit. La purge reste manuelle dans ce lab.
