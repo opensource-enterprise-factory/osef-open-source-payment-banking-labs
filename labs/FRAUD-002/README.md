@@ -9,6 +9,14 @@ Avant les tests métier, lire le [guide détaillé des 13 services Tazama Core](
 > **Usage : laboratoire isolé uniquement.** Données entièrement synthétiques, sans PSP bancaire réel.
 > **Attention :** ce lab ne constitue pas une implémentation officielle de l'OFTA, ni une preuve de conformité aux réglementations sectorielles.
 
+## Gate D — Contrat d'intégration Tazama vers FRAUD-001
+
+Le [contrat de mapping Gate D](docs/GATE-D-CONTRAT-TAZAMA-FRAUD-001.md) précise les interfaces réellement vérifiées, la politique « NALT = aucun signal », la minimisation des données, les conditions d'une alerte positive et les tests D01–E05 encore nécessaires. Le moteur Tazama a réussi les 39 assertions Newman officielles le 19/11/2026 et le rapport de la transaction Web synthétique de 370 USD a été retrouvé (`NALT`, score 200, seuil 300). **L'adaptateur n'est pas encore implémenté.**
+
+## Intérêt de Tazama pour les IMF d'Afrique francophone
+
+Lire la [fiche IMF — cas d'usage, valeur métier, exigences de production, cadre BCEAO/UMOA et parcours d'adoption](docs/INTERET-TAZAMA-IMF-AFRIQUE-FRANCOPHONE.md). Ce document distingue le laboratoire Tazama déjà validé des exigences d'un projet IMF réel, qui nécessiterait une qualification juridique, organisationnelle, technique et sécuritaire séparée.
+
 ## 1. Pourquoi un deuxième lab ?
 
 [FRAUD-001](../FRAUD-001/README.md) permet de **partager des signaux antifraude** entre deux PSP fictifs via un relais. Il ne réalise **aucune détection transactionnelle réelle**.
