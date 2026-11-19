@@ -9,6 +9,10 @@ Avant les tests métier, lire le [guide détaillé des 13 services Tazama Core](
 > **Usage : laboratoire isolé uniquement.** Données entièrement synthétiques, sans PSP bancaire réel.
 > **Attention :** ce lab ne constitue pas une implémentation officielle de l'OFTA, ni une preuve de conformité aux réglementations sectorielles.
 
+## Gate E05 — Liaison directe du rapport Tazama réel (en mémoire)
+
+Le [guide E05](docs/GATE-E05-Tazama-DIRECT.md) décrit le nouvel outil `scripts/tazama-direct-lab-submit.py` : lecture GET du rapport ALRT réel directement en mémoire, vérifications strictes D05/D06 puis prévisualisation par défaut. L'envoi opt-in vers PSP A n'est autorisé qu'après revue humaine, tests et validation préalable en lecture seule. **Aucun test d'envoi direct n'est encore validé sur VM.**
+
 ## Gate D06-2 — Livraison synthétique contrôlée (opt-in)
 
 Voir le [guide D06-2](docs/GATE-D06-CONTROLLED-SUBMIT.md) : politique de démonstration approuvée (`suspicious-transfer`, `medium`, `psp-b`, TTL 1h), fixture synthétique, envoi **désactivé par défaut**, `POST` exclusif sur le PSP A en loopback et contrôle de réception PSP B. **Les tests sont à exécuter sur VM ; la liaison à la structure du rapport Tazama réel reste à vérifier séparément.**
