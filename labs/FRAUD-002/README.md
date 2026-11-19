@@ -9,6 +9,10 @@ Avant les tests métier, lire le [guide détaillé des 13 services Tazama Core](
 > **Usage : laboratoire isolé uniquement.** Données entièrement synthétiques, sans PSP bancaire réel.
 > **Attention :** ce lab ne constitue pas une implémentation officielle de l'OFTA, ni une preuve de conformité aux réglementations sectorielles.
 
+## Gate D06 — Prévisualisation d'un signal minimal (sans publication)
+
+Le [prototype D06-1 et son guide](docs/GATE-D06-SIGNAL-PREVIEW.md) ajoutent une préparation **en mémoire** d'un signal FRAUD-001 avec contrôles de concordance de l'identifiant du rapport, politique de laboratoire explicitement approuvée, catégorie/sévérité non inférées du score et jeton opaque HMAC stable. **Aucune fonction d'envoi HTTP, aucune émission vers PSP A/PSP B.** Tests unitaires à valider après la revue/fusion de la PR.
+
 ## Gate D05 — Alerte ALRT candidate à revue (sans émission)
 
 Le [contrat et le mode opératoire D05](docs/GATE-D05-ALRT-CANDIDATE.md) ajoutent au classificateur un statut **`REVIEW_ONLY / ALRT_CANDIDATE`** pour le profil `ALRT` réellement observé (score 600, règles 901/902). Le code vérifie strictement les règles et seuils, **ne construit aucun signal FRAUD-001 et n'effectue aucun POST**. Tests unitaires ajoutés ; exécution VM à confirmer après revue/fusion de la PR.
