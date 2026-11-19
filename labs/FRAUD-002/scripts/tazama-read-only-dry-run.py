@@ -94,7 +94,7 @@ def inspect_message(message_id: str, *, fetch_once=_fetch_once, sleep=time.sleep
             return classify(None, http_status=204)
         if code != 200:
             return {"decision": "NO_PUBLISH", "reason": "SOURCE_HTTP_ERROR"}
-        # Never print payload / IDs. No approved positive status in this phase.
+        # Never print payload / IDs. A qualified ALRT is review-only, never sent.
         return classify(payload, http_status=200)
     return {"decision": "NO_PUBLISH", "reason": "REPORT_NOT_READY"}
 

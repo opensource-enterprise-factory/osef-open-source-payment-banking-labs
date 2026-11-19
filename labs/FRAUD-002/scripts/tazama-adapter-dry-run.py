@@ -2,7 +2,8 @@
 """FRAUD-002 Gate D: inspect a saved Tazama report OFFLINE.
 
 Strict dry-run: no HTTP client, no credentials, no PSP relay writes, no production use.
-The only validated report status in this lab is NALT (no alert).
+Validated lab statuses: NALT (no alert) and ALRT (alert candidate only).
+Never send a signal and never infer FRAUD-001 severity from the Tazama score.
 """
 from __future__ import annotations
 
@@ -10,6 +11,57 @@ import argparse
 import json
 from pathlib import Path
 from typing import Any
+
+
+# Gate D05 is limited to the exact observed synthetic public DockerHub profile.
+# It authorizes a *candidate for human review*, NEVER a transmission.
+EXPECTED_TYPOLOGY = "999-901-902@4.0.0"
+EXPECTED_RULES = {"901@4.0.0", "902@4.0.0", "EFRuP@4.0.0"}
+EXPECTED_WEIGHTS = {"901@4.0.0": {".01": 100, ".02": 200, ".03": 400},
+                    "902@4.0.0": {".01": 100, ".02": 200, ".03": 400},
+                    "EFRuP@4.0.0": {"none": 0}}
+
+
+def _approved_alert_candidate(report: dict[str, Any]) -> bool:
+    """Validate the observed profile; reject ambiguous/malformed data."""
+    tadp = report.get("tadpResult")
+    if not isinstance(tadp, dict):
+        return False
+    typologies = tadp.get("typologyResult")
+    if not isinstance(typologies, list) or len(typologies) != 1:
+        return False
+    t = typologies[0]
+    if not isinstance(t, dict) or t.get("cfg") != EXPECTED_TYPOLOGY:
+        return False
+    workflow = t.get("workflow")
+    if not isinstance(workflow, dict):
+        return False
+    if workflow.get("alertThreshold") != 300 or workflow.get("interdictionThreshold") != 500:
+        return False
+    if workflow.get("flowProcessor") != "EFRuP@4.0.0":
+        return False
+    # Reject bools: Python treats True as an int.
+    score = t.get("result")
+    if type(score) not in (int, float) or not 300 <= score:
+        return False
+    rule_results = t.get("ruleResults")
+    if not isinstance(rule_results, list) or len(rule_results) != 3:
+        return False
+    seen = set()
+    total = 0
+    for rule in rule_results:
+        if not isinstance(rule, dict):
+            return False
+        rule_id = rule.get("id")
+        band = rule.get("subRuleRef")
+        weight = rule.get("wght")
+        if rule_id not in EXPECTED_RULES or rule_id in seen:
+            return False
+        if type(weight) not in (int, float) or EXPECTED_WEIGHTS[rule_id].get(band) != weight:
+            return False
+        seen.add(rule_id)
+        total += weight
+    return seen == EXPECTED_RULES and total == score
 
 
 def assess_report(payload: Any, *, http_status: int = 200) -> dict[str, str]:
@@ -33,8 +85,12 @@ def assess_report(payload: Any, *, http_status: int = 200) -> dict[str, str]:
     if status == "NALT":
         # A confirmed NALT is not an alert even if numeric rule weights are non-zero.
         return {"decision": "NO_PUBLISH", "reason": "NALT"}
-    # No positive fraud status is approved. Even a score >= threshold cannot
-    # authorize forwarding without an explicit, versioned business rule.
+    if status == "ALRT":
+        if _approved_alert_candidate(report):
+            # An analyst must still approve category, severity and recipient.
+            # No signal schema is constructed, persisted, or sent.
+            return {"decision": "REVIEW_ONLY", "reason": "ALRT_CANDIDATE"}
+        return {"decision": "NO_PUBLISH", "reason": "ALRT_NOT_QUALIFIED"}
     return {"decision": "NO_PUBLISH", "reason": "UNAPPROVED_STATUS"}
 
 
@@ -57,7 +113,7 @@ def main() -> int:
         except (OSError, ValueError, UnicodeError):
             result = {"decision": "NO_PUBLISH", "reason": "UNREADABLE_REPORT"}
     print(json.dumps(result, ensure_ascii=False, sort_keys=True))
-    return 0 if result["reason"] in ("NALT", "REPORT_NOT_READY") else 2
+    return 0 if result["reason"] in ("NALT", "REPORT_NOT_READY", "ALRT_CANDIDATE") else 2
 
 
 if __name__ == "__main__":
