@@ -9,6 +9,10 @@ Avant les tests métier, lire le [guide détaillé des 13 services Tazama Core](
 > **Usage : laboratoire isolé uniquement.** Données entièrement synthétiques, sans PSP bancaire réel.
 > **Attention :** ce lab ne constitue pas une implémentation officielle de l'OFTA, ni une preuve de conformité aux réglementations sectorielles.
 
+## Gate D — Prototype adaptateur en dry-run
+
+Le [prototype offline et son guide d'exécution](docs/GATE-D-ADAPTATEUR-DRY-RUN.md) introduisent un filtrage **sans réseau et sans publication** pour les rapports Tazama. Il garantit qu'un rapport `NALT`, `204`, invalide ou avec un statut non approuvé **n'émet aucun signal**. Tests unitaires disponibles dans `tests/test_adapter_dry_run.py`. **Code en PR : aucun déploiement VM ou intégration PSP A confirmé.**
+
 ## Gate D — Contrat d'intégration Tazama vers FRAUD-001
 
 Le [contrat de mapping Gate D](docs/GATE-D-CONTRAT-TAZAMA-FRAUD-001.md) précise les interfaces réellement vérifiées, la politique « NALT = aucun signal », la minimisation des données, les conditions d'une alerte positive et les tests D01–E05 encore nécessaires. Le moteur Tazama a réussi les 39 assertions Newman officielles le 19/11/2026 et le rapport de la transaction Web synthétique de 370 USD a été retrouvé (`NALT`, score 200, seuil 300). **L'adaptateur n'est pas encore implémenté.**
