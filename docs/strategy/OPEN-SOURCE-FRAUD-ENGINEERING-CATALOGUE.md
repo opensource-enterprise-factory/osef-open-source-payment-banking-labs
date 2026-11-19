@@ -1,5 +1,7 @@
 # OSEF Open Source Fraud Engineering — Catalogue opérationnel
 
+> **Programme de référence :** [Charte OSFE et roadmap](../programs/open-source-fraud-engineering/README.md) · [Benchmark](../programs/open-source-fraud-engineering/BENCHMARK-PROTOCOL.md) · [Backlog](../programs/open-source-fraud-engineering/BACKLOG.md) · [Pilotage GitHub #88](https://github.com/opensource-enterprise-factory/osef-open-source-payment-banking-labs/issues/88)
+
 **Mise à jour : 19 novembre 2026** · Travail de formation et contribution open source pour les ingénieurs de paiement en Afrique francophone.
 
 ## Étude
