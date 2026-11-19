@@ -9,6 +9,10 @@ Avant les tests métier, lire le [guide détaillé des 13 services Tazama Core](
 > **Usage : laboratoire isolé uniquement.** Données entièrement synthétiques, sans PSP bancaire réel.
 > **Attention :** ce lab ne constitue pas une implémentation officielle de l'OFTA, ni une preuve de conformité aux réglementations sectorielles.
 
+## Gate D02 — Lecteur read-only Tazama (prototype)
+
+Un [lecteur HTTP local et ses tests](docs/GATE-D02-LECTURE-API-TAZAMA.md) sont proposés en PR : GET Admin Service sur loopback, réponse `204` avec reprises bornées, analyse en mémoire par le classificateur `NO_PUBLISH` et sortie expurgée. **Pas d'accès aux comptes, pas d'émission de signal et pas de validation en VM avant la fusion/revue de la PR.**
+
 ## Gate D — Prototype adaptateur en dry-run
 
 Le [prototype offline et son guide d'exécution](docs/GATE-D-ADAPTATEUR-DRY-RUN.md) introduisent un filtrage **sans réseau et sans publication** pour les rapports Tazama. Il garantit qu'un rapport `NALT`, `204`, invalide ou avec un statut non approuvé **n'émet aucun signal**. Tests unitaires disponibles dans `tests/test_adapter_dry_run.py`. **Code en PR : aucun déploiement VM ou intégration PSP A confirmé.**
