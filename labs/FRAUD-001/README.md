@@ -1,5 +1,7 @@
 # OSEF FRAUD-001 — Lab d'interopérabilité antifraude entre PSP fictifs
 
+**[Guide de reprise pour un nouvel ingénieur](GUIDE-REPRISE.md)**
+
 > **Statut : prototype pédagogique proposé.** Les fichiers de démarrage sont publiés mais les tests Docker n'ont pas été exécutés sur une machine de référence par OSEF. À faire valider par un ingénieur avant publication d'un résultat. **Ce projet n'est pas une implémentation officielle de l'Open Financial Trust Alliance (OFTA), ni une plateforme de détection de fraude de production.**
 
 - [Issue de pilotage #43](https://github.com/opensource-enterprise-factory/osef-open-source-payment-banking-labs/issues/43)
