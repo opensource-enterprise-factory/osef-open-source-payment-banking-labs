@@ -37,10 +37,21 @@ def _load_classifier():
     return module.assess_report
 
 
-def _fetch_once(message_id: str, *, open_url=urllib.request.urlopen) -> tuple[int, object | None]:
+class _NoRedirect(urllib.request.HTTPRedirectHandler):
+    """Refuse to follow redirects, including to non-loopback destinations."""
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
+
+
+def _fetch_once(message_id: str, *, open_url=None) -> tuple[int, object | None]:
     # Constant, hardcoded loopback target: no user-supplied host, redirect, auth or headers.
     url = BASE_URL + REPORT_ENDPOINT + "?" + urllib.parse.urlencode({"msgid": message_id})
     request = urllib.request.Request(url, method="GET")
+    if open_url is None:
+        # Disable proxy environment inheritance and redirects.
+        opener = urllib.request.build_opener(urllib.request.ProxyHandler({}), _NoRedirect())
+        open_url = opener.open
     try:
         with open_url(request, timeout=TIMEOUT_SECONDS) as response:
             # Reject redirects, including redirects off loopback.
