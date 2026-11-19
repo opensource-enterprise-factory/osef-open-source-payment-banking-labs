@@ -4,6 +4,10 @@
 
 **Issue de référence :** [#63 — FRAUD-003](https://github.com/opensource-enterprise-factory/osef-open-source-payment-banking-labs/issues/63). **Meetup associé :** [#66](https://github.com/opensource-enterprise-factory/osef-open-source-payment-banking-labs/issues/66).
 
+## Formation et transmission — standard OSEF
+
+**Chaque Gate couvre obligatoirement les dimensions technique, métier et meetup.** Le [parcours intégré des neuf Gates (0 à 8)](PARCOURS-TECHNIQUE-METIER-MEETUP.md) définit pour chaque jalon l'apprentissage, la preuve, la vulgarisation et la règle de clôture. Le kit de meetup est obligatoire avant la clôture du lab, mais la tenue de l'événement public peut être ultérieure.
+
 ## Commencer dans le bon ordre
 
 1. [Gate 0 — dépendances, contrats et preuves FRAUD-001/FRAUD-002](GATE-0-DEPENDANCES-ET-PREUVES.md) : distingue les succès réellement observés, les limites et les interfaces restant à valider avant réutilisation.
