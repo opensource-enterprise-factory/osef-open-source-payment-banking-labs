@@ -1,5 +1,10 @@
 # FRAUD-002 — Détection transactionnelle avec Tazama et interopérabilité avec FRAUD-001
 
+## Glossaire technique de référence
+
+Le [glossaire complet FRAUD-001 / FRAUD-002 / Tazama](docs/GLOSSAIRE-FRAUD-001-FRAUD-002-TAZAMA-OSEF.md) définit les termes de paiement et de monétique, les messages ISO 20022, les 13 composants Tazama, le contrat d'échange antifraude OSEF, la sécurité, l'infrastructure, les commandes et les méthodes de recette. Document pédagogique en français destiné aux ingénieurs et aux relecteurs indépendants.
+
+
 ## Guide des 13 services Tazama
 
 Avant les tests métier, lire le [guide détaillé des 13 services Tazama Core](docs/ARCHITECTURE-13-SERVICES-TAZAMA.md) : responsabilités, dépendances, ports, santé, diagnostics et opportunités de contribution upstream. Il reprend les sources officielles du commit Tazama utilisé sur `osef-fraud-01` et distingue les contrôles déjà observés des validations encore nécessaires.
