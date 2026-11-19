@@ -1,0 +1,9 @@
+{
+  "approved_for_lab": true,
+  "approval_reference": "OSEF-D06-LAB-20261119",
+  "category": "suspicious-transfer",
+  "severity": "medium",
+  "recipient": "psp-b",
+  "expires_in_hours": 1,
+  "scope": "synthetic-isolated-lab-only"
+}
