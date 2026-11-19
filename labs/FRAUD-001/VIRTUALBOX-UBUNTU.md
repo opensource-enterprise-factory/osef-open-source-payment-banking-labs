@@ -1,6 +1,6 @@
 # FRAUD-001 — Exécuter le laboratoire dans une VM Ubuntu sous VirtualBox (Windows 11)
 
-> **Guide de lab** — procédure proposée pour un poste personnel ; **aucun test de bout en bout sur VirtualBox n'est encore confirmé par OSEF**. Utiliser seulement des données synthétiques. Aucun raccordement à un système de paiement réel.
+> **Guide de lab.** Le parcours de référence a été validé sur Ubuntu dans VirtualBox sur `osef-fraud-01`. Voir le [guide de reprise et les résultats attendus](GUIDE-REPRISE.md). Utiliser uniquement des données synthétiques.
 
 - [Issue FRAUD-001 #43](https://github.com/opensource-enterprise-factory/osef-open-source-payment-banking-labs/issues/43)
 - [Guide principal et tests](README.md)
