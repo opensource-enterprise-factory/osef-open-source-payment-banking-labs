@@ -17,6 +17,29 @@
 - [Collection officielle Newman 3.1 Full-Service](https://github.com/tazama-lf/postman/blob/main/Newman/Newman%20-%203.1.%20(NO-AUTH)%20Public%20DockerHub%20Full-Service%20Test.postman_collection.json) : résultat attendu NALT dans l'assertion de rapport inspectée.
 - [Collection de tests des règles 901/902 — profil Public DockerHub](https://github.com/tazama-lf/postman/blob/main/2.3.%20Rule%20Functionality%20Testing%20-%20Public%20DockerHub.postman_collection.json) : scénarios de répétition, fenêtres temporelles et multitenancy ; pas une garantie d'ALRT end-to-end.
 
+## Configuration officielle retrouvée au commit épinglé
+
+Le fichier officiel [00-public-base.sql](https://github.com/tazama-lf/tazama-stack/blob/83e4b12c16986aedfff843ed84b7045ac912ec0a/core/postgres/migration/config/00-public-base.sql), et non une hypothèse, définit :
+
+- Règle **901** : nombre de transactions sortantes du débiteur dans les dernières **86 400 000 ms** (24 h). Bandes `.01` : moins de 2 ; `.02` : de 2 à moins de 3 ; `.03` : 3 ou plus.
+- Règle **902** : nombre de transactions entrantes du créancier, même fenêtre de 24 h et bandes analogues.
+- Typologie `999-901-902@4.0.0` : addition des poids des règles 901 et 902. Bandes `.01` = 100, `.02` = 200, `.03` = 400 pour chacune.
+- Seuil d'alerte **300** ; seuil d'interdiction **500** ; EFRuP contribue un poids **0** dans cette configuration.
+- [02-public-dockerhub.sql](https://github.com/tazama-lf/tazama-stack/blob/83e4b12c16986aedfff843ed84b7045ac912ec0a/core/postgres/migration/config/02-public-dockerhub.sql) relie la typologie 999-901-902 au message `pacs.002.001.12`.
+
+**Conséquence testable, pas résultat déjà observé :** une séquence de transactions synthétiques *réussies* entre les mêmes comptes peut conduire à la bande `.02` ou `.03` et à un total atteignant ou dépassant 300. Le statut exact doit être contrôlé dans le rapport émis par la VM ; les résultats peuvent dépendre de l'historique enregistré et des états métier.
+
+## Scénario positif proposé — pas encore exécuté
+
+1. Conserver la configuration de la VM et les mêmes débiteur et créancier fictifs dans Tazama Demo.
+2. Envoyer une **nouvelle transaction fictive** via l'interface Demo ; noter l'heure, le montant fictif et les réactions visibles. L'interface peut afficher `null` sans que le backend soit en échec.
+3. Identifier dans les logs TMS le nouvel identifiant `pacs.002`, et récupérer son rapport via Admin Service ; **ne pas associer automatiquement un identifiant ancien à un nouvel envoi**.
+4. Contrôler `data.report.status`, les règles `subRuleRef`, les poids et le score. Si toujours `NALT`, inspecter si les messages réutilisent les mêmes IDs ou si les règles conservent le bon historique ; éviter des clics en rafale.
+5. Quand une alerte `ALRT` apparaît réellement, consigner les champs expurgés du rapport, la configuration/version et la preuve ; cela validera D04.
+6. Ne pas publier de signal FRAUD-001 tant que D05 (politique de mapping et sévérité) n'est pas approuvé.
+
+**Interdictions :** ne pas éditer la configuration SQL/Compose sur la VM, ne pas forcer un score dans une réponse JSON, ne pas utiliser de vrais comptes, ne pas effacer les volumes de données pour forcer le scénario.
+
 ## Plan d'exécution
 
 1. Inspecter dans GitHub les configurations exactes des règles 901 et 902 et de la typologie 999-901-902@4.0.0, pour le profil épinglé et les images utilisées.
