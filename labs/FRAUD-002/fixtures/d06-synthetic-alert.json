@@ -1,0 +1,46 @@
+{
+  "message": "Report was found",
+  "data": {
+    "transactionID": "0123456789abcdef0123456789abcdef",
+    "report": {
+      "status": "ALRT",
+      "tadpResult": {
+        "typologyResult": [
+          {
+            "cfg": "999-901-902@4.0.0",
+            "result": 600,
+            "workflow": {
+              "flowProcessor": "EFRuP@4.0.0",
+              "alertThreshold": 300,
+              "interdictionThreshold": 500
+            },
+            "ruleResults": [
+              {
+                "id": "EFRuP@4.0.0",
+                "subRuleRef": "none",
+                "wght": 0
+              },
+              {
+                "id": "901@4.0.0",
+                "subRuleRef": ".03",
+                "wght": 400
+              },
+              {
+                "id": "902@4.0.0",
+                "subRuleRef": ".02",
+                "wght": 200
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "transaction": {
+      "FIToFIPmtSts": {
+        "GrpHdr": {
+          "MsgId": "0123456789abcdef0123456789abcdef"
+        }
+      }
+    }
+  }
+}
