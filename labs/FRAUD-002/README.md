@@ -9,6 +9,10 @@ Avant les tests métier, lire le [guide détaillé des 13 services Tazama Core](
 > **Usage : laboratoire isolé uniquement.** Données entièrement synthétiques, sans PSP bancaire réel.
 > **Attention :** ce lab ne constitue pas une implémentation officielle de l'OFTA, ni une preuve de conformité aux réglementations sectorielles.
 
+## Gate D04 — Alerte positive Tazama
+
+Voir le [protocole de qualification ALRT](docs/GATE-D04-SCENARIO-ALERTE-POSITIVE.md) : sources officielles, limites des collections Newman 2.1/3.1, scénarios 901/902, preuves nécessaires et suite vers FRAUD-001. **Aucun statut ALRT authentique n'a encore été reproduit sur la VM ; aucune publication n'est autorisée.**
+
 ## Gate D02 — Lecteur read-only Tazama (prototype)
 
 Un [lecteur HTTP local et ses tests](docs/GATE-D02-LECTURE-API-TAZAMA.md) sont proposés en PR : GET Admin Service sur loopback, réponse `204` avec reprises bornées, analyse en mémoire par le classificateur `NO_PUBLISH` et sortie expurgée. **Pas d'accès aux comptes, pas d'émission de signal et pas de validation en VM avant la fusion/revue de la PR.**
