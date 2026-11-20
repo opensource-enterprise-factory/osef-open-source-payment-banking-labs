@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OSEF | FRAUD-003 Lab</title>
+<style>
+:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#172235;background:#f4f7fb}
+*{box-sizing:border-box}body{margin:0}.shell{max-width:1120px;margin:auto;padding:24px 18px 60px}
+header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px}
+h1{font-size:1.8rem;margin:6px 0}h2{font-size:1.12rem;margin:0 0 12px}
+p{line-height:1.5}.sub{color:#536378;font-size:.92rem}
+.badge{font-size:.8rem;padding:6px 10px;border-radius:30px;background:#dfeefa;color:#184572}
+.panel{border:1px solid #dce3ef;border-radius:14px;background:white;padding:20px;box-shadow:0 3px 14px #1b365b0a;margin:0 0 18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(225px,1fr));gap:16px}
+label{display:block;font-size:.86rem;font-weight:650;margin-bottom:6px}
+input,select{border:1px solid #bccadd;border-radius:8px;padding:11px;width:100%;font:inherit;background:white}
+button{border:none;border-radius:8px;background:#1d4d84;color:white;padding:11px 16px;font:inherit;font-weight:650;cursor:pointer}
+button.secondary{background:#e5effb;color:#15406f}
+button:disabled{opacity:.5;cursor:default}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:16px}
+.status{margin-top:12px;font-size:.9rem;min-height:20px}
+.good{color:#136847}.bad{color:#a2352d}
+table{border-collapse:collapse;width:100%;font-size:.9rem}th,td{border-bottom:1px solid #e2e7ee;padding:11px;text-align:left;overflow-wrap:anywhere}
+th{color:#50647b} .scroll{overflow-x:auto}
+ul{margin:0;padding-left:20px;line-height:1.8}
+.note{border-left:3px solid #a3b9d0;padding-left:12px;color:#536378}
+code{font-size:.85em} .small{font-size:.86rem}
+</style></head>
+<body><main class="shell">
+<header><div><span class="badge">LAB · Données synthétiques uniquement</span>
+<h1>FRAUD-003 — Console pédagogique</h1>
+<p class="sub">Gate 2 · Signaux isolés par institution · Pas de données bancaires réelles</p></div>
+<span id="health" class="badge" role="status">Service : vérification…</span></header>
+<section class="panel"><h2>1. Choisir l'institution fictive</h2>
+<div class="grid"><div><label for="institution">Institution</label>
+<select id="institution"><option value="demo-bank-a">Banque A</option><option value="demo-psp-b">PSP B</option><option value="demo-mobile-c">Mobile Money C</option></select></div>
+<div><label for="lab-key">Clé de laboratoire de cette institution</label>
+<input id="lab-key" type="password" autocomplete="off" spellcheck="false" placeholder="Clé distincte de 32 caractères minimum"></div></div>
+<p class="sub">La clé reste uniquement en mémoire dans ce navigateur, n'est ni stockée ni affichée dans les résultats. Ne jamais utiliser de clé réelle.</p>
+<div class="actions"><button id="load">Consulter les signaux</button><button id="clear" class="secondary">Effacer la clé et les résultats</button></div>
+<p id="message" class="status" role="status" aria-live="polite"></p></section>
+<section class="grid"><article class="panel"><h2>2. Signaux actifs</h2><strong id="count">—</strong>
+<p class="sub">Uniquement les signaux de l'institution authentifiée. TTL : 1 à 24 heures.</p></article>
+<article class="panel"><h2>3. Recette depuis le navigateur</h2>
+<p class="sub">Crée un signal fictif, teste sa lecture, un doublon et quelques refus HTTP. Aucun test ne contacte FRAUD-001, FRAUD-002 ou Tazama.</p>
+<button id="run">Exécuter les tests API</button>
+<p id="test-summary" class="status" role="status" aria-live="polite">Aucun test exécuté dans cette session</p></article></section>
+<section class="panel"><h2>Signaux visibles</h2><div class="scroll"><table><thead><tr>
+<th>Identifiant fictif</th><th>Catégorie</th><th>Gravité</th><th>Scénario</th><th>Expiration UTC</th>
+</tr></thead><tbody id="signals"><tr><td colspan="5">Sélectionner une institution et consulter</td></tr></tbody></table></div></section>
+<section class="panel"><h2>Résultats de la recette courante</h2>
+<ul id="results"><li>Aucun test exécuté.</li></ul>
+<p class="note small">Les résultats sont locaux à la page et disparaissent au rechargement. La création de signaux de test écrit dans la base SQLite du lab. Le tableau ne représente pas les résultats de la suite Python exécutée sur la VM, ni une preuve d'isolation entre plusieurs clés.</p></section>
+</main><script src="/ui.js" defer></script></body></html>
