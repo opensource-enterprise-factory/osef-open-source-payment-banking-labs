@@ -1,0 +1,28 @@
+name: OSEF ENG-012 documentary quality gate
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  twelve-factor-matrix:
+    name: eng-012-matrix
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Check compliance matrix structure (NOT architectural compliance)
+        shell: python
+        run: |
+          from pathlib import Path
+          import sys
+          file = Path("docs/engineering/TWELVE-FACTOR-COMPLIANCE.md")
+          if not file.is_file():
+              sys.exit("Missing OSEF-ENG-012 matrix: " + str(file))
+          text = file.read_text(encoding="utf-8")
+          missing = [f"{i:02d}" for i in range(1,13) if f"| {i:02d} " not in text]
+          if missing:
+              sys.exit("Missing factor rows: " + ", ".join(missing))
+          if "non évalué" not in text.lower() and "non evalue" not in text.lower() and "C/NC/NA/NE" not in text:
+              sys.exit("Missing explicit evaluation status legend")
+          print("PASS: 12 rows and status legend present. No technical conformity has been evaluated.")
