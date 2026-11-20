@@ -214,6 +214,30 @@ La PR #79 contient désormais une console web pédagogique `dashboard.html` + `d
 
 ---
 
+## Recette Docker API Gate 2 — résultat opérateur : PASS
+
+**Environnement rapporté :** `osef-fraud-01`, répertoire `/tmp/osef-fraud003-pr79-test/labs/FRAUD-003`, image locale `osef-fraud003:gate2`, `docker build --network host`. Trois clés éphémères générées en mémoire par `openssl rand -hex 32` ; conteneur lancé avec port `127.0.0.1:8113:8000`, plafond `384m` RAM et `0.75` CPU, rootfs lecture seule, `/data` temporaire.
+
+**Construction :** `[+] Building 48.7s (11/11) FINISHED`, image exportée. Le journal précise **`COPY app.py /app/app.py`**, ce qui identifie une version *antérieure à la nouvelle console web* (le Dockerfile actualisé copie aussi `dashboard.html` et `dashboard.js`). **Ne pas utiliser cette recette comme preuve du fonctionnement de l'interface web.**
+
+| Vérification HTTP réellement annoncée dans la sortie du script | Verdict |
+|---|---|
+| Service API disponible | PASS |
+| Création et lecture : Banque A | PASS |
+| Création et lecture : PSP B | PASS |
+| Création et lecture : Mobile Money C | PASS |
+| Refus de lecture inter-institutions (404) | PASS |
+| Authentification obligatoire (401) | PASS |
+| Rejet des doublons (409) | PASS |
+
+Message final : **`RECETTE API GATE 2 : OK`**.
+
+**Anomalies transitoires non bloquantes observées :** trois `curl: (56) Recv failure: Connection reset by peer` et un `curl: (52) Empty reply from server` pendant la boucle d'attente HTTP, avant les PASS. Leur cause exacte n'a pas été diagnostiquée. Le test validé prouve les opérations fonctionnelles après disponibilité, pas la stabilité des premières secondes ni la résilience sous charge.
+
+**Limites :** tests API anciens uniquement ; nouvelle interface web, nouvelle image Docker, quatre tests web et suite actualisée de douze tests encore non exécutés selon les preuves disponibles. La PR #79 n'est pas fusionnée.
+
+---
+
 ## Protocole de consignation pour chaque prochaine séance
 
 Documenter : **date**, **Gate**, **commande en lecture seule ou script versionné**, **résultat réellement observé**, **pass/fail/non testé**, **limites**, **issue/PR**, **prochaine décision**. Ne jamais cocher un test à partir d'une sortie attendue ou d'une hypothèse.
