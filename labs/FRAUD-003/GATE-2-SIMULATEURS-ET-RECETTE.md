@@ -78,8 +78,23 @@ docker compose down
 # Ne PAS ajouter --volumes : cela supprimerait les données de ce laboratoire.
 ```
 
+## Console web pédagogique — ajout proposé, recette non exécutée
+
+Le dashboard est servi par la même application sur `GET /`, son script local sur `GET /ui.js`. Il n'utilise aucun CDN, ne contient pas de secret préchargé, n'enregistre aucune clé en cookie/localStorage et affiche seulement les données obtenues par l'API authentifiée. Les routes `/signals` restent protégées. Les résultats de tests ne persistent pas après fermeture/rechargement de la page.
+
+**Parcours manuel de recette web :**
+1. Ouvrir `http://127.0.0.1:8113/` depuis la VM (ou via tunnel SSH) après démarrage du service.
+2. Sélectionner une institution fictive et saisir **sa** clé de lab ; cliquer « Consulter les signaux ».
+3. Cliquer « Exécuter les tests API » : disponibilité 200, clé et institution associées, création 201, lecture 200, doublon 409, champ rejeté 422, inexistant 404 et absence de clé 401 ; les résultats s'affichent PASS/FAIL dans le navigateur.
+4. Changer d'institution : la page efface la clé et les résultats, il faut saisir la clé propre à cette institution.
+5. Ne publier aucune capture contenant une clé ou une donnée sensible.
+
+**Attention :** ce parcours **écrit un signal synthétique** dans SQLite ; la page ne possède pas d'historique serveur des PASS/FAIL et ne remplace pas les tests d'isolation entre trois institutions. Les tests additionnels `tests/test_web_console.py` contrôlent le HTML, le JS, les en-têtes anti-cache/CSP et l'absence d'exposition de l'API sans clé. Ces tests **n'ont pas encore été exécutés sur la VM**.
+
 ## Critères de recette Gate 2
 
+- [x] Huit tests unitaires initiaux réussis sur la VM : `Ran 8 tests in 1.961s — OK` (sortie de l'opérateur).
+- [ ] Tests de la nouvelle console web exécutés sur la VM.
 - [ ] Service construit avec Compose sans impact sur FRAUD-001/002.
 - [ ] Les trois clés sont distinctes et aucune valeur n'est publiée.
 - [ ] Chaque institution peut créer/lire son signal fictif.
