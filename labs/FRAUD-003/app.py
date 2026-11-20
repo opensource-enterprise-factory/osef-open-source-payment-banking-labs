@@ -12,6 +12,7 @@ from typing import Literal
 from uuid import uuid4
 
 from fastapi import FastAPI, Header, HTTPException
+from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
 
 INSTITUTIONS = ("demo-bank-a", "demo-psp-b", "demo-mobile-c")
@@ -87,6 +88,33 @@ def create_app(db_path: str | None = None, keys: dict[str, str] | None = None) -
         db.execute(
             "INSERT INTO audit(timestamp,institution,action,outcome) VALUES(?,?,?,?)",
             (datetime.now(timezone.utc).isoformat(), institution, action, outcome),
+        )
+
+    # Public, localhost-only teaching page. API operations still require the
+    # selected institution's key; the page does not receive any secrets.
+    @api.get("/", include_in_schema=False)
+    def dashboard():
+        return FileResponse(
+            Path(__file__).with_name("dashboard.html"),
+            media_type="text/html",
+            headers={
+                "Cache-Control": "no-store",
+                "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'unsafe-inline'; connect-src 'self'; img-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+                "X-Content-Type-Options": "nosniff",
+                "Referrer-Policy": "no-referrer",
+            },
+        )
+
+    @api.get("/ui.js", include_in_schema=False)
+    def dashboard_js():
+        return FileResponse(
+            Path(__file__).with_name("dashboard.js"),
+            media_type="application/javascript",
+            headers={
+                "Cache-Control": "no-store",
+                "X-Content-Type-Options": "nosniff",
+                "Referrer-Policy": "no-referrer",
+            },
         )
 
     @api.get("/health")
