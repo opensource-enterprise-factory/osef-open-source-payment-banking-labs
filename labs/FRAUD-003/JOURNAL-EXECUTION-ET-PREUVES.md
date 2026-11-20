@@ -118,7 +118,7 @@ Schéma `Signal` observé : `transaction_token` avec motif `^demo-[A-Za-z0-9-]{8
 
 ## Étape suivante — dimensionnement avant toute nouvelle création de conteneurs
 
-L'opérateur n'a **pas encore fourni** les mesures `nproc`, `free -h`, `df -h /` et `docker stats --no-stream` demandées. **Aucun nouveau déploiement FRAUD-003 n'est autorisé sur cette VM avant analyse des ressources.**
+Les mesures CPU/RAM/disque ont été **fournies et analysées** pour un instantané de la VM (voir session ci-dessous). La capacité de fonctionnement sous charge et la décision de déploiement FRAUD-003 restent **à valider**, notamment parce qu'aucun plafond mémoire des services existants n'est déclaré.
 
 ```bash
 # Diagnostic en lecture seule uniquement
@@ -128,6 +128,48 @@ df -h /
 docker stats --no-stream --format 'table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}'
 ```
 
+## Session du 20 novembre 2026 — Gate 0, ressources et capacité (sortie opérateur)
+
+Commandes exécutées : `nproc`, `free -h`, `df -h /`, `docker stats --no-stream --format 'table {{.Name}}\\t{{.CPUPerc}}\\t{{.MemUsage}}'`. Aucune action modificatrice.
+
+| Ressource | Résultat effectivement communiqué |
+|---|---|
+| vCPU | `4` |
+| Mémoire système | `11Gi total`, `1.0Gi used`, `9.2Gi free`, `1.4Gi buff/cache`, `10Gi available` |
+| Swap | `0B` |
+| Partition racine | `/dev/sda2` : `79G` total, `8.5G` utilisés, `67G` disponibles, `12%` utilisés |
+| Conteneurs visibles | 16 (13 Tazama + 3 FRAUD-001) |
+| Limite Docker affichée | `11.68GiB` pour chaque conteneur : valeur maximale système affichée, **pas une limite mémoire individuelle configurée** |
+
+### Instantané par service (CPU ; mémoire)
+
+| Service | CPU instantané | RAM |
+|---|---:|---:|
+| batch-ppa | 0.00 % | 57.98 MiB |
+| tazama-demo | 0.00 % | 158.7 MiB |
+| typology-processor | 0.00 % | 61.39 MiB |
+| admin-service | 0.00 % | 57.43 MiB |
+| tms-service | 0.00 % | 63.38 MiB |
+| event-adjudicator | 0.00 % | 52.29 MiB |
+| event-flow | 0.00 % | 45.62 MiB |
+| rule-902 | 0.00 % | 46.25 MiB |
+| event-director | 0.00 % | 55.43 MiB |
+| rule-901 | 0.00 % | 50.9 MiB |
+| core-postgres | 0.00 % | 52.52 MiB |
+| nats | 0.19 % | 6.062 MiB |
+| valkey | 28.87 % | 11.29 MiB |
+| fraud-001-psp-a-1 | 0.65 % | 47.87 MiB |
+| fraud-001-psp-b-1 | 0.71 % | 48.27 MiB |
+| fraud-001-relay-1 | 33.07 % | 35.95 MiB |
+
+**Interprétation bornée :** la mémoire disponible (`10Gi`) et le disque libre (`67G`) donnent une marge pour envisager un prototype très léger. Les pics ponctuels CPU de Valkey et du relais ne suffisent pas à établir une saturation ou une capacité sous charge. Aucun swap n'est configuré ; aucun plafond de RAM dédié aux conteneurs existants n'est prouvé. Le chiffre 11.68 GiB affiché par `docker stats` ne doit pas être interprété comme une allocation réservée par conteneur.
+
+**Décision Gate 0 (provisoire) :** faisabilité plausible d'un **prototype FRAUD-003 léger** sur la même VM, avec budget de ressources explicite, ports distincts, non-régression FRAUD-001/002 et arrêt contrôlé. **Pas de feu vert pour déployer les trois simulateurs ni pour un test en charge sans revue Gate 1**, vérification de la propriété Git sous `lionel` et approbation des paramètres techniques.
+
+**Preuves restant à obtenir :** mesures sur une période représentative de charge, comportement des services existants pendant le lab, limites de ressources dans les fichiers Compose proposés, backup si nouvelles données persistantes, et revue technique.
+
+---
+
 ## Checklist vivante Gate 0
 
 - [x] Services FRAUD-001/002 repérés et états Docker observés.
@@ -135,7 +177,7 @@ docker stats --no-stream --format 'table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}'
 - [x] Routes et validations du modèle FRAUD-001 examinées sur la copie locale.
 - [x] Limitations de réutilisation bipartite documentées.
 - [ ] Propriété Git corrigée et accès utilisateur `lionel` vérifié.
-- [ ] Mesures CPU/RAM/disque et charge Docker récoltées et interprétées.
+- [x] Mesures CPU/RAM/disque et charge Docker récoltées et interprétées (instantané seulement ; tests en charge non réalisés).
 - [ ] Contrats comparés au code fusionné et validés en revue.
 - [ ] Décision d'isolation et architecture Gate 1 approuvées.
 - [ ] PR documentaire fusionnée ; code de `main` synchronisé en sécurité.
