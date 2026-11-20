@@ -109,9 +109,16 @@ def create_app(db_path: str | None = None, keys: dict[str, str] | None = None) -
                     ),
                 )
             except sqlite3.IntegrityError:
+                # Write the audit in a separate successful transaction;
+                # raising inside the context would roll back the audit entry.
+                db.rollback()
                 log(db, institution, "create", "duplicate")
-                raise HTTPException(status_code=409, detail="Duplicate signal ID for institution")
-            log(db, institution, "create", "accepted")
+                duplicate = True
+            else:
+                log(db, institution, "create", "accepted")
+                duplicate = False
+        if duplicate:
+            raise HTTPException(status_code=409, detail="Duplicate signal ID for institution")
         return {"signal_id": payload.signal_id, "status": "accepted"}
 
     @api.get("/signals")
