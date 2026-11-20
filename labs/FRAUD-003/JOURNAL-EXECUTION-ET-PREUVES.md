@@ -204,6 +204,16 @@ docker run --rm --network host -v "$(pwd):/work:ro" -w /work python:3.12-slim \
 
 ---
 
+## Extension web Gate 2 — code publié, recette en attente
+
+La PR #79 contient désormais une console web pédagogique `dashboard.html` + `dashboard.js` servie sur `/` et `/ui.js`, avec accès local à `127.0.0.1:8113` après déploiement. Fonctionnalités proposées : sélectionner une seule institution fictive, saisir sa clé en mémoire de la page, consulter exclusivement ses signaux et lancer une série de tests API affichant PASS/FAIL. Pas de stockage permanent des résultats de tests, pas d'exposition automatique des clés, pas de front de corrélation ni de dossiers d'investigation.
+
+**Contrôles ajoutés mais non exécutés :** `tests/test_web_console.py`, 4 tests couvrant HTML, en-têtes HTTP de sécurité, script local et protection des endpoints API.
+
+**État des preuves :** les **8 tests précédents ont réussi** avant cet ajout (commit testé `b3eba12`). Les 4 nouveaux tests et l'ensemble des 12 tests sur le nouveau HEAD n'ont **pas encore** été exécutés sur la VM. La recette navigateur et Docker restent aussi à effectuer. Aucune fusion de la PR #79 à ce stade.
+
+---
+
 ## Protocole de consignation pour chaque prochaine séance
 
 Documenter : **date**, **Gate**, **commande en lecture seule ou script versionné**, **résultat réellement observé**, **pass/fail/non testé**, **limites**, **issue/PR**, **prochaine décision**. Ne jamais cocher un test à partir d'une sortie attendue ou d'une hypothèse.
