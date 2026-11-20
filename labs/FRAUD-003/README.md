@@ -4,6 +4,10 @@
 
 **Issue de référence :** [#63 — FRAUD-003](https://github.com/opensource-enterprise-factory/osef-open-source-payment-banking-labs/issues/63). **Meetup associé :** [#66](https://github.com/opensource-enterprise-factory/osef-open-source-payment-banking-labs/issues/66).
 
+## Journal d'exécution et preuves
+
+Le [journal vivant du Gate 0 et des sessions suivantes](JOURNAL-EXECUTION-ET-PREUVES.md) conserve les sorties terminal réellement reçues, les statuts vérifiés, les limites et les incidents ouverts. **Tout résultat de test doit y être consigné au fur et à mesure, via une PR GitHub, jamais par édition manuelle sur la VM.**
+
 ## Formation et transmission — standard OSEF
 
 **Chaque Gate couvre obligatoirement les dimensions technique, métier et meetup.** Le [parcours intégré des neuf Gates (0 à 8)](PARCOURS-TECHNIQUE-METIER-MEETUP.md) définit pour chaque jalon l'apprentissage, la preuve, la vulgarisation et la règle de clôture. Le kit de meetup est obligatoire avant la clôture du lab, mais la tenue de l'événement public peut être ultérieure.
