@@ -182,6 +182,28 @@ Commandes exécutées : `nproc`, `free -h`, `df -h /`, `docker stats --no-stream
 - [ ] Décision d'isolation et architecture Gate 1 approuvées.
 - [ ] PR documentaire fusionnée ; code de `main` synchronisé en sécurité.
 
+## Session du 20 novembre 2026 — Gate 2 : huit tests unitaires réussis sur la VM
+
+**Preuve :** sortie terminal transmise par l'opérateur sur `osef-fraud-01`, en utilisant le worktree `/tmp/osef-fraud003-pr79-test` au commit `b3eba12` de la PR #79. Tests exécutés dans `python:3.12-slim` avec `--network host` et dépôt monté en lecture seule ; la tentative précédente en réseau Docker par défaut était bloquée par la résolution DNS pendant `pip install`.
+
+Commande exécutée :
+
+```bash
+cd /tmp/osef-fraud003-pr79-test
+docker run --rm --network host -v "$(pwd):/work:ro" -w /work python:3.12-slim \
+  sh -c 'pip install --quiet --retries 1 --timeout 10 -r labs/FRAUD-003/requirements.txt && python -m unittest discover -s labs/FRAUD-003/tests -p "test_*.py" -v'
+```
+
+**Résultat observé : `Ran 8 tests in 1.961s` ; `OK`.** Les huit scénarios réussis sont : lecture isolée des trois institutions, doublon intra-institution, expiration, santé HTTP, validation d'identifiants et TTL, authentification refusée, clés invalides au démarrage, et rejet des champs sensibles inattendus.
+
+**Avertissements non bloquants :** `pip` en tant que root à l'intérieur du conteneur temporaire ; avertissement de dépréciation `StarletteDeprecationWarning` concernant `httpx` / `starlette.testclient`. La compatibilité exacte des versions doit être suivie.
+
+**Limites :** seuls les tests par `TestClient` sont prouvés ; l'image du service `labs/FRAUD-003/Dockerfile`, le lancement Compose, l'API sur `127.0.0.1:8113` et les essais de bout en bout sont encore non testés. La PR reste non fusionnée et non revue.
+
+**Étape suivante :** recette Docker locale isolée sur VM, preuves de création/lecture des trois institutions, contrôle croisé 404, puis revue finale et décision de fusion.
+
+---
+
 ## Protocole de consignation pour chaque prochaine séance
 
 Documenter : **date**, **Gate**, **commande en lecture seule ou script versionné**, **résultat réellement observé**, **pass/fail/non testé**, **limites**, **issue/PR**, **prochaine décision**. Ne jamais cocher un test à partir d'une sortie attendue ou d'une hypothèse.
