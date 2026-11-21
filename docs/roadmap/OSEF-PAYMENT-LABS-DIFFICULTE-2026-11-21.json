@@ -1,0 +1,717 @@
+{
+  "date": "2026-11-21",
+  "status": "proposition_pedagogique",
+  "source_catalogue": 75,
+  "complements": 3,
+  "total": 78,
+  "repartition": {
+    "Débutant": 8,
+    "Intermédiaire": 31,
+    "Avancé": 28,
+    "Expert": 11
+  },
+  "labs": [
+    {
+      "id": "CORE-001",
+      "titre": "Installer Apache Fineract",
+      "domaine": "Core banking",
+      "niveau": "Débutant",
+      "priorite": "P0",
+      "issue_existante": 14,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "CORE-002",
+      "titre": "Clients et comptes fictifs",
+      "domaine": "Core banking",
+      "niveau": "Débutant",
+      "priorite": "P0",
+      "issue_existante": 16,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "DATA-004",
+      "titre": "Dashboard indicateurs de paiement",
+      "domaine": "Data",
+      "niveau": "Débutant",
+      "priorite": "P1",
+      "issue_existante": 34,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "BASE-001",
+      "titre": "Cartographie technologies, licences et standards",
+      "domaine": "Fondations",
+      "niveau": "Débutant",
+      "priorite": "P0",
+      "issue_existante": 12,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "BASE-003",
+      "titre": "Environnement reproductible Ubuntu / Docker / 12-Factor",
+      "domaine": "Fondations",
+      "niveau": "Débutant",
+      "priorite": "P0",
+      "issue_existante": 90,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "FRAUD-008",
+      "titre": "Licences open source vs source-available",
+      "domaine": "Fraude",
+      "niveau": "Débutant",
+      "priorite": "P0",
+      "issue_existante": 83,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "BIZ-001",
+      "titre": "Catalogue de maturité et licences open source",
+      "domaine": "Gouvernance",
+      "niveau": "Débutant",
+      "priorite": "P0",
+      "issue_existante": null,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "MON-001",
+      "titre": "Construire/parser un ISO 8583 fictif",
+      "domaine": "Monétique",
+      "niveau": "Débutant",
+      "priorite": "P0",
+      "issue_existante": 41,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "CORE-003",
+      "titre": "Crédit, échéancier et remboursement",
+      "domaine": "Core banking",
+      "niveau": "Intermédiaire",
+      "priorite": "P1",
+      "issue_existante": 17,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "DATA-001",
+      "titre": "Kafka events et contrats Avro/JSON",
+      "domaine": "Data",
+      "niveau": "Intermédiaire",
+      "priorite": "P0",
+      "issue_existante": 33,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "DATA-003",
+      "titre": "Qualité de données et rapprochement",
+      "domaine": "Data",
+      "niveau": "Intermédiaire",
+      "priorite": "P1",
+      "issue_existante": 35,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "FINOS-001",
+      "titre": "Governance-as-Code et contribution",
+      "domaine": "FINOS",
+      "niveau": "Intermédiaire",
+      "priorite": "P1",
+      "issue_existante": 45,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "FINOS-002",
+      "titre": "Interopérabilité FDC3 entre deux apps",
+      "domaine": "FINOS",
+      "niveau": "Intermédiaire",
+      "priorite": "P1",
+      "issue_existante": 61,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "FINOS-WORKSPACE-001",
+      "titre": "Évaluer un poste de travail financier et les agents FDC3",
+      "domaine": "FINOS",
+      "niveau": "Intermédiaire",
+      "priorite": "P1",
+      "issue_existante": 97,
+      "source": "nouveau_2026-11-21"
+    },
+    {
+      "id": "BASE-002",
+      "titre": "SBOM, provenance et licences des dépendances",
+      "domaine": "Fondations",
+      "niveau": "Intermédiaire",
+      "priorite": "P1",
+      "issue_existante": 83,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "FRAUD-001",
+      "titre": "Échange de signaux entre 2 PSP fictifs",
+      "domaine": "Fraude",
+      "niveau": "Intermédiaire",
+      "priorite": "P0",
+      "issue_existante": 43,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "FRAUD-002",
+      "titre": "Surveillance Tazama et adaptateur",
+      "domaine": "Fraude",
+      "niveau": "Intermédiaire",
+      "priorite": "P0",
+      "issue_existante": 50,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "FRAUD-004",
+      "titre": "Déploiement Kubernetes/Helm Tazama",
+      "domaine": "Fraude",
+      "niveau": "Intermédiaire",
+      "priorite": "P1",
+      "issue_existante": 68,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "FRAUD-009",
+      "titre": "Taxonomie fictive interinstitutionnelle",
+      "domaine": "Fraude",
+      "niveau": "Intermédiaire",
+      "priorite": "P1",
+      "issue_existante": 63,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "BIZ-002",
+      "titre": "Contribution upstream (issue → PR → revue)",
+      "domaine": "Gouvernance",
+      "niveau": "Intermédiaire",
+      "priorite": "P0",
+      "issue_existante": null,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "MM-001",
+      "titre": "Wallet synthétique et ledger double entrée",
+      "domaine": "Mobile money",
+      "niveau": "Intermédiaire",
+      "priorite": "P0",
+      "issue_existante": null,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "MM-002",
+      "titre": "Cash-in/cash-out et agents fictifs",
+      "domaine": "Mobile money",
+      "niveau": "Intermédiaire",
+      "priorite": "P1",
+      "issue_existante": null,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "MON-002",
+      "titre": "Simulateur émetteur / acquéreur ISO 8583",
+      "domaine": "Monétique",
+      "niveau": "Intermédiaire",
+      "priorite": "P0",
+      "issue_existante": 41,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "MON-004",
+      "titre": "Field 55 TLV EMV sur données synthétiques",
+      "domaine": "Monétique",
+      "niveau": "Intermédiaire",
+      "priorite": "P1",
+      "issue_existante": null,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "OPEN-001",
+      "titre": "API bancaire et consentement simulé",
+      "domaine": "Open banking",
+      "niveau": "Intermédiaire",
+      "priorite": "P0",
+      "issue_existante": null,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "OPEN-002",
+      "titre": "OAuth2/OIDC, PKCE et consentement",
+      "domaine": "Open banking",
+      "niveau": "Intermédiaire",
+      "priorite": "P0",
+      "issue_existante": 30,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "OPEN-005",
+      "titre": "Identité et vérification KYC simulée",
+      "domaine": "Open banking",
+      "niveau": "Intermédiaire",
+      "priorite": "P1",
+      "issue_existante": null,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "RAIL-001",
+      "titre": "Architecture et déploiement Mojaloop",
+      "domaine": "Rails",
+      "niveau": "Intermédiaire",
+      "priorite": "P0",
+      "issue_existante": 21,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "RAIL-002",
+      "titre": "Transfert entre DFSP fictifs",
+      "domaine": "Rails",
+      "niveau": "Intermédiaire",
+      "priorite": "P0",
+      "issue_existante": 44,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "RAIL-004",
+      "titre": "Quotes, fees et chemin d'échec",
+      "domaine": "Rails",
+      "niveau": "Intermédiaire",
+      "priorite": "P0",
+      "issue_existante": 44,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "RAIL-007",
+      "titre": "Validation ISO 20022 schemas et règles métier",
+      "domaine": "Rails",
+      "niveau": "Intermédiaire",
+      "priorite": "P0",
+      "issue_existante": null,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "RAIL-010",
+      "titre": "Confirmation, statut, recours et litiges",
+      "domaine": "Rails",
+      "niveau": "Intermédiaire",
+      "priorite": "P0",
+      "issue_existante": 92,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "SRE-001",
+      "titre": "Observabilité transactionnelle end-to-end",
+      "domaine": "Reliabilité",
+      "niveau": "Intermédiaire",
+      "priorite": "P0",
+      "issue_existante": 36,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "SRE-005",
+      "titre": "Runbooks et reprise après incident",
+      "domaine": "Reliabilité",
+      "niveau": "Intermédiaire",
+      "priorite": "P1",
+      "issue_existante": null,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "SRE-006",
+      "titre": "Chaîne CI/CD sécurisée et tests de contrats",
+      "domaine": "Reliabilité",
+      "niveau": "Intermédiaire",
+      "priorite": "P0",
+      "issue_existante": 38,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "SEC-001",
+      "titre": "Gestion de secrets et rotation",
+      "domaine": "Sécurité",
+      "niveau": "Intermédiaire",
+      "priorite": "P0",
+      "issue_existante": 31,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "SEC-002",
+      "titre": "API authentifiées et autorisations",
+      "domaine": "Sécurité",
+      "niveau": "Intermédiaire",
+      "priorite": "P0",
+      "issue_existante": 30,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "SEC-004",
+      "titre": "Scanning SBOM, CVE et correctifs",
+      "domaine": "Sécurité",
+      "niveau": "Intermédiaire",
+      "priorite": "P0",
+      "issue_existante": 38,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "SEC-005",
+      "titre": "Threat modeling STRIDE paiement",
+      "domaine": "Sécurité",
+      "niveau": "Intermédiaire",
+      "priorite": "P1",
+      "issue_existante": 39,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "CORE-004",
+      "titre": "Connecteur Fineract ↔ Mojaloop",
+      "domaine": "Core banking",
+      "niveau": "Avancé",
+      "priorite": "P0",
+      "issue_existante": 27,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "CORE-005",
+      "titre": "Mifos Payment Hub EE : installation et adaptateur",
+      "domaine": "Core banking",
+      "niveau": "Avancé",
+      "priorite": "P0",
+      "issue_existante": null,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "DATA-002",
+      "titre": "Paiement streaming et Flink CEP",
+      "domaine": "Data",
+      "niveau": "Avancé",
+      "priorite": "P1",
+      "issue_existante": 82,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "FINOS-003",
+      "titre": "Tests de compatibilité FDC3 et invalid contexts",
+      "domaine": "FINOS",
+      "niveau": "Avancé",
+      "priorite": "P1",
+      "issue_existante": 61,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "FRAUD-005",
+      "titre": "Benchmark Tazama vs Jube",
+      "domaine": "Fraude",
+      "niveau": "Avancé",
+      "priorite": "P1",
+      "issue_existante": 80,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "FRAUD-006",
+      "titre": "ML et explicabilité des alertes",
+      "domaine": "Fraude",
+      "niveau": "Avancé",
+      "priorite": "P1",
+      "issue_existante": 81,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "FRAUD-007",
+      "titre": "Fraude streaming vélocité",
+      "domaine": "Fraude",
+      "niveau": "Avancé",
+      "priorite": "P0",
+      "issue_existante": 82,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "FRAUD-010",
+      "titre": "Graphes de comptes et réseaux suspects synthétiques",
+      "domaine": "Fraude",
+      "niveau": "Avancé",
+      "priorite": "P1",
+      "issue_existante": null,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "FRAUD-011",
+      "titre": "AML : surveillance typologies et fausses alertes",
+      "domaine": "Fraude",
+      "niveau": "Avancé",
+      "priorite": "P1",
+      "issue_existante": null,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "FRAUD-012",
+      "titre": "Gestion des cas, audit trail et droits d'accès",
+      "domaine": "Fraude",
+      "niveau": "Avancé",
+      "priorite": "P1",
+      "issue_existante": 63,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "BIZ-003",
+      "titre": "Matrice conformité technique UEMOA contextualisée",
+      "domaine": "Gouvernance",
+      "niveau": "Avancé",
+      "priorite": "P1",
+      "issue_existante": 39,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "MM-003",
+      "titre": "Interopérabilité wallet-banque-PSP",
+      "domaine": "Mobile money",
+      "niveau": "Avancé",
+      "priorite": "P1",
+      "issue_existante": null,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "MM-004",
+      "titre": "Réconciliation et commissions d'agents",
+      "domaine": "Mobile money",
+      "niveau": "Avancé",
+      "priorite": "P1",
+      "issue_existante": null,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "MON-003",
+      "titre": "Autorisation, reversal, advice et duplicate MTI",
+      "domaine": "Monétique",
+      "niveau": "Avancé",
+      "priorite": "P0",
+      "issue_existante": 41,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "MON-006",
+      "titre": "Routage multi-acquéreur fictif et timeouts",
+      "domaine": "Monétique",
+      "niveau": "Avancé",
+      "priorite": "P1",
+      "issue_existante": null,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "MON-007",
+      "titre": "Réconciliation monétique et chargeback simulé",
+      "domaine": "Monétique",
+      "niveau": "Avancé",
+      "priorite": "P1",
+      "issue_existante": 35,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "OPEN-003",
+      "titre": "Profils FAPI et tests de conformité locaux",
+      "domaine": "Open banking",
+      "niveau": "Avancé",
+      "priorite": "P1",
+      "issue_existante": null,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "OPEN-004",
+      "titre": "Webhook signé, mTLS et anti-rejeu",
+      "domaine": "Open banking",
+      "niveau": "Avancé",
+      "priorite": "P1",
+      "issue_existante": null,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "PISPI-API-001",
+      "titre": "Simuler une API Business de paiement instantané en UEMOA",
+      "domaine": "Rails",
+      "niveau": "Avancé",
+      "priorite": "P0",
+      "issue_existante": 96,
+      "source": "nouveau_2026-11-21"
+    },
+    {
+      "id": "RAIL-003",
+      "titre": "Non-régression timeout et idempotence",
+      "domaine": "Rails",
+      "niveau": "Avancé",
+      "priorite": "P0",
+      "issue_existante": 62,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "RAIL-006",
+      "titre": "Passerelle ISO 20022 pacs.* synthétique",
+      "domaine": "Rails",
+      "niveau": "Avancé",
+      "priorite": "P0",
+      "issue_existante": null,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "RAIL-008",
+      "titre": "Simulation multirail wallet / banque / PSP",
+      "domaine": "Rails",
+      "niveau": "Avancé",
+      "priorite": "P1",
+      "issue_existante": null,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "SRE-002",
+      "titre": "Chaos testing timeout, panne, reprise",
+      "domaine": "Reliabilité",
+      "niveau": "Avancé",
+      "priorite": "P0",
+      "issue_existante": 37,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "SRE-004",
+      "titre": "Capacity test 1x/10x/100x sur données fictives",
+      "domaine": "Reliabilité",
+      "niveau": "Avancé",
+      "priorite": "P1",
+      "issue_existante": null,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "SEC-003",
+      "titre": "TLS/mTLS, certificats et révocation",
+      "domaine": "Sécurité",
+      "niveau": "Avancé",
+      "priorite": "P0",
+      "issue_existante": null,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "SEC-006",
+      "titre": "Signature événements, audit et non-répudiation",
+      "domaine": "Sécurité",
+      "niveau": "Avancé",
+      "priorite": "P1",
+      "issue_existante": null,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "DLT-001",
+      "titre": "Ledger permissionné d'actifs fictifs",
+      "domaine": "Tokenisation",
+      "niveau": "Avancé",
+      "priorite": "P2",
+      "issue_existante": null,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "DLT-002",
+      "titre": "Tokenisation et transfert sur réseau de test",
+      "domaine": "Tokenisation",
+      "niveau": "Avancé",
+      "priorite": "P2",
+      "issue_existante": null,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "CORE-006",
+      "titre": "Réconciliation Fineract–Hub–Switch",
+      "domaine": "Core banking",
+      "niveau": "Expert",
+      "priorite": "P0",
+      "issue_existante": 35,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "CORE-007",
+      "titre": "Écritures comptables et soldes après retry",
+      "domaine": "Core banking",
+      "niveau": "Expert",
+      "priorite": "P1",
+      "issue_existante": null,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "CORE-008",
+      "titre": "Traitement batch, EOD et cut-off",
+      "domaine": "Core banking",
+      "niveau": "Expert",
+      "priorite": "P2",
+      "issue_existante": null,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "FRAUD-003",
+      "titre": "Corrélation fédérée et investigation",
+      "domaine": "Fraude",
+      "niveau": "Expert",
+      "priorite": "P0",
+      "issue_existante": 63,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "BIZ-004",
+      "titre": "Capstone banque → hub → switch → fraude → ledger",
+      "domaine": "Gouvernance",
+      "niveau": "Expert",
+      "priorite": "P2",
+      "issue_existante": 40,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "MON-005",
+      "titre": "Simuler clés, rotation et PIN sans PIN réel",
+      "domaine": "Monétique",
+      "niveau": "Expert",
+      "priorite": "P1",
+      "issue_existante": 31,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "MOJA-MIGRATION-001",
+      "titre": "Auditer la migration Central Settlement vers Central Ledger",
+      "domaine": "Rails",
+      "niveau": "Expert",
+      "priorite": "P0",
+      "issue_existante": 95,
+      "source": "nouveau_2026-11-21"
+    },
+    {
+      "id": "RAIL-005",
+      "titre": "Liquidity positions, net settlement et reconciliation",
+      "domaine": "Rails",
+      "niveau": "Expert",
+      "priorite": "P1",
+      "issue_existante": 35,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "RAIL-009",
+      "titre": "Paiement transfrontalier simulé et FX/fees",
+      "domaine": "Rails",
+      "niveau": "Expert",
+      "priorite": "P2",
+      "issue_existante": null,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "SRE-003",
+      "titre": "Idempotence, outbox/inbox et exactly-once applicatif",
+      "domaine": "Reliabilité",
+      "niveau": "Expert",
+      "priorite": "P0",
+      "issue_existante": null,
+      "source": "catalogue_75"
+    },
+    {
+      "id": "DLT-003",
+      "titre": "Atomicity d'un règlement simulé, sans fonds réels",
+      "domaine": "Tokenisation",
+      "niveau": "Expert",
+      "priorite": "P2",
+      "issue_existante": null,
+      "source": "catalogue_75"
+    }
+  ]
+}
