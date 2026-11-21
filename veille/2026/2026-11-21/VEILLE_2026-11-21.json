@@ -1,0 +1,79 @@
+{
+  "date": "2026-11-21",
+  "timezone": "GMT",
+  "window_primary": "2026-11-20T08:08:00Z/2026-11-21T08:08:00Z",
+  "window_extended": "2026-11-14/2026-11-21",
+  "scope": "selected primary sources, non-exhaustive",
+  "items": [
+    {
+      "id": "FIN-20261121-01",
+      "date": "2026-11-19",
+      "project": "AfricaNenda SIIPS",
+      "kind": "report",
+      "lab": "SIIPS-TRUST-001",
+      "issues": [
+        62,
+        63
+      ],
+      "meetup": "Confiance, confirmation et recours",
+      "source": "https://africanenda.org/siips/siips-report-2026"
+    },
+    {
+      "id": "FIN-20261121-02",
+      "date": "2026-11-20",
+      "project": "Mojaloop central-ledger",
+      "kind": "component commit",
+      "lab": "MOJA-TIMEOUT-001",
+      "issues": [
+        62
+      ],
+      "meetup": "Mojaloop timeout/idempotence",
+      "source": "https://github.com/mojaloop/central-ledger/commit/7e11fdaa11e58dc2902021c0e1df1a1e25b5e16e"
+    },
+    {
+      "id": "FIN-20261121-03",
+      "date": "2026-11-19",
+      "project": "OFTA/Tazama",
+      "kind": "alliance announcement",
+      "lab": "TAXONOMY-001",
+      "issues": [
+        63,
+        50
+      ],
+      "meetup": "OFTA/Tazama taxonomies",
+      "source": "https://www.tazama.org/blog/2026/open-financial-trust-alliance/"
+    },
+    {
+      "id": "FIN-20261121-04",
+      "date": "2026-11-20",
+      "project": "FINOS",
+      "kind": "scheduled event",
+      "lab": "FDC3-001",
+      "issues": [
+        61
+      ],
+      "meetup": "Contributions FINOS/FDC3",
+      "source": "https://www.finos.org/hosted-events/2026-11-13-finos-fall-2026-hackathon"
+    },
+    {
+      "id": "FIN-20261121-05",
+      "date": "2026-11-20",
+      "project": "Fineract/Flink/Kafka",
+      "kind": "upstream commits",
+      "lab": "existing regression tests",
+      "issues": [
+        27,
+        82
+      ],
+      "meetup": null,
+      "source": "https://github.com/apache/fineract/commit/de5c64036abedee1051fdd8c81f3e657f021a4f6"
+    }
+  ],
+  "limitations": [
+    "not exhaustive",
+    "no confirmed CVE audit",
+    "no deployed result",
+    "no invented OFTA exchange standard",
+    "not evidence of PI-SPI source licensing"
+  ]
+}
