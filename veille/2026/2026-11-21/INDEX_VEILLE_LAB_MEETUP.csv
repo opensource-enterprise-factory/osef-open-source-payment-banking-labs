@@ -1,0 +1,6 @@
+date,fiche,projet,type,lab,issue,meetup,duree_minutes,source
+2026-11-19,FIN-20261121-01,AfricaNenda SIIPS,rapport,SIIPS-TRUST-001,62;63,Confiance confirmation et recours,60,https://africanenda.org/siips/siips-report-2026
+2026-11-20,FIN-20261121-02,Mojaloop central-ledger,commit,MOJA-TIMEOUT-001,62,Mojaloop timeout et idempotence,75,https://github.com/mojaloop/central-ledger/commit/7e11fdaa11e58dc2902021c0e1df1a1e25b5e16e
+2026-11-19,FIN-20261121-03,OFTA Tazama,alliance,TAXONOMY-001,63;50,OFTA Tazama taxonomies,60,https://www.tazama.org/blog/2026/open-financial-trust-alliance/
+2026-11-20,FIN-20261121-04,FINOS,hackathon,FDC3-001,61,Premieres contributions FINOS FDC3,60,https://www.finos.org/hosted-events/2026-11-13-finos-fall-2026-hackathon
+2026-11-20,FIN-20261121-05,Fineract Flink Kafka,commits,tests-existants,27;82,aucun nouveau meetup,0,https://github.com/apache/fineract/commit/de5c64036abedee1051fdd8c81f3e657f021a4f6
