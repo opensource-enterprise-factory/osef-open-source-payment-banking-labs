@@ -1,0 +1,22 @@
+name: OSEF Payment Docs Validation
+
+on:
+  pull_request:
+    paths:
+      - 'docs/academy/payment-engineer/**'
+      - 'docs/roadmap/**'
+      - 'veille/2026/2026-11-21/**'
+      - 'scripts/validate_payment_docs.py'
+      - '.github/workflows/payment-docs-validation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  payment-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate local Markdown links and catalogue exports
+        run: python3 scripts/validate_payment_docs.py

@@ -1,0 +1,682 @@
+{
+  "as_of": "2026-11-21",
+  "scope": "ideas only",
+  "count": 75,
+  "labs": [
+    {
+      "id": "BASE-001",
+      "titre": "Cartographie technologies, licences et standards",
+      "domaine": "Fondations",
+      "stack_candidat": "inventaire OSI, SPDX, normes",
+      "issue_existante": 12,
+      "statut": "existant",
+      "priorite": "P0"
+    },
+    {
+      "id": "BASE-002",
+      "titre": "SBOM, provenance et licences des dépendances",
+      "domaine": "Fondations",
+      "stack_candidat": "Syft, CycloneDX, OSV",
+      "issue_existante": 83,
+      "statut": "extension",
+      "priorite": "P1"
+    },
+    {
+      "id": "BASE-003",
+      "titre": "Environnement reproductible Ubuntu / Docker / 12-Factor",
+      "domaine": "Fondations",
+      "stack_candidat": "Docker, Compose, CI",
+      "issue_existante": 90,
+      "statut": "extension",
+      "priorite": "P0"
+    },
+    {
+      "id": "MON-001",
+      "titre": "Construire/parser un ISO 8583 fictif",
+      "domaine": "Monétique",
+      "stack_candidat": "Moov ISO8583 (Go)",
+      "issue_existante": 41,
+      "statut": "existant",
+      "priorite": "P0"
+    },
+    {
+      "id": "MON-002",
+      "titre": "Simulateur émetteur / acquéreur ISO 8583",
+      "domaine": "Monétique",
+      "stack_candidat": "jPOS, Moov",
+      "issue_existante": 41,
+      "statut": "extension",
+      "priorite": "P0"
+    },
+    {
+      "id": "MON-003",
+      "titre": "Autorisation, reversal, advice et duplicate MTI",
+      "domaine": "Monétique",
+      "stack_candidat": "jPOS",
+      "issue_existante": 41,
+      "statut": "extension",
+      "priorite": "P0"
+    },
+    {
+      "id": "MON-004",
+      "titre": "Field 55 TLV EMV sur données synthétiques",
+      "domaine": "Monétique",
+      "stack_candidat": "TLV, outils de parsing",
+      "issue_existante": null,
+      "statut": "nouveau",
+      "priorite": "P1"
+    },
+    {
+      "id": "MON-005",
+      "titre": "Simuler clés, rotation et PIN sans PIN réel",
+      "domaine": "Monétique",
+      "stack_candidat": "SoftHSM2, OpenBao",
+      "issue_existante": 31,
+      "statut": "extension",
+      "priorite": "P1"
+    },
+    {
+      "id": "MON-006",
+      "titre": "Routage multi-acquéreur fictif et timeouts",
+      "domaine": "Monétique",
+      "stack_candidat": "jPOS, simulateurs",
+      "issue_existante": null,
+      "statut": "nouveau",
+      "priorite": "P1"
+    },
+    {
+      "id": "MON-007",
+      "titre": "Réconciliation monétique et chargeback simulé",
+      "domaine": "Monétique",
+      "stack_candidat": "PostgreSQL, règles",
+      "issue_existante": 35,
+      "statut": "extension",
+      "priorite": "P1"
+    },
+    {
+      "id": "RAIL-001",
+      "titre": "Architecture et déploiement Mojaloop",
+      "domaine": "Rails",
+      "stack_candidat": "Mojaloop Helm",
+      "issue_existante": 21,
+      "statut": "existant",
+      "priorite": "P0"
+    },
+    {
+      "id": "RAIL-002",
+      "titre": "Transfert entre DFSP fictifs",
+      "domaine": "Rails",
+      "stack_candidat": "Mojaloop",
+      "issue_existante": 44,
+      "statut": "existant",
+      "priorite": "P0"
+    },
+    {
+      "id": "RAIL-003",
+      "titre": "Non-régression timeout et idempotence",
+      "domaine": "Rails",
+      "stack_candidat": "Mojaloop TTK",
+      "issue_existante": 62,
+      "statut": "extension",
+      "priorite": "P0"
+    },
+    {
+      "id": "RAIL-004",
+      "titre": "Quotes, fees et chemin d'échec",
+      "domaine": "Rails",
+      "stack_candidat": "Mojaloop",
+      "issue_existante": 44,
+      "statut": "extension",
+      "priorite": "P0"
+    },
+    {
+      "id": "RAIL-005",
+      "titre": "Liquidity positions, net settlement et reconciliation",
+      "domaine": "Rails",
+      "stack_candidat": "Mojaloop",
+      "issue_existante": 35,
+      "statut": "extension",
+      "priorite": "P1"
+    },
+    {
+      "id": "RAIL-006",
+      "titre": "Passerelle ISO 20022 pacs.* synthétique",
+      "domaine": "Rails",
+      "stack_candidat": "ISO 20022 schémas, XML",
+      "issue_existante": null,
+      "statut": "nouveau",
+      "priorite": "P0"
+    },
+    {
+      "id": "RAIL-007",
+      "titre": "Validation ISO 20022 schemas et règles métier",
+      "domaine": "Rails",
+      "stack_candidat": "XML Schema, Schematron",
+      "issue_existante": null,
+      "statut": "nouveau",
+      "priorite": "P0"
+    },
+    {
+      "id": "RAIL-008",
+      "titre": "Simulation multirail wallet / banque / PSP",
+      "domaine": "Rails",
+      "stack_candidat": "Mojaloop, adaptateurs",
+      "issue_existante": null,
+      "statut": "nouveau",
+      "priorite": "P1"
+    },
+    {
+      "id": "RAIL-009",
+      "titre": "Paiement transfrontalier simulé et FX/fees",
+      "domaine": "Rails",
+      "stack_candidat": "ISO 20022, règles",
+      "issue_existante": null,
+      "statut": "nouveau",
+      "priorite": "P2"
+    },
+    {
+      "id": "RAIL-010",
+      "titre": "Confirmation, statut, recours et litiges",
+      "domaine": "Rails",
+      "stack_candidat": "API fictive",
+      "issue_existante": 92,
+      "statut": "existant",
+      "priorite": "P0"
+    },
+    {
+      "id": "CORE-001",
+      "titre": "Installer Apache Fineract",
+      "domaine": "Core banking",
+      "stack_candidat": "Apache Fineract",
+      "issue_existante": 14,
+      "statut": "existant",
+      "priorite": "P0"
+    },
+    {
+      "id": "CORE-002",
+      "titre": "Clients et comptes fictifs",
+      "domaine": "Core banking",
+      "stack_candidat": "Fineract",
+      "issue_existante": 16,
+      "statut": "existant",
+      "priorite": "P0"
+    },
+    {
+      "id": "CORE-003",
+      "titre": "Crédit, échéancier et remboursement",
+      "domaine": "Core banking",
+      "stack_candidat": "Fineract",
+      "issue_existante": 17,
+      "statut": "existant",
+      "priorite": "P1"
+    },
+    {
+      "id": "CORE-004",
+      "titre": "Connecteur Fineract ↔ Mojaloop",
+      "domaine": "Core banking",
+      "stack_candidat": "Fineract, Mojaloop",
+      "issue_existante": 27,
+      "statut": "existant",
+      "priorite": "P0"
+    },
+    {
+      "id": "CORE-005",
+      "titre": "Mifos Payment Hub EE : installation et adaptateur",
+      "domaine": "Core banking",
+      "stack_candidat": "Mifos PHEE",
+      "issue_existante": null,
+      "statut": "nouveau",
+      "priorite": "P0"
+    },
+    {
+      "id": "CORE-006",
+      "titre": "Réconciliation Fineract–Hub–Switch",
+      "domaine": "Core banking",
+      "stack_candidat": "Fineract, Mifos, Mojaloop",
+      "issue_existante": 35,
+      "statut": "extension",
+      "priorite": "P0"
+    },
+    {
+      "id": "CORE-007",
+      "titre": "Écritures comptables et soldes après retry",
+      "domaine": "Core banking",
+      "stack_candidat": "Fineract, ledger de test",
+      "issue_existante": null,
+      "statut": "nouveau",
+      "priorite": "P1"
+    },
+    {
+      "id": "CORE-008",
+      "titre": "Traitement batch, EOD et cut-off",
+      "domaine": "Core banking",
+      "stack_candidat": "Fineract",
+      "issue_existante": null,
+      "statut": "nouveau",
+      "priorite": "P2"
+    },
+    {
+      "id": "MM-001",
+      "titre": "Wallet synthétique et ledger double entrée",
+      "domaine": "Mobile money",
+      "stack_candidat": "PostgreSQL, API",
+      "issue_existante": null,
+      "statut": "nouveau",
+      "priorite": "P0"
+    },
+    {
+      "id": "MM-002",
+      "titre": "Cash-in/cash-out et agents fictifs",
+      "domaine": "Mobile money",
+      "stack_candidat": "wallet simulé",
+      "issue_existante": null,
+      "statut": "nouveau",
+      "priorite": "P1"
+    },
+    {
+      "id": "MM-003",
+      "titre": "Interopérabilité wallet-banque-PSP",
+      "domaine": "Mobile money",
+      "stack_candidat": "Mojaloop, adaptateurs",
+      "issue_existante": null,
+      "statut": "nouveau",
+      "priorite": "P1"
+    },
+    {
+      "id": "MM-004",
+      "titre": "Réconciliation et commissions d'agents",
+      "domaine": "Mobile money",
+      "stack_candidat": "SQL, ledger",
+      "issue_existante": null,
+      "statut": "nouveau",
+      "priorite": "P1"
+    },
+    {
+      "id": "OPEN-001",
+      "titre": "API bancaire et consentement simulé",
+      "domaine": "Open banking",
+      "stack_candidat": "Open Bank Project",
+      "issue_existante": null,
+      "statut": "nouveau",
+      "priorite": "P0"
+    },
+    {
+      "id": "OPEN-002",
+      "titre": "OAuth2/OIDC, PKCE et consentement",
+      "domaine": "Open banking",
+      "stack_candidat": "Keycloak",
+      "issue_existante": 30,
+      "statut": "extension",
+      "priorite": "P0"
+    },
+    {
+      "id": "OPEN-003",
+      "titre": "Profils FAPI et tests de conformité locaux",
+      "domaine": "Open banking",
+      "stack_candidat": "OpenID FAPI",
+      "issue_existante": null,
+      "statut": "nouveau",
+      "priorite": "P1"
+    },
+    {
+      "id": "OPEN-004",
+      "titre": "Webhook signé, mTLS et anti-rejeu",
+      "domaine": "Open banking",
+      "stack_candidat": "Keycloak, OpenSSL",
+      "issue_existante": null,
+      "statut": "nouveau",
+      "priorite": "P1"
+    },
+    {
+      "id": "OPEN-005",
+      "titre": "Identité et vérification KYC simulée",
+      "domaine": "Open banking",
+      "stack_candidat": "Keycloak, données fictives",
+      "issue_existante": null,
+      "statut": "nouveau",
+      "priorite": "P1"
+    },
+    {
+      "id": "FRAUD-001",
+      "titre": "Échange de signaux entre 2 PSP fictifs",
+      "domaine": "Fraude",
+      "stack_candidat": "OSEF FRAUD",
+      "issue_existante": 43,
+      "statut": "existant",
+      "priorite": "P0"
+    },
+    {
+      "id": "FRAUD-002",
+      "titre": "Surveillance Tazama et adaptateur",
+      "domaine": "Fraude",
+      "stack_candidat": "Tazama",
+      "issue_existante": 50,
+      "statut": "existant",
+      "priorite": "P0"
+    },
+    {
+      "id": "FRAUD-003",
+      "titre": "Corrélation fédérée et investigation",
+      "domaine": "Fraude",
+      "stack_candidat": "Tazama, API",
+      "issue_existante": 63,
+      "statut": "existant",
+      "priorite": "P0"
+    },
+    {
+      "id": "FRAUD-004",
+      "titre": "Déploiement Kubernetes/Helm Tazama",
+      "domaine": "Fraude",
+      "stack_candidat": "Helm, Kubernetes",
+      "issue_existante": 68,
+      "statut": "existant",
+      "priorite": "P1"
+    },
+    {
+      "id": "FRAUD-005",
+      "titre": "Benchmark Tazama vs Jube",
+      "domaine": "Fraude",
+      "stack_candidat": "Tazama, Jube",
+      "issue_existante": 80,
+      "statut": "existant",
+      "priorite": "P1"
+    },
+    {
+      "id": "FRAUD-006",
+      "titre": "ML et explicabilité des alertes",
+      "domaine": "Fraude",
+      "stack_candidat": "Ojuri, notebooks",
+      "issue_existante": 81,
+      "statut": "existant",
+      "priorite": "P1"
+    },
+    {
+      "id": "FRAUD-007",
+      "titre": "Fraude streaming vélocité",
+      "domaine": "Fraude",
+      "stack_candidat": "Kafka, Flink",
+      "issue_existante": 82,
+      "statut": "existant",
+      "priorite": "P0"
+    },
+    {
+      "id": "FRAUD-008",
+      "titre": "Licences open source vs source-available",
+      "domaine": "Fraude",
+      "stack_candidat": "SPDX, Marble ELv2",
+      "issue_existante": 83,
+      "statut": "existant",
+      "priorite": "P0"
+    },
+    {
+      "id": "FRAUD-009",
+      "titre": "Taxonomie fictive interinstitutionnelle",
+      "domaine": "Fraude",
+      "stack_candidat": "mappings CSV/JSON",
+      "issue_existante": 63,
+      "statut": "extension",
+      "priorite": "P1"
+    },
+    {
+      "id": "FRAUD-010",
+      "titre": "Graphes de comptes et réseaux suspects synthétiques",
+      "domaine": "Fraude",
+      "stack_candidat": "NetworkX, Neo4j community",
+      "issue_existante": null,
+      "statut": "nouveau",
+      "priorite": "P1"
+    },
+    {
+      "id": "FRAUD-011",
+      "titre": "AML : surveillance typologies et fausses alertes",
+      "domaine": "Fraude",
+      "stack_candidat": "règles fictives",
+      "issue_existante": null,
+      "statut": "nouveau",
+      "priorite": "P1"
+    },
+    {
+      "id": "FRAUD-012",
+      "titre": "Gestion des cas, audit trail et droits d'accès",
+      "domaine": "Fraude",
+      "stack_candidat": "workflow, PostgreSQL",
+      "issue_existante": 63,
+      "statut": "extension",
+      "priorite": "P1"
+    },
+    {
+      "id": "SEC-001",
+      "titre": "Gestion de secrets et rotation",
+      "domaine": "Sécurité",
+      "stack_candidat": "OpenBao",
+      "issue_existante": 31,
+      "statut": "existant",
+      "priorite": "P0"
+    },
+    {
+      "id": "SEC-002",
+      "titre": "API authentifiées et autorisations",
+      "domaine": "Sécurité",
+      "stack_candidat": "Keycloak",
+      "issue_existante": 30,
+      "statut": "existant",
+      "priorite": "P0"
+    },
+    {
+      "id": "SEC-003",
+      "titre": "TLS/mTLS, certificats et révocation",
+      "domaine": "Sécurité",
+      "stack_candidat": "OpenSSL, step-ca",
+      "issue_existante": null,
+      "statut": "nouveau",
+      "priorite": "P0"
+    },
+    {
+      "id": "SEC-004",
+      "titre": "Scanning SBOM, CVE et correctifs",
+      "domaine": "Sécurité",
+      "stack_candidat": "Trivy, OSV",
+      "issue_existante": 38,
+      "statut": "extension",
+      "priorite": "P0"
+    },
+    {
+      "id": "SEC-005",
+      "titre": "Threat modeling STRIDE paiement",
+      "domaine": "Sécurité",
+      "stack_candidat": "OWASP, diagrams",
+      "issue_existante": 39,
+      "statut": "extension",
+      "priorite": "P1"
+    },
+    {
+      "id": "SEC-006",
+      "titre": "Signature événements, audit et non-répudiation",
+      "domaine": "Sécurité",
+      "stack_candidat": "OpenSSL, logs",
+      "issue_existante": null,
+      "statut": "nouveau",
+      "priorite": "P1"
+    },
+    {
+      "id": "SRE-001",
+      "titre": "Observabilité transactionnelle end-to-end",
+      "domaine": "Reliabilité",
+      "stack_candidat": "OpenTelemetry",
+      "issue_existante": 36,
+      "statut": "existant",
+      "priorite": "P0"
+    },
+    {
+      "id": "SRE-002",
+      "titre": "Chaos testing timeout, panne, reprise",
+      "domaine": "Reliabilité",
+      "stack_candidat": "Docker, Kubernetes",
+      "issue_existante": 37,
+      "statut": "existant",
+      "priorite": "P0"
+    },
+    {
+      "id": "SRE-003",
+      "titre": "Idempotence, outbox/inbox et exactly-once applicatif",
+      "domaine": "Reliabilité",
+      "stack_candidat": "Kafka, PostgreSQL",
+      "issue_existante": null,
+      "statut": "nouveau",
+      "priorite": "P0"
+    },
+    {
+      "id": "SRE-004",
+      "titre": "Capacity test 1x/10x/100x sur données fictives",
+      "domaine": "Reliabilité",
+      "stack_candidat": "k6, Prometheus",
+      "issue_existante": null,
+      "statut": "nouveau",
+      "priorite": "P1"
+    },
+    {
+      "id": "SRE-005",
+      "titre": "Runbooks et reprise après incident",
+      "domaine": "Reliabilité",
+      "stack_candidat": "Grafana, scripts",
+      "issue_existante": null,
+      "statut": "nouveau",
+      "priorite": "P1"
+    },
+    {
+      "id": "SRE-006",
+      "titre": "Chaîne CI/CD sécurisée et tests de contrats",
+      "domaine": "Reliabilité",
+      "stack_candidat": "GitHub Actions",
+      "issue_existante": 38,
+      "statut": "existant",
+      "priorite": "P0"
+    },
+    {
+      "id": "DATA-001",
+      "titre": "Kafka events et contrats Avro/JSON",
+      "domaine": "Data",
+      "stack_candidat": "Kafka",
+      "issue_existante": 33,
+      "statut": "existant",
+      "priorite": "P0"
+    },
+    {
+      "id": "DATA-002",
+      "titre": "Paiement streaming et Flink CEP",
+      "domaine": "Data",
+      "stack_candidat": "Flink",
+      "issue_existante": 82,
+      "statut": "extension",
+      "priorite": "P1"
+    },
+    {
+      "id": "DATA-003",
+      "titre": "Qualité de données et rapprochement",
+      "domaine": "Data",
+      "stack_candidat": "Great Expectations, SQL",
+      "issue_existante": 35,
+      "statut": "extension",
+      "priorite": "P1"
+    },
+    {
+      "id": "DATA-004",
+      "titre": "Dashboard indicateurs de paiement",
+      "domaine": "Data",
+      "stack_candidat": "Grafana",
+      "issue_existante": 34,
+      "statut": "existant",
+      "priorite": "P1"
+    },
+    {
+      "id": "FINOS-001",
+      "titre": "Governance-as-Code et contribution",
+      "domaine": "FINOS",
+      "stack_candidat": "FINOS, CI",
+      "issue_existante": 45,
+      "statut": "existant",
+      "priorite": "P1"
+    },
+    {
+      "id": "FINOS-002",
+      "titre": "Interopérabilité FDC3 entre deux apps",
+      "domaine": "FINOS",
+      "stack_candidat": "FDC3",
+      "issue_existante": 61,
+      "statut": "existant",
+      "priorite": "P1"
+    },
+    {
+      "id": "FINOS-003",
+      "titre": "Tests de compatibilité FDC3 et invalid contexts",
+      "domaine": "FINOS",
+      "stack_candidat": "FDC3",
+      "issue_existante": 61,
+      "statut": "extension",
+      "priorite": "P1"
+    },
+    {
+      "id": "DLT-001",
+      "titre": "Ledger permissionné d'actifs fictifs",
+      "domaine": "Tokenisation",
+      "stack_candidat": "Hyperledger Fabric",
+      "issue_existante": null,
+      "statut": "nouveau",
+      "priorite": "P2"
+    },
+    {
+      "id": "DLT-002",
+      "titre": "Tokenisation et transfert sur réseau de test",
+      "domaine": "Tokenisation",
+      "stack_candidat": "Hyperledger Besu",
+      "issue_existante": null,
+      "statut": "nouveau",
+      "priorite": "P2"
+    },
+    {
+      "id": "DLT-003",
+      "titre": "Atomicity d'un règlement simulé, sans fonds réels",
+      "domaine": "Tokenisation",
+      "stack_candidat": "Fabric/Besu simulateur",
+      "issue_existante": null,
+      "statut": "nouveau",
+      "priorite": "P2"
+    },
+    {
+      "id": "BIZ-001",
+      "titre": "Catalogue de maturité et licences open source",
+      "domaine": "Gouvernance",
+      "stack_candidat": "SPDX, OSI, CHAOSS",
+      "issue_existante": null,
+      "statut": "nouveau",
+      "priorite": "P0"
+    },
+    {
+      "id": "BIZ-002",
+      "titre": "Contribution upstream (issue → PR → revue)",
+      "domaine": "Gouvernance",
+      "stack_candidat": "GitHub, guides",
+      "issue_existante": null,
+      "statut": "nouveau",
+      "priorite": "P0"
+    },
+    {
+      "id": "BIZ-003",
+      "titre": "Matrice conformité technique UEMOA contextualisée",
+      "domaine": "Gouvernance",
+      "stack_candidat": "sources BCEAO",
+      "issue_existante": 39,
+      "statut": "extension",
+      "priorite": "P1"
+    },
+    {
+      "id": "BIZ-004",
+      "titre": "Capstone banque → hub → switch → fraude → ledger",
+      "domaine": "Gouvernance",
+      "stack_candidat": "Fineract, Mifos, Mojaloop, Tazama",
+      "issue_existante": 40,
+      "statut": "extension",
+      "priorite": "P2"
+    }
+  ]
+}
